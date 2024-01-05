@@ -7,10 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D646A932B483E3D00C0B2D3 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9D646A922B483E3D00C0B2D3 /* IQKeyboardManagerSwift */; };
+		9D646A962B483E8800C0B2D3 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 9D646A952B483E8800C0B2D3 /* RxBlocking */; };
+		9D646A982B483E8800C0B2D3 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 9D646A972B483E8800C0B2D3 /* RxCocoa */; };
+		9D646A9A2B483E8800C0B2D3 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9D646A992B483E8800C0B2D3 /* RxSwift */; };
+		9D646AA02B48582100C0B2D3 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D646A9F2B48582100C0B2D3 /* UIColor.swift */; };
+		9D646AA42B48594B00C0B2D3 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D646AA32B48594B00C0B2D3 /* UIImage.swift */; };
+		9D646AA62B48596E00C0B2D3 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D646AA52B48596E00C0B2D3 /* UIFont.swift */; };
+		9D646AAE2B4861C700C0B2D3 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D646AAD2B4861C700C0B2D3 /* Colors.xcassets */; };
 		9D653A632B0F9D6E009B98A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D653A622B0F9D6E009B98A5 /* AppDelegate.swift */; };
 		9D653A652B0F9D6E009B98A5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D653A642B0F9D6E009B98A5 /* SceneDelegate.swift */; };
 		9D653A672B0F9D6E009B98A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D653A662B0F9D6E009B98A5 /* ViewController.swift */; };
-		9D653A6A2B0F9D6E009B98A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D653A682B0F9D6E009B98A5 /* Main.storyboard */; };
 		9D653A6D2B0F9D6E009B98A5 /* SocialNetwork.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9D653A6B2B0F9D6E009B98A5 /* SocialNetwork.xcdatamodeld */; };
 		9D653A6F2B0F9D6F009B98A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D653A6E2B0F9D6F009B98A5 /* Assets.xcassets */; };
 		9D653A722B0F9D6F009B98A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D653A702B0F9D6F009B98A5 /* LaunchScreen.storyboard */; };
@@ -37,11 +44,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9D646A9F2B48582100C0B2D3 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		9D646AA32B48594B00C0B2D3 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		9D646AA52B48596E00C0B2D3 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		9D646AAD2B4861C700C0B2D3 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		9D653A5F2B0F9D6E009B98A5 /* SocialNetwork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialNetwork.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D653A622B0F9D6E009B98A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D653A642B0F9D6E009B98A5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9D653A662B0F9D6E009B98A5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9D653A692B0F9D6E009B98A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9D653A6C2B0F9D6E009B98A5 /* SocialNetwork.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SocialNetwork.xcdatamodel; sourceTree = "<group>"; };
 		9D653A6E2B0F9D6F009B98A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D653A712B0F9D6F009B98A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,6 +68,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D646A982B483E8800C0B2D3 /* RxCocoa in Frameworks */,
+				9D646A932B483E3D00C0B2D3 /* IQKeyboardManagerSwift in Frameworks */,
+				9D646A9A2B483E8800C0B2D3 /* RxSwift in Frameworks */,
+				9D646A962B483E8800C0B2D3 /* RxBlocking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +92,89 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D646A9B2B4856C000C0B2D3 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				9D653A622B0F9D6E009B98A5 /* AppDelegate.swift */,
+				9D653A642B0F9D6E009B98A5 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		9D646A9C2B4856EA00C0B2D3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9D653A6E2B0F9D6F009B98A5 /* Assets.xcassets */,
+				9D646AAD2B4861C700C0B2D3 /* Colors.xcassets */,
+				9D653A702B0F9D6F009B98A5 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9D646A9D2B48576700C0B2D3 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9D646A9F2B48582100C0B2D3 /* UIColor.swift */,
+				9D646AA52B48596E00C0B2D3 /* UIFont.swift */,
+				9D646AA32B48594B00C0B2D3 /* UIImage.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		9D646A9E2B48577600C0B2D3 /* UIExtensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UIExtensions;
+			sourceTree = "<group>";
+		};
+		9D646AA72B485B0B00C0B2D3 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		9D646AA82B485B1600C0B2D3 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		9D646AA92B485B3000C0B2D3 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		9D646AAA2B485B3600C0B2D3 /* Saved */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Saved;
+			sourceTree = "<group>";
+		};
+		9D646AAB2B485D0E00C0B2D3 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				9D646AA72B485B0B00C0B2D3 /* Authentication */,
+				9D646AA82B485B1600C0B2D3 /* Main */,
+				9D646AA92B485B3000C0B2D3 /* Profile */,
+				9D646AAA2B485B3600C0B2D3 /* Saved */,
+				9D646AAC2B485FB400C0B2D3 /* TabBarController */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		9D646AAC2B485FB400C0B2D3 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TabBarController;
+			sourceTree = "<group>";
+		};
 		9D653A562B0F9D6E009B98A5 = {
 			isa = PBXGroup;
 			children = (
@@ -101,12 +198,12 @@
 		9D653A612B0F9D6E009B98A5 /* SocialNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				9D653A622B0F9D6E009B98A5 /* AppDelegate.swift */,
-				9D653A642B0F9D6E009B98A5 /* SceneDelegate.swift */,
+				9D646A9B2B4856C000C0B2D3 /* Application */,
+				9D646AAB2B485D0E00C0B2D3 /* Presentation */,
+				9D646A9C2B4856EA00C0B2D3 /* Resources */,
+				9D646A9E2B48577600C0B2D3 /* UIExtensions */,
+				9D646A9D2B48576700C0B2D3 /* Utils */,
 				9D653A662B0F9D6E009B98A5 /* ViewController.swift */,
-				9D653A682B0F9D6E009B98A5 /* Main.storyboard */,
-				9D653A6E2B0F9D6F009B98A5 /* Assets.xcassets */,
-				9D653A702B0F9D6F009B98A5 /* LaunchScreen.storyboard */,
 				9D653A732B0F9D6F009B98A5 /* Info.plist */,
 				9D653A6B2B0F9D6E009B98A5 /* SocialNetwork.xcdatamodeld */,
 			);
@@ -146,6 +243,12 @@
 			dependencies = (
 			);
 			name = SocialNetwork;
+			packageProductDependencies = (
+				9D646A922B483E3D00C0B2D3 /* IQKeyboardManagerSwift */,
+				9D646A952B483E8800C0B2D3 /* RxBlocking */,
+				9D646A972B483E8800C0B2D3 /* RxCocoa */,
+				9D646A992B483E8800C0B2D3 /* RxSwift */,
+			);
 			productName = SocialNetwork;
 			productReference = 9D653A5F2B0F9D6E009B98A5 /* SocialNetwork.app */;
 			productType = "com.apple.product-type.application";
@@ -218,6 +321,10 @@
 				Base,
 			);
 			mainGroup = 9D653A562B0F9D6E009B98A5;
+			packageReferences = (
+				9D646A912B483E3D00C0B2D3 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				9D646A942B483E8800C0B2D3 /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			productRefGroup = 9D653A602B0F9D6E009B98A5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -234,9 +341,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D646AAE2B4861C700C0B2D3 /* Colors.xcassets in Resources */,
 				9D653A722B0F9D6F009B98A5 /* LaunchScreen.storyboard in Resources */,
 				9D653A6F2B0F9D6F009B98A5 /* Assets.xcassets in Resources */,
-				9D653A6A2B0F9D6E009B98A5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,7 +371,10 @@
 				9D653A672B0F9D6E009B98A5 /* ViewController.swift in Sources */,
 				9D653A632B0F9D6E009B98A5 /* AppDelegate.swift in Sources */,
 				9D653A652B0F9D6E009B98A5 /* SceneDelegate.swift in Sources */,
+				9D646AA62B48596E00C0B2D3 /* UIFont.swift in Sources */,
 				9D653A6D2B0F9D6E009B98A5 /* SocialNetwork.xcdatamodeld in Sources */,
+				9D646AA02B48582100C0B2D3 /* UIColor.swift in Sources */,
+				9D646AA42B48594B00C0B2D3 /* UIImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,14 +411,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9D653A682B0F9D6E009B98A5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9D653A692B0F9D6E009B98A5 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9D653A702B0F9D6F009B98A5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -451,7 +553,7 @@
 				INFOPLIST_FILE = SocialNetwork/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -479,7 +581,7 @@
 				INFOPLIST_FILE = SocialNetwork/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -611,6 +713,48 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9D646A912B483E3D00C0B2D3 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.16;
+			};
+		};
+		9D646A942B483E8800C0B2D3 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9D646A922B483E3D00C0B2D3 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9D646A912B483E3D00C0B2D3 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+		9D646A952B483E8800C0B2D3 /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9D646A942B483E8800C0B2D3 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		9D646A972B483E8800C0B2D3 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9D646A942B483E8800C0B2D3 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		9D646A992B483E8800C0B2D3 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9D646A942B483E8800C0B2D3 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		9D653A6B2B0F9D6E009B98A5 /* SocialNetwork.xcdatamodeld */ = {
