@@ -9,4 +9,11 @@ import UIKit
 
 extension UIImage {
     
+    // MARK: - LogIn
+    
+    class var logInLogoImage: UIImage {
+        UIImage(named: "logInLogo") ?? UIImage()
+    }
+    
+    
 }

@@ -9,4 +9,13 @@ import UIKit
 
 extension UIColor {
     
+    // MARK: - Main
+    
+    class var textColor: UIColor {
+        UIColor(named: "textColor") ?? .black
+    }
+    
+    class var mainBackgroundColor: UIColor {
+        UIColor(named: "mainBackgroundColor") ?? .white
+    }
 }
