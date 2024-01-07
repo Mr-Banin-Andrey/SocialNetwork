@@ -9,7 +9,7 @@ import UIKit
 
 //MARK: - LogInViewDelegate
 
-protocol LogInViewDelegate: ViewModelProtocol {
+protocol LogInViewDelegate: AnyObject {
     func showRegistrationScreen()
     func showHaveAccountScreen()
 }
@@ -40,7 +40,7 @@ final class LogInView: UIView {
     private lazy var registrationButton = MainBigButton(
         title: "ЗАРЕГИСТРИРОВАТЬСЯ",
         fontWeight: .medium,
-        titleColor: .white,
+        titleColor: .mainBackgroundColor,
         backgroundColor: .textColor,
         action: goToRegistrationScreen
     )

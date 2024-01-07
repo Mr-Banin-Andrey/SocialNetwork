@@ -28,6 +28,8 @@
 		9D653A892B0F9D6F009B98A5 /* SocialNetworkUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D653A882B0F9D6F009B98A5 /* SocialNetworkUITestsLaunchTests.swift */; };
 		9DC279B32B49CB4B00FD401F /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC279B22B49CB4B00FD401F /* ViewModelProtocol.swift */; };
 		9DC279B62B49D04100FD401F /* MainBigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC279B52B49D04100FD401F /* MainBigButton.swift */; };
+		9DC279B92B4A8A4900FD401F /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC279B82B4A8A4900FD401F /* Factory.swift */; };
+		9DC279BC2B4A935500FD401F /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC279BB2B4A935500FD401F /* RootCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		9D653A882B0F9D6F009B98A5 /* SocialNetworkUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialNetworkUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9DC279B22B49CB4B00FD401F /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		9DC279B52B49D04100FD401F /* MainBigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBigButton.swift; sourceTree = "<group>"; };
+		9DC279B82B4A8A4900FD401F /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		9DC279BB2B4A935500FD401F /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +226,9 @@
 		9D646AB32B493B5400C0B2D3 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				9DC279BF2B4AF88000FD401F /* Model */,
+				9DC279C02B4AF9B400FD401F /* View */,
+				9DC279C12B4AF9BD00FD401F /* VIewModel */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -292,6 +299,8 @@
 			children = (
 				9D646A9B2B4856C000C0B2D3 /* Application */,
 				9DC279B42B49CF8300FD401F /* CustomUIElements */,
+				9DC279B72B4A8A2700FD401F /* Factory */,
+				9DC279BA2B4A92FE00FD401F /* Interfaces */,
 				9D646AAB2B485D0E00C0B2D3 /* Presentation */,
 				9D646A9C2B4856EA00C0B2D3 /* Resources */,
 				9D646A9E2B48577600C0B2D3 /* UIExtensions */,
@@ -325,6 +334,43 @@
 				9DC279B52B49D04100FD401F /* MainBigButton.swift */,
 			);
 			path = CustomUIElements;
+			sourceTree = "<group>";
+		};
+		9DC279B72B4A8A2700FD401F /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				9DC279B82B4A8A4900FD401F /* Factory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		9DC279BA2B4A92FE00FD401F /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				9DC279BB2B4A935500FD401F /* RootCoordinator.swift */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		9DC279BF2B4AF88000FD401F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9DC279C02B4AF9B400FD401F /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9DC279C12B4AF9BD00FD401F /* VIewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VIewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -476,7 +522,9 @@
 				9DC279B62B49D04100FD401F /* MainBigButton.swift in Sources */,
 				9D646ABE2B493FF300C0B2D3 /* LogInViewModel.swift in Sources */,
 				9DC279B32B49CB4B00FD401F /* ViewModelProtocol.swift in Sources */,
+				9DC279B92B4A8A4900FD401F /* Factory.swift in Sources */,
 				9D646ABC2B493FE500C0B2D3 /* LogInView.swift in Sources */,
+				9DC279BC2B4A935500FD401F /* RootCoordinator.swift in Sources */,
 				9D646AA02B48582100C0B2D3 /* UIColor.swift in Sources */,
 				9D646AA42B48594B00C0B2D3 /* UIImage.swift in Sources */,
 			);

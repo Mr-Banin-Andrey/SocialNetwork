@@ -14,9 +14,18 @@ final class LogInViewController: UIViewController {
     //MARK: Properties
     
     private lazy var logInView = LogInView(delegate: self)
+    private let viewModel: LogInViewModelProtocol
     
     //MARK: Initial
     
+    init(viewModel: LogInViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: Life cycle
     
@@ -36,12 +45,10 @@ final class LogInViewController: UIViewController {
 
 extension LogInViewController: LogInViewDelegate {
     func showRegistrationScreen() {
-        print("showRegistrationScreen")
+        viewModel.updateState(viewInput: .openScreenRegistration)
     }
     
     func showHaveAccountScreen() {
-        print("showHaveAccountScreen")
+        viewModel.updateState(viewInput: .openScreenHaveAccount)
     }
-    
-    
 }
