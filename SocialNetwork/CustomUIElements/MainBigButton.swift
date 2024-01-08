@@ -7,8 +7,6 @@
 
 import UIKit
 
-//TODO: добавить кастомный шрифт
-
 final class MainBigButton: UIButton {
     
     typealias Action = () -> Void
@@ -17,7 +15,7 @@ final class MainBigButton: UIButton {
     
     init(
         title: String,
-        fontWeight: UIFont.Weight,
+        font: UIFont,
         titleColor: UIColor,
         backgroundColor: UIColor?,
         action: @escaping Action
@@ -27,7 +25,7 @@ final class MainBigButton: UIButton {
         
         self.translatesAutoresizingMaskIntoConstraints = false
         self.setTitle(title, for: .normal)
-        self.titleLabel?.font = .systemFont(ofSize: 17, weight: fontWeight)
+        self.titleLabel?.font = font
         self.setTitleColor(titleColor, for: .normal)
         self.backgroundColor = backgroundColor
         self.layer.cornerRadius = 10

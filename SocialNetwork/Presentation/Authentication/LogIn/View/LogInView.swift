@@ -39,7 +39,7 @@ final class LogInView: UIView {
     
     private lazy var registrationButton = MainBigButton(
         title: "ЗАРЕГИСТРИРОВАТЬСЯ",
-        fontWeight: .medium,
+        font: .interMedium500Font,
         titleColor: .mainBackgroundColor,
         backgroundColor: .textColor,
         action: goToRegistrationScreen
@@ -47,7 +47,7 @@ final class LogInView: UIView {
     
     private lazy var haveAccountButton = MainBigButton(
         title: "Уже есть аккаунт",
-        fontWeight: .medium,
+        font: .interRegular400Font,
         titleColor: .textColor,
         backgroundColor: nil,
         action: goToHaveAccountScreen
