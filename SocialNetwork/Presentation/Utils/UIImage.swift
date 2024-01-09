@@ -15,5 +15,10 @@ extension UIImage {
         UIImage(named: "logInLogo") ?? UIImage()
     }
     
+    // MARK: - Confirmation
+    
+    class var confirmationCheckMarkImage: UIImage {
+        UIImage(named: "confirmationCheckMark") ?? UIImage()
+    }
     
 }

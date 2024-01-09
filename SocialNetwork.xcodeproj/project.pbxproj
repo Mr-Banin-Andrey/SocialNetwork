@@ -37,6 +37,14 @@
 		9DC279CE2B4C64BC00FD401F /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9DC279CA2B4C64BC00FD401F /* Inter-Medium.ttf */; };
 		9DC279CF2B4C64BC00FD401F /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9DC279CB2B4C64BC00FD401F /* Inter-Regular.ttf */; };
 		9DC279D02B4C64BC00FD401F /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9DC279CC2B4C64BC00FD401F /* Inter-SemiBold.ttf */; };
+		9DCAC4DE2B4D72BF0040C327 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4DD2B4D72BF0040C327 /* RegistrationViewModel.swift */; };
+		9DCAC4E32B4D78FE0040C327 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4E22B4D78FE0040C327 /* ConfirmationViewController.swift */; };
+		9DCAC4E52B4D790B0040C327 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4E42B4D790B0040C327 /* ConfirmationView.swift */; };
+		9DCAC4E72B4D79150040C327 /* ConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4E62B4D79150040C327 /* ConfirmationViewModel.swift */; };
+		9DCAC4EA2B4D82CC0040C327 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4E92B4D82CC0040C327 /* UILabel.swift */; };
+		9DCAC4ED2B4D96130040C327 /* HaveAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4EC2B4D96130040C327 /* HaveAccountViewController.swift */; };
+		9DCAC4EF2B4D961C0040C327 /* HaveAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4EE2B4D961C0040C327 /* HaveAccountView.swift */; };
+		9DCAC4F12B4D96280040C327 /* HaveAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4F02B4D96280040C327 /* HaveAccountViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +95,14 @@
 		9DC279CA2B4C64BC00FD401F /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
 		9DC279CB2B4C64BC00FD401F /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		9DC279CC2B4C64BC00FD401F /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
+		9DCAC4DD2B4D72BF0040C327 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		9DCAC4E22B4D78FE0040C327 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
+		9DCAC4E42B4D790B0040C327 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
+		9DCAC4E62B4D79150040C327 /* ConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewModel.swift; sourceTree = "<group>"; };
+		9DCAC4E92B4D82CC0040C327 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		9DCAC4EC2B4D96130040C327 /* HaveAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaveAccountViewController.swift; sourceTree = "<group>"; };
+		9DCAC4EE2B4D961C0040C327 /* HaveAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaveAccountView.swift; sourceTree = "<group>"; };
+		9DCAC4F02B4D96280040C327 /* HaveAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaveAccountViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +167,7 @@
 		9D646A9E2B48577600C0B2D3 /* UIExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				9DCAC4E92B4D82CC0040C327 /* UILabel.swift */,
 			);
 			path = UIExtensions;
 			sourceTree = "<group>";
@@ -190,10 +207,10 @@
 		9D646AAB2B485D0E00C0B2D3 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				9D646AA72B485B0B00C0B2D3 /* Authentication */,
-				9D646AA82B485B1600C0B2D3 /* Main */,
-				9D646AA92B485B3000C0B2D3 /* Profile */,
-				9D646AAA2B485B3600C0B2D3 /* Saved */,
+				9DCAC4EB2B4D85A80040C327 /* NavigationFlows */,
+				9DC279B42B49CF8300FD401F /* CustomUIElements */,
+				9D646A9E2B48577600C0B2D3 /* UIExtensions */,
+				9D646A9D2B48576700C0B2D3 /* Utils */,
 				9D646AAC2B485FB400C0B2D3 /* TabBarController */,
 				9DC279B22B49CB4B00FD401F /* ViewModelProtocol.swift */,
 			);
@@ -217,6 +234,8 @@
 		9D646AB02B4931D000C0B2D3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9DCAC4EE2B4D961C0040C327 /* HaveAccountView.swift */,
+				9DCAC4EC2B4D96130040C327 /* HaveAccountViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -224,6 +243,7 @@
 		9D646AB12B4931D600C0B2D3 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				9DCAC4F02B4D96280040C327 /* HaveAccountViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -261,6 +281,9 @@
 		9D646AB52B493F1C00C0B2D3 /* Сonfirmation */ = {
 			isa = PBXGroup;
 			children = (
+				9DCAC4DF2B4D78CC0040C327 /* Model */,
+				9DCAC4E12B4D78E00040C327 /* View */,
+				9DCAC4E02B4D78D90040C327 /* ViewModel */,
 			);
 			path = "Сonfirmation";
 			sourceTree = "<group>";
@@ -313,13 +336,10 @@
 			isa = PBXGroup;
 			children = (
 				9D646A9B2B4856C000C0B2D3 /* Application */,
-				9DC279B42B49CF8300FD401F /* CustomUIElements */,
 				9DC279B72B4A8A2700FD401F /* Factory */,
 				9DC279BA2B4A92FE00FD401F /* Interfaces */,
 				9D646AAB2B485D0E00C0B2D3 /* Presentation */,
 				9D646A9C2B4856EA00C0B2D3 /* Resources */,
-				9D646A9E2B48577600C0B2D3 /* UIExtensions */,
-				9D646A9D2B48576700C0B2D3 /* Utils */,
 				9D653A662B0F9D6E009B98A5 /* ViewController.swift */,
 				9D653A732B0F9D6F009B98A5 /* Info.plist */,
 			);
@@ -346,8 +366,8 @@
 		9DC279B42B49CF8300FD401F /* CustomUIElements */ = {
 			isa = PBXGroup;
 			children = (
-				9DC279B52B49D04100FD401F /* MainBigButton.swift */,
 				9DC279C62B4BED7800FD401F /* CustomTextField.swift */,
+				9DC279B52B49D04100FD401F /* MainBigButton.swift */,
 			);
 			path = CustomUIElements;
 			sourceTree = "<group>";
@@ -387,6 +407,7 @@
 		9DC279C12B4AF9BD00FD401F /* VIewModel */ = {
 			isa = PBXGroup;
 			children = (
+				9DCAC4DD2B4D72BF0040C327 /* RegistrationViewModel.swift */,
 			);
 			path = VIewModel;
 			sourceTree = "<group>";
@@ -400,6 +421,41 @@
 				9DC279CC2B4C64BC00FD401F /* Inter-SemiBold.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		9DCAC4DF2B4D78CC0040C327 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9DCAC4E02B4D78D90040C327 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9DCAC4E62B4D79150040C327 /* ConfirmationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9DCAC4E12B4D78E00040C327 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9DCAC4E42B4D790B0040C327 /* ConfirmationView.swift */,
+				9DCAC4E22B4D78FE0040C327 /* ConfirmationViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9DCAC4EB2B4D85A80040C327 /* NavigationFlows */ = {
+			isa = PBXGroup;
+			children = (
+				9D646AA72B485B0B00C0B2D3 /* Authentication */,
+				9D646AA82B485B1600C0B2D3 /* Main */,
+				9D646AA92B485B3000C0B2D3 /* Profile */,
+				9D646AAA2B485B3600C0B2D3 /* Saved */,
+			);
+			path = NavigationFlows;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -548,20 +604,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D653A672B0F9D6E009B98A5 /* ViewController.swift in Sources */,
+				9DCAC4DE2B4D72BF0040C327 /* RegistrationViewModel.swift in Sources */,
+				9DCAC4F12B4D96280040C327 /* HaveAccountViewModel.swift in Sources */,
 				9D653A632B0F9D6E009B98A5 /* AppDelegate.swift in Sources */,
 				9D653A652B0F9D6E009B98A5 /* SceneDelegate.swift in Sources */,
+				9DCAC4E52B4D790B0040C327 /* ConfirmationView.swift in Sources */,
 				9D646AA62B48596E00C0B2D3 /* UIFont.swift in Sources */,
 				9DC279C72B4BED7800FD401F /* CustomTextField.swift in Sources */,
 				9DC279C32B4BE71E00FD401F /* RegistrationViewController.swift in Sources */,
+				9DCAC4E32B4D78FE0040C327 /* ConfirmationViewController.swift in Sources */,
 				9D646ABA2B493FD400C0B2D3 /* LogInViewController.swift in Sources */,
 				9DC279B62B49D04100FD401F /* MainBigButton.swift in Sources */,
 				9D646ABE2B493FF300C0B2D3 /* LogInViewModel.swift in Sources */,
 				9DC279B32B49CB4B00FD401F /* ViewModelProtocol.swift in Sources */,
 				9DC279C52B4BE81300FD401F /* RegistrationView.swift in Sources */,
+				9DCAC4E72B4D79150040C327 /* ConfirmationViewModel.swift in Sources */,
 				9DC279B92B4A8A4900FD401F /* Factory.swift in Sources */,
+				9DCAC4EA2B4D82CC0040C327 /* UILabel.swift in Sources */,
 				9D646ABC2B493FE500C0B2D3 /* LogInView.swift in Sources */,
 				9DC279BC2B4A935500FD401F /* RootCoordinator.swift in Sources */,
+				9DCAC4EF2B4D961C0040C327 /* HaveAccountView.swift in Sources */,
 				9D646AA02B48582100C0B2D3 /* UIColor.swift in Sources */,
+				9DCAC4ED2B4D96130040C327 /* HaveAccountViewController.swift in Sources */,
 				9D646AA42B48594B00C0B2D3 /* UIImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -752,6 +816,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Banin-Andrey.SocialNetwork";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -781,6 +848,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Banin-Andrey.SocialNetwork";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

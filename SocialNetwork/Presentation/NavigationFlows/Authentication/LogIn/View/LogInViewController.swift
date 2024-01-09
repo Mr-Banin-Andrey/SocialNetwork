@@ -38,6 +38,28 @@ final class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.bindViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false
+    }
+    
+    //MARK: Private methods
+    
+    private func bindViewModel() {
+        viewModel.onStateDidChange = { [weak self] state in
+            guard let self = self else { return }
+            switch state {
+            case .initial:
+                print("initial")
+
+            }
+        }
     }
 }
 

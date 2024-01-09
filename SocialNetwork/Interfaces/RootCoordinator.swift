@@ -14,7 +14,9 @@ protocol Coordinatable {
 protocol RootCoordinator: AnyObject {
     var navigationController: UINavigationController? { get set }
     func start()
+    func startUser()
     func setupRegistrationView()
+    func setupConfirmationView()
     func setupHaveAccountView()
 }
 
@@ -27,24 +29,36 @@ final class RootCoordinatorImp: RootCoordinator {
         setupLogInView()
     }
     
+    func startUser() {
+        print("1")
+    }
+    
     func setupLogInView() {
         let viewModel = LogInViewModel()
         viewModel.coordinator = self
         let viewController = LogInViewController(viewModel: viewModel)
-        navigationController?.setViewControllers([viewController], animated: true)
+        navigationController?.setViewControllers([viewController], animated: false)
     }
     
     func setupRegistrationView() {
-        let viewController = ViewController()
-        viewController.title = "setupRegistrationView"
-        viewController.view.backgroundColor = .green
+        let viewModel = RegistrationViewModel()
+        viewModel.coordinator = self
+        let viewController = RegistrationViewController(viewModel: viewModel)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func setupConfirmationView() {
+        let viewModel = ConfirmationViewModel()
+        viewModel.coordinator = self
+        let viewController = ConfirmationViewController(viewModel: viewModel)
         navigationController?.pushViewController(viewController, animated: true)
     }
     
     func setupHaveAccountView() {
-        let viewController = ViewController()
-        viewController.title = "setupHaveAccountView"
-        viewController.view.backgroundColor = .yellow
-        navigationController?.present(viewController, animated: true)
+        let viewModel = HaveAccountViewModel()
+        viewModel.coordinator = self
+        let viewController = HaveAccountViewController(viewModel: viewModel)
+        navigationController?.pushViewController(viewController, animated: true)
     }
+    
 }

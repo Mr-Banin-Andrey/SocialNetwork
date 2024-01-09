@@ -41,14 +41,14 @@ final class LogInView: UIView {
         title: "ЗАРЕГИСТРИРОВАТЬСЯ",
         font: .interMedium500Font,
         titleColor: .mainBackgroundColor,
-        backgroundColor: .textColor,
+        backgroundColor: .textAndButtonColor,
         action: goToRegistrationScreen
     )
     
     private lazy var haveAccountButton = MainBigButton(
         title: "Уже есть аккаунт",
         font: .interRegular400Font,
-        titleColor: .textColor,
+        titleColor: .textAndButtonColor,
         backgroundColor: nil,
         action: goToHaveAccountScreen
     )
