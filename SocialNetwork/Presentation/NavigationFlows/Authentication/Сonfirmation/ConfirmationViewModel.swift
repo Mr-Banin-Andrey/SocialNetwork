@@ -21,9 +21,7 @@ final class ConfirmationViewModel: ConfirmationViewModelProtocol {
     enum ViewInput {
         case registrationOnSocialNetwork // получает юзера
     }
-    
-    weak var coordinator: RootCoordinator?
-    
+        
     var onStateDidChange: ((State) -> Void)?
     
     private(set) var state: State = .initial {
@@ -33,12 +31,12 @@ final class ConfirmationViewModel: ConfirmationViewModelProtocol {
     }
     
     func updateState(viewInput: ViewInput) {
-        switch viewInput {
-        case .registrationOnSocialNetwork:
-            
-            // передаёт юзера
-            coordinator?.startUser() // принмает юзера
-        }
+//        switch viewInput {
+//        case .registrationOnSocialNetwork:
+//            
+//            // передаёт юзера
+//            coordinator?.startUser() // принмает юзера
+//        }
     }
     
 }

@@ -1,5 +1,5 @@
 //
-//  RegistrationView.swift
+//  RegistrationViewController.swift
 //  SocialNetwork
 //
 //  Created by Андрей Банин on 8.1.24..
@@ -7,15 +7,14 @@
 
 import UIKit
 
-protocol RegistrationViewDelegate: AnyObject {
-    func showConfirmationOfRegistration()
-}
+//MARK: - RegistrationViewController
 
-final class RegistrationView: UIView {
+final class RegistrationViewController: UIViewController, Coordinatable {
     
-    weak var delegate: RegistrationViewDelegate?
+    private let viewModel: RegistrationViewModelProtocol
     
-    //MARK: Properties
+    typealias CoordinatorType = AuthenticationCoordinator
+    var coordinator: CoordinatorType?
     
     private lazy var titleLabel = UILabel(text: "Зарегистрироваться", state: .logInTitleLabel)
     
@@ -57,9 +56,9 @@ final class RegistrationView: UIView {
         title: "ДАЛЕЕ",
         font: .interMedium500Font,
         titleColor: .mainBackgroundColor,
-        backgroundColor: .textAndButtonColor,
-        action: goToConfirmationOfRegistration
-    )
+        backgroundColor: .textAndButtonColor) { [weak self] in
+            self?.viewModel.updateState(viewInput: .openScreenConfirmation)
+        }
     
     private lazy var privacyPolicyLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -73,56 +72,84 @@ final class RegistrationView: UIView {
     
     //MARK: Initial
     
-    init(delegate: RegistrationViewDelegate) {
-        self.delegate = delegate
-        super.init(frame: .zero)
-        
-        self.backgroundColor = .mainBackgroundColor
-        self.setupUI()
+    init(viewModel: RegistrationViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: Life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.setupBackButton()
+        self.bindViewModel()
+        self.view.backgroundColor = .mainBackgroundColor
+        self.setupUI()
+    }
+    
+    
     //MARK: Private methods
     
+    private func bindViewModel() {
+        viewModel.onStateDidChange = { [weak self] state in
+            guard let self = self else { return }
+            switch state {
+            case .initial:
+                print("initial")
+            case .showOpenConfirmation:
+                guard let coordinator else { return }
+                coordinator.navigateTo(.confirmation(coordinator: coordinator))
+            }
+        }
+    }
+    
+    private func setupBackButton() {
+        let backBarButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(comeBack))
+        backBarButton.tintColor = .textAndButtonColor
+        self.navigationItem.leftBarButtonItem = backBarButton
+    }
+    
     private func setupUI() {
-        self.addSubview(self.titleLabel)
-        self.addSubview(self.nameNumberAndExplanationStack)
+        self.view.addSubview(self.titleLabel)
+        self.view.addSubview(self.nameNumberAndExplanationStack)
         self.nameNumberAndExplanationStack.addArrangedSubview(self.nameNumberLabel)
         self.nameNumberAndExplanationStack.addArrangedSubview(self.explanationLabel)
-        self.addSubview(self.numberText)
-        self.addSubview(self.confirmationButton)
-        self.addSubview(self.privacyPolicyLabel)
+        self.view.addSubview(self.numberText)
+        self.view.addSubview(self.confirmationButton)
+        self.view.addSubview(self.privacyPolicyLabel)
 
         NSLayoutConstraint.activate([
-            self.titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.titleLabel.bottomAnchor.constraint(equalTo: self.nameNumberAndExplanationStack.topAnchor, constant: -70),
             
-            self.nameNumberAndExplanationStack.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.nameNumberAndExplanationStack.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.nameNumberAndExplanationStack.widthAnchor.constraint(equalToConstant: 215),
             self.nameNumberAndExplanationStack.bottomAnchor.constraint(equalTo: self.numberText.topAnchor, constant: -24),
             
-            self.numberText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: numberText.countIndents()),
-            self.numberText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -numberText.countIndents()),
+            self.numberText.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: numberText.countIndents()),
+            self.numberText.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -numberText.countIndents()),
             self.numberText.heightAnchor.constraint(equalToConstant: 48),
-            self.numberText.bottomAnchor.constraint(equalTo: self.centerYAnchor, constant: -10),
+            self.numberText.bottomAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -10),
             
-            self.confirmationButton.topAnchor.constraint(equalTo: self.centerYAnchor, constant: 64),
-            self.confirmationButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.confirmationButton.topAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 64),
+            self.confirmationButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.confirmationButton.heightAnchor.constraint(equalToConstant: 48),
             self.confirmationButton.widthAnchor.constraint(equalToConstant: 120),
             
             self.privacyPolicyLabel.topAnchor.constraint(equalTo: self.confirmationButton.bottomAnchor, constant: 30),
-            self.privacyPolicyLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.privacyPolicyLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.privacyPolicyLabel.widthAnchor.constraint(equalToConstant: 300),
         ])
     }
     
     //MARK: @objc private methods
     
-    @objc private func goToConfirmationOfRegistration() {
-        delegate?.showConfirmationOfRegistration()
+    @objc private func comeBack() {
+        self.navigationController?.popViewController(animated: true)
     }
 }

@@ -16,13 +16,13 @@ final class RegistrationViewModel: RegistrationViewModelProtocol {
     
     enum State {
         case initial
+        case showOpenConfirmation
     }
     
     enum ViewInput {
         case openScreenConfirmation
     }
     
-    weak var coordinator: RootCoordinator?
     
     var onStateDidChange: ((State) -> Void)?
     
@@ -35,12 +35,7 @@ final class RegistrationViewModel: RegistrationViewModelProtocol {
     func updateState(viewInput: ViewInput) {
         switch viewInput {
         case .openScreenConfirmation:
-            
-            // отправка номера в firebase и ответ от сервера
-            
-            
-            // номер валидный и регистрация прошла открывается окно для ввода данных -> передаю номер юзера
-            coordinator?.setupConfirmationView()
+            state = .showOpenConfirmation
         }
     }
     

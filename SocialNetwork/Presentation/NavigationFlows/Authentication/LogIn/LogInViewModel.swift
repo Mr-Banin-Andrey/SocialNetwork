@@ -16,14 +16,14 @@ final class LogInViewModel: LogInViewModelProtocol {
     
     enum State {
         case initial
+        case showOpenRegistration
+        case showOpenHaveAccount
     }
     
     enum ViewInput {
         case openScreenRegistration
         case openScreenHaveAccount
     }
-    
-    weak var coordinator: RootCoordinator?
     
     var onStateDidChange: ((State) -> Void)?
     
@@ -36,9 +36,9 @@ final class LogInViewModel: LogInViewModelProtocol {
     func updateState(viewInput: ViewInput) {
         switch viewInput {
         case .openScreenRegistration:
-            coordinator?.setupRegistrationView()
+            state = .showOpenRegistration
         case .openScreenHaveAccount:
-                        coordinator?.setupHaveAccountView()
+            state = .showOpenHaveAccount
         }
     }
     

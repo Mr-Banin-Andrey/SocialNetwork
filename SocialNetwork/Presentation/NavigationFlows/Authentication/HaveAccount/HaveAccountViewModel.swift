@@ -21,9 +21,7 @@ final class HaveAccountViewModel: HaveAccountViewModelProtocol {
     enum ViewInput {
         case goToScreenMain // получает юзера
     }
-    
-    weak var coordinator: RootCoordinator?
-    
+        
     var onStateDidChange: ((State) -> Void)?
     
     private(set) var state: State = .initial {
@@ -33,12 +31,12 @@ final class HaveAccountViewModel: HaveAccountViewModelProtocol {
     }
     
     func updateState(viewInput: ViewInput) {
-        switch viewInput {
-        case .goToScreenMain:
-            
-            // передаёт юзера
-            coordinator?.startUser() // принмает юзера
-        }
+//        switch viewInput {
+//        case .goToScreenMain:
+//            
+//            // передаёт юзера
+//            coordinator?.startUser() // принмает юзера
+//        }
     }
     
 }

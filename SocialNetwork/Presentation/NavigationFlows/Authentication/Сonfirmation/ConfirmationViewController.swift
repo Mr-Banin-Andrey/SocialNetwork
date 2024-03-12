@@ -1,5 +1,5 @@
 //
-//  ConfirmationView.swift
+//  ConfirmationViewController.swift
 //  SocialNetwork
 //
 //  Created by Андрей Банин on 9.1.24..
@@ -7,19 +7,16 @@
 
 import UIKit
 
-//MARK: - ConfirmationViewDelegate
+//MARK: - ConfirmationViewController
 
-protocol ConfirmationViewDelegate: AnyObject {
-    func registrationOnSocialNetwork()
-}
-
-//MARK: - ConfirmationView
-
-final class ConfirmationView: UIView {
+final class ConfirmationViewController: UIViewController, Coordinatable {
     
-    weak var delegate: ConfirmationViewDelegate?
+    typealias CoordinatorType = AuthenticationCoordinator
+    var coordinator: CoordinatorType?
     
     //MARK: Properties
+    
+    private let viewModel: ConfirmationViewModelProtocol
     
     private lazy var titleAndExplanationStack: UIStackView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -51,9 +48,9 @@ final class ConfirmationView: UIView {
         title: "ЗАРЕГИСТРИРОВАТЬСЯ",
         font: .interMedium500Font,
         titleColor: .mainBackgroundColor,
-        backgroundColor: .textAndButtonColor,
-        action: goToMainScreen
-    )
+        backgroundColor: .textAndButtonColor) { [weak self] in
+            self?.viewModel.updateState(viewInput: .registrationOnSocialNetwork)
+        }
     
     private lazy var checkMarkImage: UIImageView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -62,58 +59,82 @@ final class ConfirmationView: UIView {
         return $0
     }(UIImageView())
     
+    
     //MARK: Initial
     
-    init(delegate: ConfirmationViewDelegate) {
-        self.delegate = delegate
-        super.init(frame: .zero)
-        
-        self.backgroundColor = .mainBackgroundColor
-        self.setupUI()
+    init(viewModel: ConfirmationViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: Public methods
-    
-    
+    //MARK: Life cycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .mainBackgroundColor
+        self.bindViewModel()
+        self.setupBackButton()
+        setupUI()
+    }
     
     //MARK: Private methods
     
+    private func bindViewModel() {
+        viewModel.onStateDidChange = { [weak self] state in
+            guard let self = self else { return }
+            switch state {
+            case .initial:
+                print("initial")
+
+            }
+        }
+    }
+    
+    private func setupBackButton() {
+        let backBarButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(comeBack))
+        backBarButton.tintColor = .textAndButtonColor
+        self.navigationItem.leftBarButtonItem = backBarButton
+    }
+    
     private func setupUI() {
-        self.addSubview(self.titleAndExplanationStack)
+        self.view.addSubview(self.titleAndExplanationStack)
         self.titleAndExplanationStack.addArrangedSubview(self.titleLabel)
         self.titleAndExplanationStack.addArrangedSubview(self.explanationLabel)
         
-        self.addSubview(self.codText)
-        self.addSubview(self.registrationButton)
-        self.addSubview(self.checkMarkImage)
+        view.addSubview(self.codText)
+        view.addSubview(self.registrationButton)
+        view.addSubview(self.checkMarkImage)
         
         NSLayoutConstraint.activate([
             self.titleAndExplanationStack.bottomAnchor.constraint(equalTo: self.codText.topAnchor, constant: -100),
-            self.titleAndExplanationStack.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.titleAndExplanationStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            self.codText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: codText.countIndents()),
-            self.codText.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -codText.countIndents()),
+            self.codText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: codText.countIndents()),
+            self.codText.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -codText.countIndents()),
             self.codText.heightAnchor.constraint(equalToConstant: 48),
-            self.codText.bottomAnchor.constraint(equalTo: self.centerYAnchor, constant: 0),
+            self.codText.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: 0),
             
-            self.registrationButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.registrationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             self.registrationButton.topAnchor.constraint(equalTo: self.codText.bottomAnchor, constant: 88),
             self.registrationButton.heightAnchor.constraint(equalToConstant: 48),
             self.registrationButton.widthAnchor.constraint(equalToConstant: 261),
             
             self.checkMarkImage.topAnchor.constraint(equalTo: self.registrationButton.bottomAnchor, constant: 48),
-            self.checkMarkImage.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.checkMarkImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             self.checkMarkImage.heightAnchor.constraint(equalToConstant: 86),
             self.checkMarkImage.widthAnchor.constraint(equalToConstant: 100),
         ])
 
     }
     
-    @objc private func goToMainScreen() {
-        delegate?.registrationOnSocialNetwork()
+    //MARK: @objc private methods
+    
+    @objc private func comeBack() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
