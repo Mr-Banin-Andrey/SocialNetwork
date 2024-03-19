@@ -23,6 +23,16 @@ final class AppFactory {
         }
     }
     
+    private func makeUserCoordinator(rootCoordinator: RootCoordinator) throws -> any Coordinator {
+        do {
+            let userCoordinator = try UserCoordinator(navigationController: rootCoordinator.navigationController)
+            userCoordinator.parentCoordinator = rootCoordinator
+            return userCoordinator
+        } catch {
+            throw AppFactoryError.emptyUserProfile
+        }
+    }
+    
     enum AppFactoryError: Error {
         case failedToMakeFlow
         case emptyUserProfile
@@ -36,7 +46,7 @@ extension AppFactory: AppFactoryProtocol {
             return try makeAuthenticationCoordinator(rootCoordinator: rootCoordinator)
             
         case .main:
-            return try makeAuthenticationCoordinator(rootCoordinator: rootCoordinator)
+            return try makeUserCoordinator(rootCoordinator: rootCoordinator)
         }
     }
 }

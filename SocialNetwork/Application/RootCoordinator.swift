@@ -23,13 +23,29 @@ final class RootCoordinator: Coordinator {
     }
     
     func startLogInFlow() {
-        guard let authenticationCoordinator = try? appFactory.makeFlowCoordinator(.authentication, rootCoordinator: self) else { return }
-        addChild(authenticationCoordinator)
-        authenticationCoordinator.start()
+        do {
+            let authenticationCoordinator = try appFactory.makeFlowCoordinator(.authentication, rootCoordinator: self)
+            DispatchQueue.main.async {
+                self.addChild(authenticationCoordinator)
+                authenticationCoordinator.start()
+            }
+        } catch {
+            print(">>>>>")
+        }
+        
     }
     
     func startUserFlow() {
-        
+        do {
+            let userCoordinator = try appFactory.makeFlowCoordinator(.main, rootCoordinator: self)
+            DispatchQueue.main.async {
+                
+                self.addChild(userCoordinator)
+                userCoordinator.start()
+            }
+        } catch {
+            print(">>>>>")
+        }
     }
     
 
