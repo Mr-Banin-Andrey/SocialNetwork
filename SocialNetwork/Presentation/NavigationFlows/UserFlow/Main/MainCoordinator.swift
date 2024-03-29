@@ -28,8 +28,19 @@ final class MainCoordinator: Coordinator {
         let mainViewController = userFactory.makeMainScreen()
         (mainViewController as? MainViewController)?.coordinator = self
         navigationController.setViewControllers([mainViewController], animated: true)
+        setupNavBarAppearance()
     }
     
+    private func setupNavBarAppearance() {
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.backgroundColor = .mainBackgroundColor
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.textAndButtonColor]
+        
+        navigationController.navigationBar.standardAppearance = navBarAppearance
+        navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
+        
+        navigationController.navigationBar.isHidden = true
+    }
     
     // MARK: Types
     
