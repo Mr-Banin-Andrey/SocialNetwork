@@ -24,9 +24,7 @@ final class AvatarView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
-        $0.image = .logInLogoImage
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.textTertiaryColor.cgColor
+        $0.image = .avatarMockObjectImage
         return $0
     }(UIImageView())
     
@@ -57,13 +55,14 @@ final class AvatarView: UIView {
     
     //MARK: Initial
     
-    init(viewModel: AvatarViewModel, size: AvatarSize) {
+    init(viewModel: AvatarViewModel, size: AvatarSize, isBorder: Bool) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         
         self.translatesAutoresizingMaskIntoConstraints = false
         self.setupUI()
         setupImage(type: size)
+        setupBorder(isBorder)
         bindViewModel()
         viewModel.updateState(with: .startLoadAvatar)
     }
@@ -91,6 +90,13 @@ final class AvatarView: UIView {
 //                    self.pictureImage.image = imageData.image
 //                }
             }
+        }
+    }
+    
+    private func setupBorder(_ isBorder: Bool) {
+        if isBorder {
+            pictureImage.layer.borderWidth = 1
+            pictureImage.layer.borderColor = UIColor.textTertiaryColor.cgColor
         }
     }
     

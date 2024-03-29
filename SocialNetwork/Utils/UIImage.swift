@@ -21,6 +21,24 @@ extension UIImage {
         UIImage(named: "confirmationCheckMark") ?? UIImage()
     }
     
+    // MARK: - Post
+    
+    class var verticalEllipseImage: UIImage {
+        UIImage(named: "verticalEllipse") ?? UIImage()
+    }
+    
+    class var likeImage: UIImage {
+        UIImage(systemName: "heart") ?? UIImage()
+    }
+    
+    class var commentImage: UIImage {
+        UIImage(systemName: "message") ?? UIImage()
+    }
+    
+    class var bookmarkImage: UIImage {
+        UIImage(systemName: "bookmark") ?? UIImage()
+    }
+    
     // MARK: - TabBar
     
     class var vectorHouseNotSelectImage: UIImage {
@@ -41,6 +59,17 @@ extension UIImage {
     
     class var savedIconImage: UIImage {
         UIImage(named: "savedIcon") ?? UIImage()
+    }
+    
+    
+    //MARK: - MockObject
+    
+    class var giraffeMockObjectImage: UIImage {
+        UIImage(named: "giraffe") ?? UIImage()
+    }
+    
+    class var avatarMockObjectImage: UIImage {
+        UIImage(named: "avatarMockObject") ?? UIImage()
     }
     
 }

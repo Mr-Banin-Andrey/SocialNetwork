@@ -53,6 +53,10 @@
 		9D7FCBE72BB624AF001546FC /* DateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FCBE62BB624AF001546FC /* DateHeader.swift */; };
 		9D7FCBEA2BB6CB55001546FC /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FCBE92BB6CB55001546FC /* AppDIContainer.swift */; };
 		9D7FCBEC2BB6CE96001546FC /* DependencyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FCBEB2BB6CE96001546FC /* DependencyWrapper.swift */; };
+		9D7FCBF62BB6F9AC001546FC /* SubscriberAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FCBF52BB6F9AC001546FC /* SubscriberAssembly.swift */; };
+		9D7FCBF82BB6FA03001546FC /* SubscriberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FCBF72BB6FA03001546FC /* SubscriberViewController.swift */; };
+		9D7FCBFA2BB6FA10001546FC /* SubscriberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FCBF92BB6FA10001546FC /* SubscriberViewModel.swift */; };
+		9D7FCBFC2BB70159001546FC /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FCBFB2BB70159001546FC /* PostCell.swift */; };
 		9DC279B32B49CB4B00FD401F /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC279B22B49CB4B00FD401F /* ViewModelProtocol.swift */; };
 		9DC279B62B49D04100FD401F /* MainBigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC279B52B49D04100FD401F /* MainBigButton.swift */; };
 		9DC279BC2B4A935500FD401F /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC279BB2B4A935500FD401F /* RootCoordinator.swift */; };
@@ -134,6 +138,10 @@
 		9D7FCBE62BB624AF001546FC /* DateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeader.swift; sourceTree = "<group>"; };
 		9D7FCBE92BB6CB55001546FC /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		9D7FCBEB2BB6CE96001546FC /* DependencyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyWrapper.swift; sourceTree = "<group>"; };
+		9D7FCBF52BB6F9AC001546FC /* SubscriberAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberAssembly.swift; sourceTree = "<group>"; };
+		9D7FCBF72BB6FA03001546FC /* SubscriberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberViewController.swift; sourceTree = "<group>"; };
+		9D7FCBF92BB6FA10001546FC /* SubscriberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberViewModel.swift; sourceTree = "<group>"; };
+		9D7FCBFB2BB70159001546FC /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		9DC279B22B49CB4B00FD401F /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		9DC279B52B49D04100FD401F /* MainBigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBigButton.swift; sourceTree = "<group>"; };
 		9DC279BB2B4A935500FD401F /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
@@ -189,6 +197,7 @@
 				9D646AA82B485B1600C0B2D3 /* Main */,
 				9D646AA92B485B3000C0B2D3 /* Profile */,
 				9D646AAA2B485B3600C0B2D3 /* Saved */,
+				9D7FCBF42BB6F51C001546FC /* Subscriber */,
 			);
 			path = UserFlow;
 			sourceTree = "<group>";
@@ -439,12 +448,23 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		9D7FCBF42BB6F51C001546FC /* Subscriber */ = {
+			isa = PBXGroup;
+			children = (
+				9D7FCBF52BB6F9AC001546FC /* SubscriberAssembly.swift */,
+				9D7FCBF72BB6FA03001546FC /* SubscriberViewController.swift */,
+				9D7FCBF92BB6FA10001546FC /* SubscriberViewModel.swift */,
+			);
+			path = Subscriber;
+			sourceTree = "<group>";
+		};
 		9DC279B42B49CF8300FD401F /* CustomUIElements */ = {
 			isa = PBXGroup;
 			children = (
 				9D7FCBDB2BB5F218001546FC /* AvatarView */,
 				9DC279C62B4BED7800FD401F /* CustomTextField.swift */,
 				9DC279B52B49D04100FD401F /* MainBigButton.swift */,
+				9D7FCBFB2BB70159001546FC /* PostCell.swift */,
 			);
 			path = CustomUIElements;
 			sourceTree = "<group>";
@@ -641,6 +661,8 @@
 				9D609D5F2BA336BD001765C0 /* MainViewController.swift in Sources */,
 				9D7FCBE12BB60202001546FC /* AvatarView.swift in Sources */,
 				9D7FCBEA2BB6CB55001546FC /* AppDIContainer.swift in Sources */,
+				9D7FCBFC2BB70159001546FC /* PostCell.swift in Sources */,
+				9D7FCBF82BB6FA03001546FC /* SubscriberViewController.swift in Sources */,
 				9D646AA62B48596E00C0B2D3 /* UIFont.swift in Sources */,
 				9D3994DB2BA097CF009F894A /* Coordinator.swift in Sources */,
 				9D7FCBE52BB60C4B001546FC /* UIActivityIndicatorViewExt.swift in Sources */,
@@ -663,6 +685,7 @@
 				9D3994D92BA0752F009F894A /* AuthenticationCoordinator.swift in Sources */,
 				9D7FCBD82BB5DC0F001546FC /* StoriesAssembly.swift in Sources */,
 				9DCAC4EA2B4D82CC0040C327 /* UILabelExt.swift in Sources */,
+				9D7FCBF62BB6F9AC001546FC /* SubscriberAssembly.swift in Sources */,
 				9DC279BC2B4A935500FD401F /* RootCoordinator.swift in Sources */,
 				9D7FCBDF2BB601EF001546FC /* AvatarViewModel.swift in Sources */,
 				9D6BE4412BA6C8A700462B12 /* SavedViewController.swift in Sources */,
@@ -670,6 +693,7 @@
 				9D6BE43B2BA6C78800462B12 /* ProfileViewModel.swift in Sources */,
 				9DCAC4ED2B4D96130040C327 /* HaveAccountViewController.swift in Sources */,
 				9D646AA42B48594B00C0B2D3 /* UIImage.swift in Sources */,
+				9D7FCBFA2BB6FA10001546FC /* SubscriberViewModel.swift in Sources */,
 				9D3994E52BA0B53D009F894A /* AuthenticationFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

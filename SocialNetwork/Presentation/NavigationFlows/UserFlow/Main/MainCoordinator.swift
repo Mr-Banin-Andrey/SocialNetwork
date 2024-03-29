@@ -38,7 +38,6 @@ final class MainCoordinator: Coordinator {
         
         navigationController.navigationBar.standardAppearance = navBarAppearance
         navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
-        
         navigationController.navigationBar.isHidden = true
     }
     

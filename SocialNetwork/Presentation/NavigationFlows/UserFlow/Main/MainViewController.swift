@@ -22,6 +22,7 @@ final class MainViewController: UIViewController, Coordinatable {
         $0.delegate = self
         $0.dataSource = self
         $0.register(DateHeader.self, forHeaderFooterViewReuseIdentifier: DateHeader.reuseID)
+        $0.register(PostCell.self, forCellReuseIdentifier: PostCell.reuseID)
         $0.separatorStyle = .none
         return $0
     }(UITableView(frame: .zero, style: .grouped))
@@ -90,7 +91,10 @@ extension MainViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCell.reuseID, for: indexPath) as? PostCell else {
+            return UITableViewCell()
+        }
+        
         return cell
     }
 }

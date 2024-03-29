@@ -33,6 +33,12 @@ extension UIColor {
         UIColor(named: "numberTextLabelColor") ?? .lightGray
     }
     
+    // MARK: - Post
+    
+    class var backgroundTextColor: UIColor {
+        UIColor(named: "backgroundTextColor") ?? .white
+    }
+    
     // MARK: - TabBar
     
     class var notSelectIconColor: UIColor {
