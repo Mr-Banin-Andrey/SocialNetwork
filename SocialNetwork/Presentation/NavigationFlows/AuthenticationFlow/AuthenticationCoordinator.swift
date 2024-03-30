@@ -32,11 +32,23 @@ final class AuthenticationCoordinator: Coordinator {
         let loginVC = authenticationFactory.makeLogInView()
         (loginVC as? LogInViewController)?.coordinator = self
         navigationController.setViewControllers([loginVC], animated: true)
+        setupNavBarAppearance()
     }
     
     func stopUserFlow() { // (_userProfile: UserProfile)
         stop()
-        (parentCoordinator as? RootCoordinator)?.startUserFlow() // (userProfile)
+        (parentCoordinator as? RootCoordinator)?.startUserFlow()
+        navigationController.navigationBar.isHidden = true// (userProfile)
+    }
+    
+    private func setupNavBarAppearance() {
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.backgroundColor = .mainBackgroundColor
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.textAndButtonColor]
+        navBarAppearance.configureWithTransparentBackground()
+        navigationController.navigationBar.standardAppearance = navBarAppearance
+        navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
+        navigationController.navigationBar.isHidden = true
     }
     
     // MARK: Types

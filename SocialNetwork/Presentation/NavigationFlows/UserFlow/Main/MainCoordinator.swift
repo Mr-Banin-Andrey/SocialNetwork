@@ -35,10 +35,9 @@ final class MainCoordinator: Coordinator {
         let navBarAppearance = UINavigationBarAppearance()
         navBarAppearance.backgroundColor = .mainBackgroundColor
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.textAndButtonColor]
-        
+        navBarAppearance.configureWithTransparentBackground()
         navigationController.navigationBar.standardAppearance = navBarAppearance
         navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
-        navigationController.navigationBar.isHidden = true
     }
     
     // MARK: Types

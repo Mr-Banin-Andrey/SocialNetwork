@@ -27,6 +27,13 @@ final class MainViewController: UIViewController, Coordinatable {
         return $0
     }(UITableView(frame: .zero, style: .grouped))
     
+    private lazy var titleLabel: UILabel = {
+        $0.font = .interSemiBold600Font
+        $0.textColor = .textAndButtonColor
+        $0.text = "Главная"
+        return $0
+    }(UILabel())
+    
     //MARK: Init
     
     init(viewModel: MainViewModel) {
@@ -43,8 +50,8 @@ final class MainViewController: UIViewController, Coordinatable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupNavBar()
         setupUI()
-        view.backgroundColor = .mainBackgroundColor
         bindViewModel()
     }
     
@@ -61,14 +68,20 @@ final class MainViewController: UIViewController, Coordinatable {
 //        }
     }
     
+    private func setupNavBar() {
+        let leftButtonTwo = UIBarButtonItem(customView: titleLabel)
+        self.navigationItem.leftBarButtonItems = [leftButtonTwo]
+    }
+    
     private func setupUI() {
+        view.backgroundColor = .mainBackgroundColor
         self.view.addSubview(mainTable)
         
         NSLayoutConstraint.activate([
-            self.mainTable.topAnchor.constraint(equalTo: view.topAnchor),
-            self.mainTable.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            self.mainTable.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            self.mainTable.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            self.mainTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            self.mainTable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            self.mainTable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            self.mainTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }
@@ -115,7 +128,7 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
-            return 60
+            return 76
         default:
             return 24
         }

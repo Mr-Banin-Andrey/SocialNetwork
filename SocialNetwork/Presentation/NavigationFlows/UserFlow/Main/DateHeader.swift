@@ -16,14 +16,14 @@ final class DateHeader: UITableViewHeaderFooterView {
     private lazy var lineFirstView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        $0.backgroundColor = .textAndButtonColor
+        $0.backgroundColor = .textSecondaryColor
         return $0
     }(UIView())
     
     private lazy var lineSecondView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        $0.backgroundColor = .textAndButtonColor
+        $0.backgroundColor = .textSecondaryColor
         return $0
     }(UIView())
     
@@ -31,8 +31,8 @@ final class DateHeader: UITableViewHeaderFooterView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 10
-        $0.layer.borderColor = UIColor.textAndButtonColor.cgColor
-        $0.textColor = .textAndButtonColor
+        $0.layer.borderColor = UIColor.textSecondaryColor.cgColor
+        $0.textColor = .textSecondaryColor
         $0.text = "12 июля"
         $0.textAlignment = .center
         return $0

@@ -20,6 +20,7 @@ final class RootCoordinator: Coordinator {
     
     func start() {
         startLogInFlow()
+        setupNavBarAppearance()
     }
     
     func startLogInFlow() {
@@ -39,7 +40,6 @@ final class RootCoordinator: Coordinator {
         do {
             let userCoordinator = try appFactory.makeFlowCoordinator(.main, rootCoordinator: self)
             DispatchQueue.main.async {
-                
                 self.addChild(userCoordinator)
                 userCoordinator.start()
             }
@@ -49,5 +49,14 @@ final class RootCoordinator: Coordinator {
     }
     
 
+    private func setupNavBarAppearance() {
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.backgroundColor = .mainBackgroundColor
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.textAndButtonColor]
+        navBarAppearance.configureWithTransparentBackground()
+        navigationController.navigationBar.standardAppearance = navBarAppearance
+        navigationController.navigationBar.scrollEdgeAppearance = navBarAppearance
+        navigationController.navigationBar.isHidden = true
+    }
     
 }

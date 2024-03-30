@@ -65,7 +65,7 @@ final class StoriesView: UIView {
         self.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
-            self.collectionView.topAnchor.constraint(equalTo: self.topAnchor),
+            self.collectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             self.collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
@@ -95,12 +95,12 @@ extension StoriesView: UICollectionViewDataSource {
 
 extension StoriesView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 72, height: 60)
+        return CGSize(width: 76, height: 60)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? StorieCell {
-            
+            //TODO: переход на профиль подписчика
         }
     }
 }

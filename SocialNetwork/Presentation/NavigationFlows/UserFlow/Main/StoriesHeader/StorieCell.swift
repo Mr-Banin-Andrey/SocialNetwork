@@ -34,8 +34,8 @@ final class StorieCell: UICollectionViewCell {
 
         NSLayoutConstraint.activate([
             self.pictureImage.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            self.pictureImage.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 6),
-            self.pictureImage.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -6),
+            self.pictureImage.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
+            self.pictureImage.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
             self.pictureImage.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
         ])
     }
