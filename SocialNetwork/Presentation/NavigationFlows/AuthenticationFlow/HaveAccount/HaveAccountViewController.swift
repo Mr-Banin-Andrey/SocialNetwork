@@ -45,7 +45,7 @@ final class HaveAccountViewController: UIViewController, Coordinatable {
         keyboardType: .phonePad
     )
     
-    private lazy var registrationButton = MainBigButton(
+    private lazy var registrationButton = CustomButton(
         title: "ПОДТВЕРДИТЬ",
         font: .interMedium500Font,
         titleColor: .mainBackgroundColor,

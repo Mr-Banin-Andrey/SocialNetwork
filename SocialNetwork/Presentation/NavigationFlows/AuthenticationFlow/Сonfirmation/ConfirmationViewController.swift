@@ -44,7 +44,7 @@ final class ConfirmationViewController: UIViewController, Coordinatable {
         borderColor: UIColor.textAndButtonColor.cgColor
     )
     
-    private lazy var registrationButton = MainBigButton(
+    private lazy var registrationButton = CustomButton(
         title: "ЗАРЕГИСТРИРОВАТЬСЯ",
         font: .interMedium500Font,
         titleColor: .mainBackgroundColor,

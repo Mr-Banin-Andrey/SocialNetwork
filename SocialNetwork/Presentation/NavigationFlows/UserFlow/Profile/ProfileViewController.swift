@@ -118,20 +118,22 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
-            return ProfileHeaderAssembly(type: .profileView).view()
+            let view = ProfileHeaderAssembly(type: .profileView).view()
+            view.setupHeader()
+            return view
         default:
             guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: DateHeader.reuseID) as? DateHeader else { return nil }
             return header
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 0:
-            return 112
-        default:
-            return 24
-        }
-    }
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        switch section {
+//        case 0:
+//            return 112
+//        default:
+//            return 24
+//        }
+//    }
     
 }

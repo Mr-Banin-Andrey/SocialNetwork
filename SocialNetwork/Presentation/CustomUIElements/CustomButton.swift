@@ -1,5 +1,5 @@
 //
-//  MainBigButton.swift
+//  CustomButton.swift
 //  SocialNetwork
 //
 //  Created by Андрей Банин on 6.1.24..
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MainBigButton: UIButton {
+final class CustomButton: UIButton {
     
     typealias Action = () -> Void
     

@@ -60,8 +60,9 @@
 		9D7FCC062BB82420001546FC /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FCC052BB82420001546FC /* ProfileHeaderViewModel.swift */; };
 		9D7FCC082BB82439001546FC /* ProfileHeaderAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FCC072BB82439001546FC /* ProfileHeaderAssembly.swift */; };
 		9D7FCC0A2BB82448001546FC /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FCC092BB82448001546FC /* ProfileHeaderView.swift */; };
+		9D7FCC0C2BB887BE001546FC /* ProfileHeaderCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FCC0B2BB887BE001546FC /* ProfileHeaderCollectionCell.swift */; };
 		9DC279B32B49CB4B00FD401F /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC279B22B49CB4B00FD401F /* ViewModelProtocol.swift */; };
-		9DC279B62B49D04100FD401F /* MainBigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC279B52B49D04100FD401F /* MainBigButton.swift */; };
+		9DC279B62B49D04100FD401F /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC279B52B49D04100FD401F /* CustomButton.swift */; };
 		9DC279BC2B4A935500FD401F /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC279BB2B4A935500FD401F /* RootCoordinator.swift */; };
 		9DC279C32B4BE71E00FD401F /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC279C22B4BE71E00FD401F /* RegistrationViewController.swift */; };
 		9DC279C72B4BED7800FD401F /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC279C62B4BED7800FD401F /* CustomTextField.swift */; };
@@ -148,8 +149,9 @@
 		9D7FCC052BB82420001546FC /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
 		9D7FCC072BB82439001546FC /* ProfileHeaderAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderAssembly.swift; sourceTree = "<group>"; };
 		9D7FCC092BB82448001546FC /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		9D7FCC0B2BB887BE001546FC /* ProfileHeaderCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCollectionCell.swift; sourceTree = "<group>"; };
 		9DC279B22B49CB4B00FD401F /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
-		9DC279B52B49D04100FD401F /* MainBigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBigButton.swift; sourceTree = "<group>"; };
+		9DC279B52B49D04100FD401F /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		9DC279BB2B4A935500FD401F /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
 		9DC279C22B4BE71E00FD401F /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		9DC279C62B4BED7800FD401F /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 				9D7FCC072BB82439001546FC /* ProfileHeaderAssembly.swift */,
 				9D7FCC092BB82448001546FC /* ProfileHeaderView.swift */,
 				9D7FCC052BB82420001546FC /* ProfileHeaderViewModel.swift */,
+				9D7FCC0B2BB887BE001546FC /* ProfileHeaderCollectionCell.swift */,
 			);
 			path = ProfileHeader;
 			sourceTree = "<group>";
@@ -480,7 +483,7 @@
 				9D7FCC002BB82388001546FC /* ProfileHeader */,
 				9D7FCBDB2BB5F218001546FC /* AvatarView */,
 				9DC279C62B4BED7800FD401F /* CustomTextField.swift */,
-				9DC279B52B49D04100FD401F /* MainBigButton.swift */,
+				9DC279B52B49D04100FD401F /* CustomButton.swift */,
 				9D7FCBFB2BB70159001546FC /* PostCell.swift */,
 			);
 			path = CustomUIElements;
@@ -686,6 +689,7 @@
 				9D7FCC082BB82439001546FC /* ProfileHeaderAssembly.swift in Sources */,
 				9D7FCBE52BB60C4B001546FC /* UIActivityIndicatorViewExt.swift in Sources */,
 				9D7FCBD62BB5DAF9001546FC /* StoriesViewModel.swift in Sources */,
+				9D7FCC0C2BB887BE001546FC /* ProfileHeaderCollectionCell.swift in Sources */,
 				9D7FCBDA2BB5F146001546FC /* StorieCell.swift in Sources */,
 				9DC279C72B4BED7800FD401F /* CustomTextField.swift in Sources */,
 				9DC279C32B4BE71E00FD401F /* RegistrationViewController.swift in Sources */,
@@ -695,7 +699,7 @@
 				9D646ABA2B493FD400C0B2D3 /* LogInViewController.swift in Sources */,
 				9D3994DF2BA0AB97009F894A /* AppFactory.swift in Sources */,
 				9D7FCBEC2BB6CE96001546FC /* DependencyWrapper.swift in Sources */,
-				9DC279B62B49D04100FD401F /* MainBigButton.swift in Sources */,
+				9DC279B62B49D04100FD401F /* CustomButton.swift in Sources */,
 				9D609D632BA33700001765C0 /* MainCoordinator.swift in Sources */,
 				9D7FCBE72BB624AF001546FC /* DateHeader.swift in Sources */,
 				9D7FCC0A2BB82448001546FC /* ProfileHeaderView.swift in Sources */,

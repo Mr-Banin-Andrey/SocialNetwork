@@ -72,4 +72,7 @@ extension UIImage {
         UIImage(named: "avatarMockObject") ?? UIImage()
     }
     
+    class var photoCellMockObjectImage: UIImage {
+        UIImage(named: "photoCelProfileHeader") ?? UIImage()
+    }
 }
