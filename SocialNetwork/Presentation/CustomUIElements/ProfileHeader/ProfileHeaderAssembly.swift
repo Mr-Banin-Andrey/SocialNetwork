@@ -13,7 +13,7 @@ final class ProfileHeaderAssembly {
     
     func view() -> ProfileHeaderView {
         let viewModel = ProfileHeaderViewModel()
-        let view = ProfileHeaderView(viewModel: viewModel, type: .profileView)
+        let view = ProfileHeaderView(viewModel: viewModel, type: type)
         return view
     }
     

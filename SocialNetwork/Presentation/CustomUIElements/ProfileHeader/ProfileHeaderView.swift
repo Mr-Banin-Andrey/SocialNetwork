@@ -7,6 +7,13 @@
 
 import UIKit
 
+protocol ProfileHeaderViewDelegate: AnyObject {
+    func openScreenCreatePost()
+    func subscribeToProfile()
+    func editProfile()
+    func openScreenGallery()
+}
+
 final class ProfileHeaderView: UIView {
     
     enum TypeView {
@@ -14,6 +21,7 @@ final class ProfileHeaderView: UIView {
         case subscriberView
     }
     
+    weak var delegate: ProfileHeaderViewDelegate?
     private let viewModel: ProfileHeaderViewModel
     
     //MARK: Properties
@@ -46,12 +54,20 @@ final class ProfileHeaderView: UIView {
     }(UILabel())
     
     private lazy var editButton = CustomButton(
-        title: "Подписаться",
+        title: "Редактировать",
         font: .interMedium500Font,
         titleColor: .mainBackgroundColor,
-        backgroundColor: .textAndButtonColor// .textTertiaryColor
+        backgroundColor: .textTertiaryColor
     ) { [weak self] in
-        return
+        guard let self else { return }
+        switch self.type {
+        case .profileView:
+            delegate?.editProfile()
+            print("profileView")
+        case .subscriberView:
+            delegate?.subscribeToProfile()
+            print("subscriberView")
+        }
     }
     
     private lazy var firstLineView: UIView = {
@@ -113,12 +129,13 @@ final class ProfileHeaderView: UIView {
         return $0
     }(UILabel())
     
-    private lazy var chevronImage: UIImageView = {
+    private lazy var chevronButton: UIButton = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.image = UIImage(systemName: "chevron.right")
+        $0.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         $0.tintColor = .textAndButtonColor
+        $0.addTarget(self, action: #selector(didTapOpenGallery), for: .touchUpInside)
         return $0
-    }(UIImageView())
+    }(UIButton())
     
     private lazy var layout: UICollectionViewFlowLayout = {
         $0.minimumLineSpacing = 0
@@ -134,6 +151,8 @@ final class ProfileHeaderView: UIView {
         $0.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
         $0.showsHorizontalScrollIndicator = false
         $0.backgroundColor = .clear
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOpenGallery))
+        $0.addGestureRecognizer(tapGesture)
         return $0
     }(UICollectionView(frame: .zero, collectionViewLayout: self.layout))
         
@@ -147,7 +166,7 @@ final class ProfileHeaderView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor = .textTertiaryColor
         $0.font = .interMedium500Font
-        $0.text = "Посты Иванки"
+        $0.text = "Мои посты"
         return $0
     }(UILabel())
     
@@ -155,6 +174,7 @@ final class ProfileHeaderView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
         $0.tintColor = .textAndButtonColor
+        $0.addTarget(self, action: #selector(didTapCreatePost), for: .touchUpInside)
         return $0
     }(UIButton())
     
@@ -163,9 +183,12 @@ final class ProfileHeaderView: UIView {
         didSet{
             switch type {
             case .profileView:
-                break
+                editButton.changeColorAndTitle(title: "Редактировать", color: .textTertiaryColor)
+                myNotesLabel.text = "Мои посты"
             case .subscriberView:
-                break
+                editButton.changeColorAndTitle(title: "Подписаться", color: .textAndButtonColor)
+                createPostButton.isHidden = true
+                myNotesLabel.text = "Посты кого-то..."
             }
         }
     }
@@ -179,7 +202,6 @@ final class ProfileHeaderView: UIView {
         self.setupUI()
         setupImage(type: type)
         bindViewModel()
-        createPostButton.isHidden = true
     }
     
     required init?(coder: NSCoder) {
@@ -188,8 +210,8 @@ final class ProfileHeaderView: UIView {
     
     //MARK: Methods
     
-    func setupHeader() {
-        photoLabel.attributedText = editColor(count: 20)
+    func setupHeader(numberOfPhoto: Int) {
+        photoLabel.attributedText = editColor(count: numberOfPhoto)
     }
     
     private func bindViewModel() {
@@ -214,7 +236,7 @@ final class ProfileHeaderView: UIView {
     private func editColor(count: Int) ->  NSMutableAttributedString {
         let text = "Фотографии  \(count)"
         let underlineAttributedString = NSMutableAttributedString(string: text)
-        var range = (text as NSString).range(of: "\(count)")
+        let range = (text as NSString).range(of: "\(count)")
         underlineAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.textSecondaryColor, range: range)
         return underlineAttributedString
     }
@@ -231,7 +253,7 @@ final class ProfileHeaderView: UIView {
         infoSubscribersAndPublicationStack.addArrangedSubview(followersLabel)
         addSubview(secondLineView)
         addSubview(photoLabel)
-        addSubview(chevronImage)
+        addSubview(chevronButton)
         addSubview(collectionView)
         addSubview(backgroundMyNotesView)
         addSubview(myNotesLabel)
@@ -262,8 +284,8 @@ final class ProfileHeaderView: UIView {
             photoLabel.topAnchor.constraint(equalTo: secondLineView.bottomAnchor, constant: 24),
             photoLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             
-            chevronImage.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            chevronImage.centerYAnchor.constraint(equalTo: photoLabel.centerYAnchor),
+            chevronButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            chevronButton.centerYAnchor.constraint(equalTo: photoLabel.centerYAnchor),
             
             collectionView.heightAnchor.constraint(equalToConstant: 68),
             collectionView.topAnchor.constraint(equalTo: photoLabel.bottomAnchor, constant: 16),
@@ -274,7 +296,7 @@ final class ProfileHeaderView: UIView {
             backgroundMyNotesView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 24),
             backgroundMyNotesView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             backgroundMyNotesView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            backgroundMyNotesView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
+            backgroundMyNotesView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
             
             myNotesLabel.centerYAnchor.constraint(equalTo: backgroundMyNotesView.centerYAnchor),
             myNotesLabel.leadingAnchor.constraint(equalTo: backgroundMyNotesView.leadingAnchor, constant: 16),
@@ -283,6 +305,15 @@ final class ProfileHeaderView: UIView {
             createPostButton.trailingAnchor.constraint(equalTo: backgroundMyNotesView.trailingAnchor, constant: -16),
         ])
     }
+    
+    @objc private func didTapCreatePost() {
+        delegate?.openScreenCreatePost()
+    }
+    
+    @objc private func didTapOpenGallery() {
+        delegate?.openScreenGallery()
+    }
+    
 }
 
 //MARK: - UICollectionViewDataSource
@@ -307,6 +338,6 @@ extension ProfileHeaderView: UICollectionViewDataSource {
 
 extension ProfileHeaderView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 72, height: 66)
+        return CGSize(width: 76, height: 66)
     }
 }

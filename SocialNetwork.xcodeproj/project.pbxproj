@@ -480,8 +480,8 @@
 		9DC279B42B49CF8300FD401F /* CustomUIElements */ = {
 			isa = PBXGroup;
 			children = (
-				9D7FCC002BB82388001546FC /* ProfileHeader */,
 				9D7FCBDB2BB5F218001546FC /* AvatarView */,
+				9D7FCC002BB82388001546FC /* ProfileHeader */,
 				9DC279C62B4BED7800FD401F /* CustomTextField.swift */,
 				9DC279B52B49D04100FD401F /* CustomButton.swift */,
 				9D7FCBFB2BB70159001546FC /* PostCell.swift */,

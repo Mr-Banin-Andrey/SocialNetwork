@@ -91,7 +91,7 @@ final class ProfileViewController: UIViewController, Coordinatable {
 extension ProfileViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        8
+        3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -99,7 +99,7 @@ extension ProfileViewController: UITableViewDataSource {
         case 0:
             return 0
         default:
-            return 1
+            return 2
         }
     }
     
@@ -119,7 +119,8 @@ extension ProfileViewController: UITableViewDelegate {
         switch section {
         case 0:
             let view = ProfileHeaderAssembly(type: .profileView).view()
-            view.setupHeader()
+            view.setupHeader(numberOfPhoto: 20)
+            view.delegate = self
             return view
         default:
             guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: DateHeader.reuseID) as? DateHeader else { return nil }
@@ -127,13 +128,33 @@ extension ProfileViewController: UITableViewDelegate {
         }
     }
     
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        switch section {
-//        case 0:
-//            return 112
-//        default:
-//            return 24
-//        }
-//    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 423
+        default:
+            return 24
+        }
+    }
     
+}
+
+//MARK: - ProfileHeaderViewDelegate
+
+extension ProfileViewController: ProfileHeaderViewDelegate {
+    func openScreenGallery() {
+        return
+    }
+    
+    func openScreenCreatePost() {
+        return
+    }
+    
+    func subscribeToProfile() {
+        return
+    }
+    
+    func editProfile() {
+        return
+    }
 }

@@ -11,7 +11,7 @@ final class CustomButton: UIButton {
     
     typealias Action = () -> Void
     
-    var buttonAction: Action
+    private var buttonAction: Action
     
     init(
         title: String,
@@ -35,6 +35,11 @@ final class CustomButton: UIButton {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func changeColorAndTitle(title: String, color: UIColor) {
+        self.setTitle(title, for: .normal)
+        self.backgroundColor = color
     }
     
     @objc private func actionButton() {
