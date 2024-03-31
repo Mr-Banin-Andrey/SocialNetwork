@@ -52,7 +52,7 @@ final class RegistrationViewController: UIViewController, Coordinatable {
         keyboardType: .phonePad
     )
     
-    private lazy var confirmationButton = MainBigButton(
+    private lazy var confirmationButton = CustomButton(
         title: "ДАЛЕЕ",
         font: .interMedium500Font,
         titleColor: .mainBackgroundColor,

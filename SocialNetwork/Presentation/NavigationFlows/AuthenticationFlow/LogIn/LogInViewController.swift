@@ -33,7 +33,7 @@ final class LogInViewController: UIViewController, Coordinatable {
         return $0
     }(UIImageView())
     
-    private lazy var registrationButton = MainBigButton(
+    private lazy var registrationButton = CustomButton(
         title: "ЗАРЕГИСТРИРОВАТЬСЯ",
         font: .interMedium500Font,
         titleColor: .mainBackgroundColor,
@@ -41,7 +41,7 @@ final class LogInViewController: UIViewController, Coordinatable {
             self?.viewModel.updateState(with: .openScreenRegistration)
         }
     
-    private lazy var haveAccountButton = MainBigButton(
+    private lazy var haveAccountButton = CustomButton(
         title: "Уже есть аккаунт",
         font: .interRegular400Font,
         titleColor: .textAndButtonColor,

@@ -1,32 +1,32 @@
 //
-//  AvatarViewModel.swift
+//  PhotoViewModel.swift
 //  SocialNetwork
 //
-//  Created by Андрей Банин on 28.3.24..
+//  Created by Андрей Банин on 31.3.24..
 //
 
 import Foundation
 
-// MARK: - AvatarViewModelProtocol
+// MARK: - PhotoViewModelProtocol
 
-protocol AvatarViewModelProtocol: ViewModelProtocol where State == AvatarState, ViewInput == AvatarViewInput {}
+protocol PhotoViewModelProtocol: ViewModelProtocol where State == PhotoState, ViewInput == PhotoViewInput {}
 
 // MARK: - Associated enums
 
-enum AvatarState {
+enum PhotoState {
     case initial
     case loadPicture
     case didLoadPicture(Data)
     case noAvatar
 }
 
-enum AvatarViewInput {
-    case startLoadAvatar
+enum PhotoViewInput {
+    case startLoadPhoto(String)
 }
 
-// MARK: - AvatarViewModel
+// MARK: - PhotoViewModel
 
-final class AvatarViewModel: AvatarViewModelProtocol {
+final class PhotoViewModel: PhotoViewModelProtocol {
     
     // MARK: State related properties
     

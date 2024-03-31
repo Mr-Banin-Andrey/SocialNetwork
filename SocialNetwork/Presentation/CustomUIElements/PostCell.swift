@@ -86,14 +86,7 @@ final class PostCell: UITableViewCell {
         return $0
     }(UIButton())
     
-    private lazy var pictureImage: UIImageView = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 10
-        $0.contentMode = .scaleAspectFill
-        $0.image = .giraffeMockObjectImage
-        return $0
-    }(UIImageView())
+    private lazy var pictureImage = PhotoAssembly().view()
     
     private lazy var horizontalLineView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -204,25 +197,25 @@ final class PostCell: UITableViewCell {
         addSubview(bookmarkImage)
         
         NSLayoutConstraint.activate([
-            avatarView.topAnchor.constraint(equalTo: self.topAnchor, constant: 24),
+            avatarView.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
             avatarView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             avatarView.heightAnchor.constraint(equalToConstant: 60),
             avatarView.widthAnchor.constraint(equalToConstant: 60),
             
-            nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 30),
+            nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 18),
             nameLabel.leadingAnchor.constraint(equalTo: self.avatarView.trailingAnchor, constant: 16),
             
             professionLabel.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: 6),
             professionLabel.leadingAnchor.constraint(equalTo: self.avatarView.trailingAnchor, constant: 16),
             
-            verticalEllipseImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 36),
+            verticalEllipseImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 24),
             verticalEllipseImage.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24),
             
             backgroundTextView.heightAnchor.constraint(equalToConstant: 308),
             backgroundTextView.topAnchor.constraint(equalTo: self.avatarView.bottomAnchor, constant: 12),
             backgroundTextView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             backgroundTextView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            backgroundTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12),
+            backgroundTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
             
             verticalLineView.topAnchor.constraint(equalTo: self.backgroundTextView.topAnchor, constant: 16),
             verticalLineView.leadingAnchor.constraint(equalTo: self.backgroundTextView.leadingAnchor, constant: 20),
