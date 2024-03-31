@@ -12,16 +12,9 @@ final class ProfileHeaderCollectionCell: UICollectionViewCell {
     static let reuseID = "ProfileHeaderCollectionCellID"
     
     //MARK: Properties
-        
-    private lazy var photoImage: UIImageView = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 5
-        $0.contentMode = .scaleAspectFill
-        $0.image = .photoCellMockObjectImage
-        return $0
-    }(UIImageView())
-    
+            
+    private lazy var photoImage = PhotoAssembly().view()
+
     //MARK: Initial
     
     override init(frame: CGRect) {

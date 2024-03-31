@@ -86,14 +86,7 @@ final class PostCell: UITableViewCell {
         return $0
     }(UIButton())
     
-    private lazy var pictureImage: UIImageView = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 10
-        $0.contentMode = .scaleAspectFill
-        $0.image = .giraffeMockObjectImage
-        return $0
-    }(UIImageView())
+    private lazy var pictureImage = PhotoAssembly().view()
     
     private lazy var horizontalLineView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false

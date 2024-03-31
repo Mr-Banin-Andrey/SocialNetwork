@@ -34,6 +34,14 @@ final class ProfileViewController: UIViewController, Coordinatable {
         return $0
     }(UILabel())
     
+    private lazy var burgerButton: UIButton = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.setImage(UIImage(systemName: "line.3.horizontal"), for: .normal)
+        $0.tintColor = .textTertiaryColor
+        $0.addTarget(self, action: #selector(didTapSettings), for: .touchUpInside)
+        return $0
+    }(UIButton())
+    
     //MARK: Init
     
     init(viewModel: ProfileViewModel) {
@@ -69,8 +77,12 @@ final class ProfileViewController: UIViewController, Coordinatable {
     }
     
     private func setupNavBar() {
-        let leftButtonTwo = UIBarButtonItem(customView: titleLabel)
-        self.navigationItem.leftBarButtonItems = [leftButtonTwo]
+        let titleLabel = UIBarButtonItem(customView: titleLabel)
+        self.navigationItem.leftBarButtonItems = [titleLabel]
+        
+        let rightButton = UIBarButtonItem(customView: burgerButton)
+        self.navigationItem.rightBarButtonItems = [rightButton]
+        
     }
     
     private func setupUI() {
@@ -83,6 +95,10 @@ final class ProfileViewController: UIViewController, Coordinatable {
             self.profileTable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             self.profileTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    @objc private func didTapSettings() {
+        
     }
 }
 
