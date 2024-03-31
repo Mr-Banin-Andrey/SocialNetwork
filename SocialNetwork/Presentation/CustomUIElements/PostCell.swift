@@ -11,6 +11,7 @@ protocol PostCellDelegate: AnyObject {
     func openScreenSubscriber()
     func openScreenMenuSheet()
     func openScreenWholePost()
+    func addPostToSaved()
 }
 
 final class PostCell: UITableViewCell {
@@ -20,20 +21,17 @@ final class PostCell: UITableViewCell {
     weak var delegate: PostCellDelegate?
     
     //MARK: Properties
+
+    private lazy var avatarView = AvatarAssembly(size: .sizeSixty, isBorder: false).view()
     
-    private lazy var avatarView: UIView = {
-        let tapGesture = UIGestureRecognizer(target: self, action: #selector(didTapOnSubscriber))
-        $0.addGestureRecognizer(tapGesture)
-        return $0
-    }(AvatarAssembly(size: .sizeSixty, isBorder: false).view())
-        
     private lazy var nameLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = "Ivanka Pushkin"
         $0.textColor = .textAndButtonColor
         $0.font = .interMedium500Font
-        let tapGesture = UIGestureRecognizer(target: self, action: #selector(didTapOnSubscriber))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOnSubscriber))
         $0.addGestureRecognizer(tapGesture)
+        $0.isUserInteractionEnabled = true
         return $0
     }(UILabel())
     
@@ -45,13 +43,14 @@ final class PostCell: UITableViewCell {
         return $0
     }(UILabel())
     
-    private lazy var verticalEllipseImage: UIImageView = {
+    private lazy var verticalEllipseButton: UIButton = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.image = .verticalEllipseImage
-        let tapGesture = UIGestureRecognizer(target: self, action: #selector(didTapOnSubscriber))
-        $0.addGestureRecognizer(tapGesture)
+        $0.setImage(.verticalEllipseImage, for: .normal)
+        $0.tintColor = .textTertiaryColor
+        $0.addTarget(self, action: #selector(didTapOnMenuSheet), for: .touchUpInside)
         return $0
-    }(UIImageView())
+    }(UIButton())
+        
     
     private lazy var backgroundTextView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -82,7 +81,6 @@ final class PostCell: UITableViewCell {
         $0.titleLabel?.font = .interSemiBold600Font.withSize(12)
         $0.setTitleColor(.textSecondaryColor, for: .normal)
         $0.addTarget(nil, action: #selector(didTapText), for: .touchUpInside)
-        
         return $0
     }(UIButton())
     
@@ -149,12 +147,13 @@ final class PostCell: UITableViewCell {
         return $0
     }(UILabel())
     
-    private lazy var bookmarkImage: UIImageView = {
+    private lazy var bookmarkButton: UIButton = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.image = .bookmarkImage
         $0.tintColor = .textAndButtonColor
+        $0.setImage(.bookmarkImage, for: .normal)
+        $0.addTarget(self, action: #selector(didTapOnBookmark), for: .touchUpInside)
         return $0
-    }(UIImageView())
+    }(UIButton())
     
     //MARK: Initial
     
@@ -163,6 +162,7 @@ final class PostCell: UITableViewCell {
         
         self.selectionStyle = .none
         setupUI()
+        addGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -174,48 +174,58 @@ final class PostCell: UITableViewCell {
     
     func setupCell() {
         //TODO: прокинуть данные из базы
+//        avatarView.setupAvatar(<#T##userID: String##String#>)
+//        nameLabel.text =
+//        professionLabel.text =
+//        textOfPostLabel.text =
+//        pictureImage.setupPhoto(<#T##photoID: String##String#>)
+    }
+    
+    private func addGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOnSubscriber))
+        avatarView.addGestureRecognizer(tapGesture)
     }
     
     private func setupUI() {
-        addSubview(avatarView)
-        addSubview(nameLabel)
-        addSubview(professionLabel)
-        addSubview(verticalEllipseImage)
-        addSubview(backgroundTextView)
-        addSubview(verticalLineView)
-        addSubview(textOfPostLabel)
-        addSubview(showInFullButton)
-        addSubview(pictureImage)
-        addSubview(horizontalLineView)
-        addSubview(likeAndCommentStack)
+        contentView.addSubview(avatarView)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(professionLabel)
+        contentView.addSubview(verticalEllipseButton)
+        contentView.addSubview(backgroundTextView)
+        contentView.addSubview(verticalLineView)
+        contentView.addSubview(textOfPostLabel)
+        contentView.addSubview(showInFullButton)
+        contentView.addSubview(pictureImage)
+        contentView.addSubview(horizontalLineView)
+        contentView.addSubview(likeAndCommentStack)
         likeAndCommentStack.addArrangedSubview(likeStack)
         likeAndCommentStack.addArrangedSubview(commentStack)
         likeStack.addArrangedSubview(likeImage)
         likeStack.addArrangedSubview(likeLabel)
         commentStack.addArrangedSubview(commentImage)
         commentStack.addArrangedSubview(commentLabel)
-        addSubview(bookmarkImage)
+        contentView.addSubview(bookmarkButton)
         
         NSLayoutConstraint.activate([
-            avatarView.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
-            avatarView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            avatarView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
+            avatarView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             avatarView.heightAnchor.constraint(equalToConstant: 60),
             avatarView.widthAnchor.constraint(equalToConstant: 60),
             
-            nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 18),
+            nameLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 18),
             nameLabel.leadingAnchor.constraint(equalTo: self.avatarView.trailingAnchor, constant: 16),
             
             professionLabel.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: 6),
             professionLabel.leadingAnchor.constraint(equalTo: self.avatarView.trailingAnchor, constant: 16),
             
-            verticalEllipseImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 24),
-            verticalEllipseImage.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24),
+            verticalEllipseButton.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 24),
+            verticalEllipseButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -24),
             
             backgroundTextView.heightAnchor.constraint(equalToConstant: 308),
             backgroundTextView.topAnchor.constraint(equalTo: self.avatarView.bottomAnchor, constant: 12),
-            backgroundTextView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            backgroundTextView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            backgroundTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
+            backgroundTextView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            backgroundTextView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            backgroundTextView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8),
             
             verticalLineView.topAnchor.constraint(equalTo: self.backgroundTextView.topAnchor, constant: 16),
             verticalLineView.leadingAnchor.constraint(equalTo: self.backgroundTextView.leadingAnchor, constant: 20),
@@ -236,14 +246,14 @@ final class PostCell: UITableViewCell {
             pictureImage.trailingAnchor.constraint(equalTo: self.backgroundTextView.trailingAnchor, constant: -16),
             
             horizontalLineView.topAnchor.constraint(equalTo: self.pictureImage.bottomAnchor, constant: 10),
-            horizontalLineView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            horizontalLineView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            horizontalLineView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            horizontalLineView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
             
             likeAndCommentStack.topAnchor.constraint(equalTo: horizontalLineView.bottomAnchor, constant: 14),
             likeAndCommentStack.leadingAnchor.constraint(equalTo: self.verticalLineView.trailingAnchor, constant: 30),
             
-            bookmarkImage.topAnchor.constraint(equalTo: horizontalLineView.bottomAnchor, constant: 14),
-            bookmarkImage.trailingAnchor.constraint(equalTo: self.backgroundTextView.trailingAnchor, constant: -16),
+            bookmarkButton.topAnchor.constraint(equalTo: horizontalLineView.bottomAnchor, constant: 14),
+            bookmarkButton.trailingAnchor.constraint(equalTo: self.backgroundTextView.trailingAnchor, constant: -16),
         ])
     }
     
@@ -257,5 +267,12 @@ final class PostCell: UITableViewCell {
     
     @objc private func didTapText() {
         delegate?.openScreenWholePost()
+    }
+    
+    @objc private func didTapOnBookmark(_ sender: UIButton) {
+        bookmarkButton.setImage(.bookmarkFillImage, for: .normal)
+        bookmarkButton.tintColor = .textTertiaryColor
+
+        delegate?.addPostToSaved()
     }
 }

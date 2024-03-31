@@ -287,7 +287,6 @@
 				9D609D5E2BA336BD001765C0 /* MainViewController.swift */,
 				9D609D602BA336F1001765C0 /* MainViewModel.swift */,
 				9D7FCBD22BB5D941001546FC /* StoriesHeader */,
-				9D7FCBE62BB624AF001546FC /* DateHeader.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -496,11 +495,12 @@
 		9DC279B42B49CF8300FD401F /* CustomUIElements */ = {
 			isa = PBXGroup;
 			children = (
-				9D7FCC0D2BB9B254001546FC /* PhotoView */,
 				9D7FCBDB2BB5F218001546FC /* AvatarView */,
+				9D7FCC0D2BB9B254001546FC /* PhotoView */,
 				9D7FCC002BB82388001546FC /* ProfileHeader */,
 				9DC279C62B4BED7800FD401F /* CustomTextField.swift */,
 				9DC279B52B49D04100FD401F /* CustomButton.swift */,
+				9D7FCBE62BB624AF001546FC /* DateHeader.swift */,
 				9D7FCBFB2BB70159001546FC /* PostCell.swift */,
 			);
 			path = CustomUIElements;
@@ -921,6 +921,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -953,6 +954,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -15,10 +15,11 @@ protocol StoriesViewModelProtocol: ViewModelProtocol where State == StoriesState
 
 enum StoriesState {
     case initial
+    case openScreenSubscriber
 }
 
 enum StoriesViewInput {
-    
+    case didTapAvatar
 }
 
 // MARK: - StoriesViewModel
@@ -38,7 +39,10 @@ final class StoriesViewModel: StoriesViewModelProtocol {
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {
-
+        switch viewInput {
+        case .didTapAvatar:
+            state = .openScreenSubscriber
+        }
     }
     
 }

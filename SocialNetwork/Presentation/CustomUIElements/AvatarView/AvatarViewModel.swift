@@ -21,7 +21,7 @@ enum AvatarState {
 }
 
 enum AvatarViewInput {
-    case startLoadAvatar
+    case startLoadAvatar(String)
 }
 
 // MARK: - AvatarViewModel

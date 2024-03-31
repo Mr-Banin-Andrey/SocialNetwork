@@ -64,13 +64,17 @@ final class AvatarView: UIView {
         setupImage(type: size)
         setupBorder(isBorder)
         bindViewModel()
-        viewModel.updateState(with: .startLoadAvatar)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: Methods
+    
+    func setupAvatar(_ userID: String) {
+        viewModel.updateState(with: .startLoadAvatar(userID))
+    }
     
     private func bindViewModel() {
         viewModel.onStateDidChange = { [weak self] state in

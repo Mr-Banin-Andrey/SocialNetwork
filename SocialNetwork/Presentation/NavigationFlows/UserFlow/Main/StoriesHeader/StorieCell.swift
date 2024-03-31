@@ -14,6 +14,7 @@ final class StorieCell: UICollectionViewCell {
     //MARK: Properties
     
     private lazy var pictureImage = AvatarAssembly(size: .sizeSixty, isBorder: true).view()
+    private var userID: String?
     
     //MARK: Initial
     
@@ -28,6 +29,15 @@ final class StorieCell: UICollectionViewCell {
     }
     
     //MARK: Methods
+    
+    func setupCell(userID: String) {
+        self.userID = userID
+        pictureImage.setupAvatar(self.userID ?? "")
+    }
+    
+    func getUserID() -> String? {
+        return userID
+    }
     
     private func setupUI() {
         self.contentView.addSubview(self.pictureImage)

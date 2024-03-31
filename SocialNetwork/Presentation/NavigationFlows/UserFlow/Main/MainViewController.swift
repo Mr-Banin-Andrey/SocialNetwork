@@ -14,7 +14,7 @@ final class MainViewController: UIViewController, Coordinatable {
     typealias CoordinatorType = MainCoordinator
     var coordinator: CoordinatorType?
     
-    let viewModel: MainViewModel
+    private let viewModel: MainViewModel
     
     private lazy var mainTable: UITableView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -58,14 +58,20 @@ final class MainViewController: UIViewController, Coordinatable {
     //MARK: Methods
     
     func bindViewModel() {
-//        viewModel.onStateDidChange = { [weak self] state in
-//            guard let self else { return}
-//            
-//            switch state {
-//            case .initial:
-//                break
-//            }
-//        }
+        viewModel.onStateDidChange = { [weak self] state in
+            guard let self else { return}
+            
+            switch state {
+            case .initial:
+                break
+            case .openScreenSubscriber:
+                coordinator?.subscriber()
+            case .openScreenMenu:
+                break
+            case .openScreenPost:
+                break
+            }
+        }
     }
     
     private func setupNavBar() {
@@ -107,7 +113,7 @@ extension MainViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCell.reuseID, for: indexPath) as? PostCell else {
             return UITableViewCell()
         }
-        
+        cell.delegate = self
         return cell
     }
 }
@@ -118,7 +124,9 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
-            return StoriesAssembly().view()
+            let stories = StoriesAssembly().view()
+            stories.coordinator = coordinator
+            return stories
         default:
             guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: DateHeader.reuseID) as? DateHeader else { return nil }
             return header
@@ -132,5 +140,25 @@ extension MainViewController: UITableViewDelegate {
         default:
             return 24
         }
+    }
+}
+
+//MARK: - PostCellDelegate
+
+extension MainViewController: PostCellDelegate {
+    func addPostToSaved() {
+        viewModel.updateState(with: .didTapAddPost)
+    }
+    
+    func openScreenSubscriber() {
+        viewModel.updateState(with: .didTapOpenSubscriberProfile)
+    }
+    
+    func openScreenMenuSheet() {
+        viewModel.updateState(with: .didTapOpenMenu)
+    }
+    
+    func openScreenWholePost() {
+        viewModel.updateState(with: .didTapOpenPost)
     }
 }
