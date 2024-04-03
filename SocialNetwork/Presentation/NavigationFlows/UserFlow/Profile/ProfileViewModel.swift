@@ -18,7 +18,7 @@ enum ProfileState {
 }
 
 enum ProfileViewInput {
-    
+    case didTapAddNewPost
 }
 
 // MARK: - ProfileViewModel

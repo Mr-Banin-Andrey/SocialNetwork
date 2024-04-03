@@ -9,16 +9,18 @@ import UIKit
 
 extension UIImage {
     
-    // MARK: - LogIn
+    // MARK: - Authentication
     
     class var logInLogoImage: UIImage {
         UIImage(named: "logInLogo") ?? UIImage()
     }
     
-    // MARK: - Confirmation
-    
     class var confirmationCheckMarkImage: UIImage {
         UIImage(named: "confirmationCheckMark") ?? UIImage()
+    }
+    
+    class var arrowLeftImage: UIImage {
+        UIImage(systemName: "arrow.left") ?? UIImage()
     }
     
     // MARK: - Post
@@ -37,6 +39,26 @@ extension UIImage {
     
     class var bookmarkImage: UIImage {
         UIImage(systemName: "bookmark") ?? UIImage()
+    }
+    
+    class var bookmarkFillImage: UIImage {
+        UIImage(systemName: "bookmark.fill") ?? UIImage()
+    }
+    
+    // MARK: - ProfileView
+    
+    class var burgerImage: UIImage {
+        UIImage(systemName: "line.3.horizontal") ?? UIImage()
+    }
+    
+    //MARK: - ProfileHeader
+    
+    class var chevronRightImage: UIImage {
+        UIImage(systemName: "chevron.right") ?? UIImage()
+    }
+    
+    class var squareAndPencilImage: UIImage {
+        UIImage(systemName: "square.and.pencil") ?? UIImage()
     }
     
     // MARK: - TabBar

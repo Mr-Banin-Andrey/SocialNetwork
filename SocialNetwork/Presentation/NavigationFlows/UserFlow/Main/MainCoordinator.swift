@@ -31,6 +31,12 @@ final class MainCoordinator: Coordinator {
         setupNavBarAppearance()
     }
     
+    func subscriber() {
+        let viewController = SubscriberAssembly().viewController()
+        viewController.coordinator = self
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
     private func setupNavBarAppearance() {
         let navBarAppearance = UINavigationBarAppearance()
         navBarAppearance.backgroundColor = .mainBackgroundColor

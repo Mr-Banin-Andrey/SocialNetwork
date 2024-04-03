@@ -90,7 +90,7 @@ final class HaveAccountViewController: UIViewController, Coordinatable {
     }
     
     private func setupBackButton() {
-        let backBarButton = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(comeBack))
+        let backBarButton = UIBarButtonItem(image: .arrowLeftImage, style: .plain, target: self, action: #selector(comeBack))
         backBarButton.tintColor = .textAndButtonColor
         self.navigationItem.leftBarButtonItem = backBarButton
     }

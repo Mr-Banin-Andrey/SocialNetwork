@@ -14,7 +14,7 @@ final class ProfileViewController: UIViewController, Coordinatable {
     typealias CoordinatorType = ProfileCoordinator
     var coordinator: CoordinatorType?
     
-    let viewModel: ProfileViewModel
+    private let viewModel: ProfileViewModel
     
     private lazy var profileTable: UITableView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -33,14 +33,6 @@ final class ProfileViewController: UIViewController, Coordinatable {
         $0.text = "super_ivanka98"
         return $0
     }(UILabel())
-    
-    private lazy var burgerButton: UIButton = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.setImage(UIImage(systemName: "line.3.horizontal"), for: .normal)
-        $0.tintColor = .textTertiaryColor
-        $0.addTarget(self, action: #selector(didTapSettings), for: .touchUpInside)
-        return $0
-    }(UIButton())
     
     //MARK: Init
     
@@ -79,10 +71,10 @@ final class ProfileViewController: UIViewController, Coordinatable {
     private func setupNavBar() {
         let titleLabel = UIBarButtonItem(customView: titleLabel)
         self.navigationItem.leftBarButtonItems = [titleLabel]
-        
-        let rightButton = UIBarButtonItem(customView: burgerButton)
+                
+        let rightButton = UIBarButtonItem(image: .burgerImage, style: .plain, target: self, action: #selector(didTapSettings))
+        rightButton.tintColor = .textTertiaryColor
         self.navigationItem.rightBarButtonItems = [rightButton]
-        
     }
     
     private func setupUI() {

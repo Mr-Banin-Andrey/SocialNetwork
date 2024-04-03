@@ -15,10 +15,20 @@ protocol MainViewModelProtocol: ViewModelProtocol where State == MainState, View
 
 enum MainState {
     case initial
+    case openScreenSubscriber
+    case openScreenMenu
+    case openScreenPost
+    case showPostsForUser
+    case showAllPosts
 }
 
 enum MainViewInput {
-    
+    case didTapOpenSubscriberProfile
+    case didTapOpenMenu
+    case didTapOpenPost
+    case didTapAddPostToSaved
+    case didTapPostsForUser
+    case didTapAllPosts
 }
 
 // MARK: - MainViewModel
@@ -38,7 +48,20 @@ final class MainViewModel: MainViewModelProtocol {
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {
-
+        switch viewInput {
+        case .didTapOpenSubscriberProfile:
+            state = .openScreenSubscriber
+        case .didTapOpenMenu:
+            state = .openScreenMenu
+        case .didTapOpenPost:
+            state = .openScreenPost
+        case .didTapAddPostToSaved:
+            break
+        case .didTapAllPosts:
+            state = .showAllPosts
+        case .didTapPostsForUser:
+            state = .showPostsForUser
+        }
     }
     
 }

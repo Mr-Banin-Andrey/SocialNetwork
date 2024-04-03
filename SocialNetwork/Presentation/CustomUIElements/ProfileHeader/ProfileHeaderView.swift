@@ -57,16 +57,14 @@ final class ProfileHeaderView: UIView {
         title: "Редактировать",
         font: .interMedium500Font,
         titleColor: .mainBackgroundColor,
-        backgroundColor: .textTertiaryColor
+        backgroundColor: nil
     ) { [weak self] in
         guard let self else { return }
         switch self.type {
         case .profileView:
             delegate?.editProfile()
-            print("profileView")
         case .subscriberView:
             delegate?.subscribeToProfile()
-            print("subscriberView")
         }
     }
     
@@ -131,7 +129,7 @@ final class ProfileHeaderView: UIView {
     
     private lazy var chevronButton: UIButton = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        $0.setImage(.chevronRightImage, for: .normal)
         $0.tintColor = .textAndButtonColor
         $0.addTarget(self, action: #selector(didTapOpenGallery), for: .touchUpInside)
         return $0
@@ -172,7 +170,7 @@ final class ProfileHeaderView: UIView {
     
     private lazy var createPostButton: UIButton = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
+        $0.setImage(.squareAndPencilImage, for: .normal)
         $0.tintColor = .textAndButtonColor
         $0.addTarget(self, action: #selector(didTapCreatePost), for: .touchUpInside)
         return $0
