@@ -43,7 +43,6 @@ final class SavedViewController: UIViewController, Coordinatable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavBar()
         setupUI()
         bindViewModel()
     }
@@ -61,11 +60,9 @@ final class SavedViewController: UIViewController, Coordinatable {
 //        }
     }
     
-    private func setupNavBar() {
-        navigationItem.title = "Сохранненые"
-    }
     
     private func setupUI() {
+        navigationItem.title = "Сохраненные"
         view.backgroundColor = .mainBackgroundColor
         self.view.addSubview(savedTable)
         

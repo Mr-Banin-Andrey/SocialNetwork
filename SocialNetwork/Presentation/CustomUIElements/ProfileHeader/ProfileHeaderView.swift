@@ -57,7 +57,7 @@ final class ProfileHeaderView: UIView {
         title: "Редактировать",
         font: .interMedium500Font,
         titleColor: .mainBackgroundColor,
-        backgroundColor: .textTertiaryColor
+        backgroundColor: nil
     ) { [weak self] in
         guard let self else { return }
         switch self.type {

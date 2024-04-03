@@ -18,13 +18,17 @@ enum MainState {
     case openScreenSubscriber
     case openScreenMenu
     case openScreenPost
+    case showPostsForUser
+    case showAllPosts
 }
 
 enum MainViewInput {
     case didTapOpenSubscriberProfile
     case didTapOpenMenu
     case didTapOpenPost
-    case didTapAddPost
+    case didTapAddPostToSaved
+    case didTapPostsForUser
+    case didTapAllPosts
 }
 
 // MARK: - MainViewModel
@@ -51,8 +55,12 @@ final class MainViewModel: MainViewModelProtocol {
             state = .openScreenMenu
         case .didTapOpenPost:
             state = .openScreenPost
-        case .didTapAddPost:
+        case .didTapAddPostToSaved:
             break
+        case .didTapAllPosts:
+            state = .showAllPosts
+        case .didTapPostsForUser:
+            state = .showPostsForUser
         }
     }
     

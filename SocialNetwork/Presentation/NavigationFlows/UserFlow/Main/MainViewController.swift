@@ -34,6 +34,34 @@ final class MainViewController: UIViewController, Coordinatable {
         return $0
     }(UILabel())
     
+    private lazy var buttonsStack: UIStackView = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.axis = .horizontal
+        $0.spacing = 38
+        $0.distribution = .fillEqually
+        return $0
+    }(UIStackView())
+    
+    private lazy var allPostsButton = CustomButton(
+        title: "Новости",
+        font: .interRegular400Font,
+        titleColor: .textSecondaryColor,
+        backgroundColor: .clear,
+        forPosts: true
+    ) { [weak self] in
+        self?.viewModel.updateState(with: .didTapAllPosts)
+    }
+    
+    private lazy var forUserButton = CustomButton(
+        title: "Для вас",
+        font: .interRegular400Font,
+        titleColor: .textSecondaryColor,
+        backgroundColor: .clear,
+        forPosts: true
+    ) { [weak self] in
+        self?.viewModel.updateState(with: .didTapPostsForUser)
+    }
+    
     //MARK: Init
     
     init(viewModel: MainViewModel) {
@@ -53,6 +81,7 @@ final class MainViewController: UIViewController, Coordinatable {
         setupNavBar()
         setupUI()
         bindViewModel()
+        viewModel.updateState(with: .didTapAllPosts)
     }
     
     //MARK: Methods
@@ -70,10 +99,15 @@ final class MainViewController: UIViewController, Coordinatable {
                 break
             case .openScreenPost:
                 break
+                
+            case .showAllPosts:
+                updateViewVisibility(isSelected: true)
+            case .showPostsForUser:
+                updateViewVisibility(isSelected: false)
             }
         }
     }
-    
+        
     private func setupNavBar() {
         let leftButtonTwo = UIBarButtonItem(customView: titleLabel)
         self.navigationItem.leftBarButtonItems = [leftButtonTwo]
@@ -81,14 +115,26 @@ final class MainViewController: UIViewController, Coordinatable {
     
     private func setupUI() {
         view.backgroundColor = .mainBackgroundColor
+
+        self.view.addSubview(buttonsStack)
+        self.buttonsStack.addArrangedSubview(allPostsButton)
+        self.buttonsStack.addArrangedSubview(forUserButton)
         self.view.addSubview(mainTable)
         
         NSLayoutConstraint.activate([
-            self.mainTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            self.buttonsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            self.buttonsStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            
+            self.mainTable.topAnchor.constraint(equalTo: allPostsButton.bottomAnchor, constant: 16),
             self.mainTable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             self.mainTable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             self.mainTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    private func updateViewVisibility(isSelected: Bool) {
+        allPostsButton.underlineSwitch(isSelect: isSelected)
+        forUserButton.underlineSwitch(isSelect: !isSelected)
     }
 }
 
@@ -147,7 +193,7 @@ extension MainViewController: UITableViewDelegate {
 
 extension MainViewController: PostCellDelegate {
     func addPostToSaved() {
-        viewModel.updateState(with: .didTapAddPost)
+        viewModel.updateState(with: .didTapAddPostToSaved)
     }
     
     func openScreenSubscriber() {
