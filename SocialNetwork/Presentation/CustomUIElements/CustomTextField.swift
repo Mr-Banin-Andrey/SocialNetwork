@@ -15,7 +15,8 @@ final class CustomTextField: UITextField {
     enum Mode: CGFloat {
         case forNumber = 165
         case forCode = 120
-        case onlyPlaceholder = 0
+        case onlyPlaceholder
+        case forComment
     }
     
     // MARK: Private properties
@@ -26,13 +27,30 @@ final class CustomTextField: UITextField {
         
     private let onlyPlaceholder = UIEdgeInsets(top: 11, left: 20, bottom: 11, right: 20)
     
+    private lazy var paperclipBackgroundView: UIView = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        $0.widthAnchor.constraint(equalToConstant: 32).isActive = true
+        return $0
+    }(UIView())
+    
+    private lazy var paperclipImage: UIImageView = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        $0.widthAnchor.constraint(equalToConstant: 15).isActive = true
+        $0.image = .paperclipImage
+        $0.tintColor = .textAndButtonColor
+        return $0
+    }(UIImageView())
+    
     // MARK: Init
     
     init(
         placeholder: String? = nil,
         mode: Mode,
         borderColor: CGColor = UIColor.clear.cgColor,
-        keyboardType: UIKeyboardType = .default
+        keyboardType: UIKeyboardType = .default,
+        backgroundColor: UIColor? = .clear
     ) {
         self.mode = mode
         super.init(frame: .zero)
@@ -40,6 +58,7 @@ final class CustomTextField: UITextField {
         self.placeholder = placeholder
         self.keyboardType = keyboardType
         self.layer.borderColor = borderColor
+        self.backgroundColor = backgroundColor
         self.setupMode(self.mode)
         self.setup()
         
@@ -71,15 +90,40 @@ final class CustomTextField: UITextField {
     }
     
     // MARK: Private methods
+    
     private func setupMode(_ mode: Mode) {
         switch mode {
         case .forNumber:
             self.edgeInsets = countIndents()
+            self.font = .interMedium500Font
+            setupLayer()
         case .forCode:
             self.edgeInsets = countIndents()
+            self.font = .interMedium500Font
+            setupLayer()
         case .onlyPlaceholder:
             self.edgeInsets = onlyPlaceholder
+            setupLayer() 
+        case .forComment:
+            paperclipBackgroundView.addSubview(paperclipImage)
+            paperclipImage.centerYAnchor.constraint(equalTo: self.paperclipBackgroundView.centerYAnchor).isActive = true
+            paperclipImage.leadingAnchor.constraint(equalTo: self.paperclipBackgroundView.leadingAnchor, constant: 16).isActive = true
+            
+            leftView = paperclipBackgroundView
+            leftViewMode = .always
+            if let placeholder {
+                self.setupPlaceholder(placeholder)
+            }
         }
+    }
+    
+    private func setupPlaceholder(_ title: String) {
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.textSecondaryColor,
+            .font: UIFont.interRegular400Font.withSize(12)
+        ]
+        let attributedTitle = NSAttributedString(string: title, attributes: attributes)
+        self.attributedPlaceholder = attributedTitle
     }
     
     private func countIndents() -> UIEdgeInsets {
@@ -87,11 +131,13 @@ final class CustomTextField: UITextField {
     }
     
     private func setup() {
-        self.font = UIFont.systemFont(ofSize: 17, weight: .regular)
-        self.layer.cornerRadius = 10
-        self.layer.borderWidth = 1
         self.translatesAutoresizingMaskIntoConstraints = false
         self.delegate = self
+    }
+    
+    private func setupLayer() {
+        self.layer.cornerRadius = 10
+        self.layer.borderWidth = 1
     }
 }
 

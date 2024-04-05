@@ -98,7 +98,8 @@ final class MainViewController: UIViewController, Coordinatable {
             case .openScreenMenu:
                 break
             case .openScreenPost:
-                break
+                let wholePost = WholePostAssembly().viewController()
+                navigationController?.pushViewController(wholePost, animated: true)
                 
             case .showAllPosts:
                 updateViewVisibility(isSelected: true)
@@ -122,10 +123,10 @@ final class MainViewController: UIViewController, Coordinatable {
         self.view.addSubview(mainTable)
         
         NSLayoutConstraint.activate([
-            self.buttonsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            self.buttonsStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             self.buttonsStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             
-            self.mainTable.topAnchor.constraint(equalTo: allPostsButton.bottomAnchor, constant: 16),
+            self.mainTable.topAnchor.constraint(equalTo: allPostsButton.bottomAnchor, constant: 8),
             self.mainTable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             self.mainTable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             self.mainTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)

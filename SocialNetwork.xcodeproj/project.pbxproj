@@ -64,6 +64,13 @@
 		9D7FCC0F2BB9B2DB001546FC /* PhotoAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FCC0E2BB9B2DB001546FC /* PhotoAssembly.swift */; };
 		9D7FCC112BB9B2EF001546FC /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FCC102BB9B2EF001546FC /* PhotoView.swift */; };
 		9D7FCC132BB9B301001546FC /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7FCC122BB9B301001546FC /* PhotoViewModel.swift */; };
+		9D831D602BBDB52C00E4E8A9 /* WholePostAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D831D5F2BBDB52C00E4E8A9 /* WholePostAssembly.swift */; };
+		9D831D622BBDB54000E4E8A9 /* WholePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D831D612BBDB54000E4E8A9 /* WholePostViewController.swift */; };
+		9D831D642BBDB55200E4E8A9 /* WholePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D831D632BBDB55200E4E8A9 /* WholePostViewModel.swift */; };
+		9D831D662BBDF9E800E4E8A9 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D831D652BBDF9E800E4E8A9 /* UIViewExt.swift */; };
+		9D9E9CB02BBDFF7600593B73 /* LikeCommentBookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E9CAF2BBDFF7600593B73 /* LikeCommentBookmarkView.swift */; };
+		9D9E9CB22BBE940800593B73 /* CommentHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E9CB12BBE940800593B73 /* CommentHeader.swift */; };
+		9D9E9CB42BBF2BC600593B73 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E9CB32BBF2BC600593B73 /* CommentCell.swift */; };
 		9DC279B32B49CB4B00FD401F /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC279B22B49CB4B00FD401F /* ViewModelProtocol.swift */; };
 		9DC279B62B49D04100FD401F /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC279B52B49D04100FD401F /* CustomButton.swift */; };
 		9DC279BC2B4A935500FD401F /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC279BB2B4A935500FD401F /* RootCoordinator.swift */; };
@@ -156,6 +163,13 @@
 		9D7FCC0E2BB9B2DB001546FC /* PhotoAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAssembly.swift; sourceTree = "<group>"; };
 		9D7FCC102BB9B2EF001546FC /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		9D7FCC122BB9B301001546FC /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
+		9D831D5F2BBDB52C00E4E8A9 /* WholePostAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WholePostAssembly.swift; sourceTree = "<group>"; };
+		9D831D612BBDB54000E4E8A9 /* WholePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WholePostViewController.swift; sourceTree = "<group>"; };
+		9D831D632BBDB55200E4E8A9 /* WholePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WholePostViewModel.swift; sourceTree = "<group>"; };
+		9D831D652BBDF9E800E4E8A9 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
+		9D9E9CAF2BBDFF7600593B73 /* LikeCommentBookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCommentBookmarkView.swift; sourceTree = "<group>"; };
+		9D9E9CB12BBE940800593B73 /* CommentHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentHeader.swift; sourceTree = "<group>"; };
+		9D9E9CB32BBF2BC600593B73 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		9DC279B22B49CB4B00FD401F /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		9DC279B52B49D04100FD401F /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		9DC279BB2B4A935500FD401F /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
@@ -212,6 +226,7 @@
 				9D646AA92B485B3000C0B2D3 /* Profile */,
 				9D646AAA2B485B3600C0B2D3 /* Saved */,
 				9D7FCBF42BB6F51C001546FC /* Subscriber */,
+				9D831D5E2BBDB4EB00E4E8A9 /* WholePost */,
 			);
 			path = UserFlow;
 			sourceTree = "<group>";
@@ -263,6 +278,7 @@
 			children = (
 				9DCAC4E92B4D82CC0040C327 /* UILabelExt.swift */,
 				9D7FCBE42BB60C4B001546FC /* UIActivityIndicatorViewExt.swift */,
+				9D831D652BBDF9E800E4E8A9 /* UIViewExt.swift */,
 			);
 			path = UIExtensions;
 			sourceTree = "<group>";
@@ -492,6 +508,18 @@
 			path = PhotoView;
 			sourceTree = "<group>";
 		};
+		9D831D5E2BBDB4EB00E4E8A9 /* WholePost */ = {
+			isa = PBXGroup;
+			children = (
+				9D831D5F2BBDB52C00E4E8A9 /* WholePostAssembly.swift */,
+				9D831D612BBDB54000E4E8A9 /* WholePostViewController.swift */,
+				9D831D632BBDB55200E4E8A9 /* WholePostViewModel.swift */,
+				9D9E9CB12BBE940800593B73 /* CommentHeader.swift */,
+				9D9E9CB32BBF2BC600593B73 /* CommentCell.swift */,
+			);
+			path = WholePost;
+			sourceTree = "<group>";
+		};
 		9DC279B42B49CF8300FD401F /* CustomUIElements */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,6 +530,7 @@
 				9DC279B52B49D04100FD401F /* CustomButton.swift */,
 				9D7FCBE62BB624AF001546FC /* DateHeader.swift */,
 				9D7FCBFB2BB70159001546FC /* PostCell.swift */,
+				9D9E9CAF2BBDFF7600593B73 /* LikeCommentBookmarkView.swift */,
 			);
 			path = CustomUIElements;
 			sourceTree = "<group>";
@@ -681,6 +710,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D9E9CB42BBF2BC600593B73 /* CommentCell.swift in Sources */,
 				9DCAC4DE2B4D72BF0040C327 /* RegistrationViewModel.swift in Sources */,
 				9D3994DD2BA09A52009F894A /* Coordinatable.swift in Sources */,
 				9D7FCBE32BB60229001546FC /* AvatarAssembly.swift in Sources */,
@@ -691,6 +721,7 @@
 				9D6BE4392BA6C77A00462B12 /* ProfileViewController.swift in Sources */,
 				9D7FCC0F2BB9B2DB001546FC /* PhotoAssembly.swift in Sources */,
 				9D609D552BA1CFAA001765C0 /* UserCoordinator.swift in Sources */,
+				9D9E9CB22BBE940800593B73 /* CommentHeader.swift in Sources */,
 				9D653A652B0F9D6E009B98A5 /* SceneDelegate.swift in Sources */,
 				9D7FCC062BB82420001546FC /* ProfileHeaderViewModel.swift in Sources */,
 				9D6BE4372BA6C70500462B12 /* ProfileCoordinator.swift in Sources */,
@@ -698,6 +729,7 @@
 				9D3994E32BA0ACB6009F894A /* NavigationFlowType.swift in Sources */,
 				9D6BE43F2BA6C89300462B12 /* SavedCoordinator.swift in Sources */,
 				9D609D5F2BA336BD001765C0 /* MainViewController.swift in Sources */,
+				9D831D602BBDB52C00E4E8A9 /* WholePostAssembly.swift in Sources */,
 				9D7FCBE12BB60202001546FC /* AvatarView.swift in Sources */,
 				9D7FCBEA2BB6CB55001546FC /* AppDIContainer.swift in Sources */,
 				9D7FCBFC2BB70159001546FC /* PostCell.swift in Sources */,
@@ -710,6 +742,8 @@
 				9D7FCC0C2BB887BE001546FC /* ProfileHeaderCollectionCell.swift in Sources */,
 				9D7FCBDA2BB5F146001546FC /* StorieCell.swift in Sources */,
 				9DC279C72B4BED7800FD401F /* CustomTextField.swift in Sources */,
+				9D831D662BBDF9E800E4E8A9 /* UIViewExt.swift in Sources */,
+				9D9E9CB02BBDFF7600593B73 /* LikeCommentBookmarkView.swift in Sources */,
 				9DC279C32B4BE71E00FD401F /* RegistrationViewController.swift in Sources */,
 				9D7FCBD42BB5D985001546FC /* StoriesView.swift in Sources */,
 				9DCAC4E32B4D78FE0040C327 /* ConfirmationViewController.swift in Sources */,
@@ -724,6 +758,7 @@
 				9D7FCC0A2BB82448001546FC /* ProfileHeaderView.swift in Sources */,
 				9D646ABE2B493FF300C0B2D3 /* LogInViewModel.swift in Sources */,
 				9DC279B32B49CB4B00FD401F /* ViewModelProtocol.swift in Sources */,
+				9D831D622BBDB54000E4E8A9 /* WholePostViewController.swift in Sources */,
 				9DCAC4E72B4D79150040C327 /* ConfirmationViewModel.swift in Sources */,
 				9D3994D92BA0752F009F894A /* AuthenticationCoordinator.swift in Sources */,
 				9D7FCBD82BB5DC0F001546FC /* StoriesAssembly.swift in Sources */,
@@ -734,6 +769,7 @@
 				9D7FCBDF2BB601EF001546FC /* AvatarViewModel.swift in Sources */,
 				9D6BE4412BA6C8A700462B12 /* SavedViewController.swift in Sources */,
 				9D646AA02B48582100C0B2D3 /* UIColor.swift in Sources */,
+				9D831D642BBDB55200E4E8A9 /* WholePostViewModel.swift in Sources */,
 				9D6BE43B2BA6C78800462B12 /* ProfileViewModel.swift in Sources */,
 				9DCAC4ED2B4D96130040C327 /* HaveAccountViewController.swift in Sources */,
 				9D646AA42B48594B00C0B2D3 /* UIImage.swift in Sources */,
