@@ -47,7 +47,7 @@ final class ProfileHeaderView: UIView {
     
     private lazy var professionLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.text = "Policmen"
+        $0.text = "Policemen"
         $0.textColor = .textSecondaryColor
         $0.font = .interRegular400Font
         return $0
@@ -67,14 +67,9 @@ final class ProfileHeaderView: UIView {
             delegate?.subscribeToProfile()
         }
     }
-    
-    private lazy var firstLineView: UIView = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .textSecondaryColor
-        $0.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-        return $0
-    }(UIView())
 
+    private lazy var firstLineView = UIView().lineView    
+    
     private lazy var infoSubscribersAndPublicationStack: UIStackView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.axis = .horizontal
@@ -112,13 +107,8 @@ final class ProfileHeaderView: UIView {
         $0.textAlignment = .center
         return $0
     }(UILabel())
-    
-    private lazy var secondLineView: UIView = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .textSecondaryColor
-        $0.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-        return $0
-    }(UIView())
+        
+    private lazy var secondLineView = UIView().lineView
     
     private lazy var photoLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false

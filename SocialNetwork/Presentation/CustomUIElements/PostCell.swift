@@ -93,67 +93,7 @@ final class PostCell: UITableViewCell {
         return $0
     }(UIView())
     
-    private lazy var likeAndCommentStack: UIStackView = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.axis = .horizontal
-        $0.spacing = 30
-        $0.distribution = .fillEqually
-        return $0
-    }(UIStackView())
-    
-    private lazy var likeStack: UIStackView = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.axis = .horizontal
-        $0.spacing = 10
-        $0.distribution = .fillEqually
-        return $0
-    }(UIStackView())
-    
-    private lazy var likeImage: UIImageView = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.image = .likeImage
-        $0.tintColor = .textAndButtonColor
-        return $0
-    }(UIImageView())
-    
-    private lazy var likeLabel: UILabel = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.text = "40"
-        $0.textColor = .textAndButtonColor
-        $0.font = .interRegular400Font
-        return $0
-    }(UILabel())
-    
-    private lazy var commentStack: UIStackView = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.axis = .horizontal
-        $0.spacing = 10
-        $0.distribution = .fillEqually
-        return $0
-    }(UIStackView())
-    
-    private lazy var commentImage: UIImageView = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.image = .commentImage
-        $0.tintColor = .textAndButtonColor
-        return $0
-    }(UIImageView())
-    
-    private lazy var commentLabel: UILabel = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.text = "40"
-        $0.textColor = .textAndButtonColor
-        $0.font = .interRegular400Font
-        return $0
-    }(UILabel())
-    
-    private lazy var bookmarkButton: UIButton = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.tintColor = .textAndButtonColor
-        $0.setImage(.bookmarkImage, for: .normal)
-        $0.addTarget(self, action: #selector(didTapOnBookmark), for: .touchUpInside)
-        return $0
-    }(UIButton())
+    private lazy var likeCommentBookmarkView = LikeCommentBookmarkView()
     
     //MARK: Initial
     
@@ -197,14 +137,7 @@ final class PostCell: UITableViewCell {
         contentView.addSubview(showInFullButton)
         contentView.addSubview(pictureImage)
         contentView.addSubview(horizontalLineView)
-        contentView.addSubview(likeAndCommentStack)
-        likeAndCommentStack.addArrangedSubview(likeStack)
-        likeAndCommentStack.addArrangedSubview(commentStack)
-        likeStack.addArrangedSubview(likeImage)
-        likeStack.addArrangedSubview(likeLabel)
-        commentStack.addArrangedSubview(commentImage)
-        commentStack.addArrangedSubview(commentLabel)
-        contentView.addSubview(bookmarkButton)
+        contentView.addSubview(likeCommentBookmarkView)
         
         NSLayoutConstraint.activate([
             avatarView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
@@ -249,11 +182,9 @@ final class PostCell: UITableViewCell {
             horizontalLineView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             horizontalLineView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
             
-            likeAndCommentStack.topAnchor.constraint(equalTo: horizontalLineView.bottomAnchor, constant: 14),
-            likeAndCommentStack.leadingAnchor.constraint(equalTo: self.verticalLineView.trailingAnchor, constant: 30),
-            
-            bookmarkButton.topAnchor.constraint(equalTo: horizontalLineView.bottomAnchor, constant: 14),
-            bookmarkButton.trailingAnchor.constraint(equalTo: self.backgroundTextView.trailingAnchor, constant: -16),
+            likeCommentBookmarkView.topAnchor.constraint(equalTo: horizontalLineView.bottomAnchor, constant: 14),
+            likeCommentBookmarkView.leadingAnchor.constraint(equalTo: self.verticalLineView.trailingAnchor, constant: 30),
+            likeCommentBookmarkView.trailingAnchor.constraint(equalTo: self.backgroundTextView.trailingAnchor, constant: -16),
         ])
     }
     
@@ -270,9 +201,6 @@ final class PostCell: UITableViewCell {
     }
     
     @objc private func didTapOnBookmark(_ sender: UIButton) {
-        bookmarkButton.setImage(.bookmarkFillImage, for: .normal)
-        bookmarkButton.tintColor = .textTertiaryColor
-
         delegate?.addPostToSaved()
     }
 }

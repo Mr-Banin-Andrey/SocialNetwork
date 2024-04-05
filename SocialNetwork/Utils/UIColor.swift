@@ -27,6 +27,12 @@ extension UIColor {
         UIColor(named: "textTertiaryColor") ?? .orange
     }
     
+    // MARK: - Comment
+    
+    class var dataCommentColor: UIColor {
+        UIColor(named: "dataCommentColor") ?? .gray
+    }
+    
     // MARK: - RegistrationView
     
     class var numberTextLabelColor: UIColor {

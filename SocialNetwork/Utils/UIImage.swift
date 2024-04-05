@@ -23,6 +23,12 @@ extension UIImage {
         UIImage(systemName: "arrow.left") ?? UIImage()
     }
     
+    // MARK: - Comment
+    
+    class var paperclipImage: UIImage {
+        UIImage(systemName: "paperclip") ?? UIImage()
+    }
+    
     // MARK: - Post
     
     class var verticalEllipseImage: UIImage {
