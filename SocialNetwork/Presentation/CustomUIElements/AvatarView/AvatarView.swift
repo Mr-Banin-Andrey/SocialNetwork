@@ -61,7 +61,7 @@ final class AvatarView: UIView {
         
         self.translatesAutoresizingMaskIntoConstraints = false
         self.setupUI()
-        setupImage(type: size)
+        setupType(type: size)
         setupBorder(isBorder)
         bindViewModel()
     }
@@ -111,7 +111,7 @@ final class AvatarView: UIView {
         }
     }
     
-    private func setupImage(type: AvatarSize) {
+    private func setupType(type: AvatarSize) {
         switch type {
         case .sizeFifteen:
             self.size = .sizeFifteen

@@ -159,7 +159,8 @@ extension SubscriberViewController: UITableViewDelegate {
 
 extension SubscriberViewController: ProfileHeaderViewDelegate {
     func openScreenGallery() {
-        return
+        let gallery = PhotoGalleryAssembly(photoGalleryType: .forSubscriber).viewController()
+        navigationController?.pushViewController(gallery, animated: true)
     }
     
     func openScreenCreatePost() {

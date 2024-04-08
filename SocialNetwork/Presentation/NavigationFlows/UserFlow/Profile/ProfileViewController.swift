@@ -115,7 +115,7 @@ extension ProfileViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCell.reuseID, for: indexPath) as? PostCell else {
             return UITableViewCell()
         }
-        
+        cell.delegate = self
         return cell
     }
 }
@@ -151,7 +151,8 @@ extension ProfileViewController: UITableViewDelegate {
 
 extension ProfileViewController: ProfileHeaderViewDelegate {
     func openScreenGallery() {
-        return
+        let gallery = PhotoGalleryAssembly(photoGalleryType: .forUser).viewController()
+        navigationController?.pushViewController(gallery, animated: true)
     }
     
     func openScreenCreatePost() {
@@ -166,3 +167,26 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
         return
     }
 }
+
+//MARK: - PostCellDelegate
+
+extension ProfileViewController: PostCellDelegate {
+    func openScreenSubscriber() {
+        return
+    }
+    
+    func openScreenMenuSheet() {
+        return
+    }
+    
+    func openScreenWholePost() {
+        let wholePost = WholePostAssembly().viewController()
+        navigationController?.pushViewController(wholePost, animated: true)
+    }
+    
+    func addPostToSaved() {
+        return
+    }
+}
+
+

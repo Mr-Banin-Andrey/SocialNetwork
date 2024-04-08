@@ -122,7 +122,8 @@ extension SavedViewController: PostCellDelegate {
     }
     
     func openScreenWholePost() {
-        return
+        let wholePost = WholePostAssembly().viewController()
+        navigationController?.pushViewController(wholePost, animated: true)
     }
     
     func addPostToSaved() {
