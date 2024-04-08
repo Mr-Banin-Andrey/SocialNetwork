@@ -199,7 +199,7 @@ final class ProfileHeaderView: UIView {
     //MARK: Methods
     
     func setupHeader(numberOfPhoto: Int) {
-        photoLabel.attributedText = editColor(count: numberOfPhoto)
+        photoLabel.attributedText = StringConverter.editColor(name: "Фотографии", count: numberOfPhoto)
     }
     
     private func bindViewModel() {
@@ -219,14 +219,6 @@ final class ProfileHeaderView: UIView {
         case .subscriberView:
             self.type = .subscriberView
         }
-    }
-    
-    private func editColor(count: Int) ->  NSMutableAttributedString {
-        let text = "Фотографии  \(count)"
-        let underlineAttributedString = NSMutableAttributedString(string: text)
-        let range = (text as NSString).range(of: "\(count)")
-        underlineAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.textSecondaryColor, range: range)
-        return underlineAttributedString
     }
     
     private func setupUI() {

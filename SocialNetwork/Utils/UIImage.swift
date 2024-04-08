@@ -29,6 +29,12 @@ extension UIImage {
         UIImage(systemName: "paperclip") ?? UIImage()
     }
     
+    // MARK: - PhotoGallery
+    
+    class var plusImage: UIImage {
+        UIImage(systemName: "plus") ?? UIImage()
+    }
+    
     // MARK: - Post
     
     class var verticalEllipseImage: UIImage {
