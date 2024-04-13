@@ -24,16 +24,14 @@ final class PostCell: UITableViewCell {
 
     private lazy var avatarView = AvatarAssembly(size: .sizeSixty, isBorder: false).view()
     
-    private lazy var nameLabel: UILabel = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.text = "Ivanka Pushkin"
-        $0.textColor = .textAndButtonColor
-        $0.font = .interMedium500Font
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOnSubscriber))
-        $0.addGestureRecognizer(tapGesture)
-        $0.isUserInteractionEnabled = true
-        return $0
-    }(UILabel())
+    private lazy var nameLabel = CustomButton(
+        title: "Ivanka Pushkin",
+        font: .interMedium500Font,
+        titleColor: .textAndButtonColor,
+        backgroundColor: .clear
+    ) { [weak self] in
+        self?.delegate?.openScreenSubscriber()
+    }
     
     private lazy var professionLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -42,19 +40,17 @@ final class PostCell: UITableViewCell {
         $0.font = .interRegular400Font
         return $0
     }(UILabel())
-    
-    private lazy var verticalEllipseButton: UIButton = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.setImage(.verticalEllipseImage, for: .normal)
-        $0.tintColor = .textTertiaryColor
-        $0.addTarget(self, action: #selector(didTapOnMenuSheet), for: .touchUpInside)
-        return $0
-    }(UIButton())
         
-    
+    private lazy var verticalEllipseButton = CustomButton(
+        image: .verticalEllipseImage,
+        tintColor: .textTertiaryColor
+    ) { [weak self] in
+        self?.delegate?.openScreenMenuSheet()
+    }
+        
     private lazy var backgroundTextView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .backgroundTextColor
+        $0.backgroundColor = .secondaryBackgroundColor
         return $0
     }(UIView())
     
@@ -75,14 +71,14 @@ final class PostCell: UITableViewCell {
         return $0
     }(UILabel())
 
-    private lazy var showInFullButton: UIButton = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.setTitle("Показать полностью...", for: .normal)
-        $0.titleLabel?.font = .interSemiBold600Font.withSize(12)
-        $0.setTitleColor(.textSecondaryColor, for: .normal)
-        $0.addTarget(nil, action: #selector(didTapText), for: .touchUpInside)
-        return $0
-    }(UIButton())
+    private lazy var showInFullButton = CustomButton(
+        title: "Показать полностью...",
+        font: .interSemiBold600Font.withSize(12),
+        titleColor: .textSecondaryColor,
+        backgroundColor: .clear
+    ) { [weak self] in
+        self?.delegate?.openScreenWholePost()
+    }
     
     private lazy var pictureImage = PhotoAssembly().view()
     
@@ -121,6 +117,11 @@ final class PostCell: UITableViewCell {
 //        pictureImage.setupPhoto(<#T##photoID: String##String#>)
     }
     
+    func setupCellForUser() {
+//        avatarView.is
+        nameLabel.isEnabled = false
+    }
+    
     private func addGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOnSubscriber))
         avatarView.addGestureRecognizer(tapGesture)
@@ -147,6 +148,7 @@ final class PostCell: UITableViewCell {
             
             nameLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 18),
             nameLabel.leadingAnchor.constraint(equalTo: self.avatarView.trailingAnchor, constant: 16),
+            nameLabel.heightAnchor.constraint(equalToConstant: 24),
             
             professionLabel.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: 6),
             professionLabel.leadingAnchor.constraint(equalTo: self.avatarView.trailingAnchor, constant: 16),
@@ -192,15 +194,7 @@ final class PostCell: UITableViewCell {
         delegate?.openScreenSubscriber()
     }
     
-    @objc private func didTapOnMenuSheet() {
-        delegate?.openScreenMenuSheet()
-    }
-    
-    @objc private func didTapText() {
-        delegate?.openScreenWholePost()
-    }
-    
-    @objc private func didTapOnBookmark(_ sender: UIButton) {
+    @objc private func didTapOnBookmark() {
         delegate?.addPostToSaved()
     }
 }

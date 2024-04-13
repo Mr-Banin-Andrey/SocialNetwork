@@ -96,7 +96,8 @@ final class MainViewController: UIViewController, Coordinatable {
             case .openScreenSubscriber:
                 coordinator?.subscriber()
             case .openScreenMenu:
-                break
+                let settings = SettingsSheetAssembly().viewController()
+                present(settings, animated: true)
             case .openScreenPost:
                 let wholePost = WholePostAssembly().viewController()
                 navigationController?.pushViewController(wholePost, animated: true)
