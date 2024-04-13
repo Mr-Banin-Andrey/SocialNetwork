@@ -14,9 +14,9 @@ final class CustomButton: UIButton {
     //MARK: Properties
     
     private let buttonAction: Action
-    private var mainColor: UIColor
-    private let title: String
-    private let forPosts: Bool
+    private var mainColor: UIColor?
+    private var title: String?
+    private var forPosts: Bool?
 
     //MARK: Initial
     
@@ -44,6 +44,20 @@ final class CustomButton: UIButton {
         addTarget(self, action: #selector(actionButton), for: .touchUpInside)
     }
     
+    init(
+        image: UIImage,
+        tintColor: UIColor,
+        action: @escaping Action
+    ) {
+        self.buttonAction = action
+        super.init(frame: .zero)
+        
+        self.setImage(image, for: .normal)
+        self.tintColor = tintColor
+        self.translatesAutoresizingMaskIntoConstraints = false
+        addTarget(self, action: #selector(actionButton), for: .touchUpInside)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -53,7 +67,7 @@ final class CustomButton: UIButton {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         UIView.animate(withDuration: 0.07, delay: 0.02, animations: {
-            self.transform = CGAffineTransform(scaleX: 0.94, y: 0.95)
+            self.transform = CGAffineTransform(scaleX: 0.94, y: 0.93)
             self.layer.shadowOffset = CGSize(width: 2, height: 2)
         })
     }
@@ -69,10 +83,11 @@ final class CustomButton: UIButton {
     //MARK: Public methods
     
     func underlineSwitch(isSelect: Bool) {
+        guard let title = self.title else { return }
         if isSelect {
-            self.setAttributedTitle(setupUnderline(text: self.title), for: .normal)
+            self.setAttributedTitle(setupUnderline(text: title), for: .normal)
         } else {
-            self.setAttributedTitle(setupRemoveUnderline(text: self.title), for: .normal)
+            self.setAttributedTitle(setupRemoveUnderline(text: title), for: .normal)
         }
     }
     

@@ -19,12 +19,16 @@ extension UIColor {
         UIColor(named: "textSecondaryColor") ?? .gray
     }
     
+    class var textTertiaryColor: UIColor {
+        UIColor(named: "textTertiaryColor") ?? .orange
+    }
+    
     class var mainBackgroundColor: UIColor {
         UIColor(named: "mainBackgroundColor") ?? .white
     }
     
-    class var textTertiaryColor: UIColor {
-        UIColor(named: "textTertiaryColor") ?? .orange
+    class var secondaryBackgroundColor: UIColor {
+        UIColor(named: "secondaryBackgroundColor") ?? .white
     }
     
     // MARK: - Comment
@@ -37,12 +41,6 @@ extension UIColor {
     
     class var numberTextLabelColor: UIColor {
         UIColor(named: "numberTextLabelColor") ?? .lightGray
-    }
-    
-    // MARK: - Post
-    
-    class var backgroundTextColor: UIColor {
-        UIColor(named: "backgroundTextColor") ?? .white
     }
     
     // MARK: - TabBar

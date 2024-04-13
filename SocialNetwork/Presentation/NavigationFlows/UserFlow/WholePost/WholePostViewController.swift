@@ -35,7 +35,7 @@ final class WholePostViewController: UIViewController {
     private lazy var commentTextField = CustomTextField(
         placeholder: "оставить комментарий",
         mode: .forComment,
-        backgroundColor: .backgroundTextColor
+        backgroundColor: .secondaryBackgroundColor
     )
     
     //MARK: Init
@@ -108,7 +108,8 @@ final class WholePostViewController: UIViewController {
     }
     
     @objc private func didTapSettings() {
-        //TODO: экран настроек
+        let settings = SettingsSheetAssembly().viewController()
+        present(settings, animated: true)
     }
     
     @objc private func comeBack() {

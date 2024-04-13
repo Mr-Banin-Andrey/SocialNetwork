@@ -92,6 +92,7 @@ extension SavedViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.delegate = self
+        cell.setupCellForUser()
         return cell
     }
 }

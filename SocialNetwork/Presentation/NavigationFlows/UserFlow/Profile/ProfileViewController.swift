@@ -116,6 +116,7 @@ extension ProfileViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.delegate = self
+        cell.setupCellForUser()
         return cell
     }
 }
@@ -176,7 +177,8 @@ extension ProfileViewController: PostCellDelegate {
     }
     
     func openScreenMenuSheet() {
-        return
+        let settings = SettingsSheetAssembly().viewController()
+        present(settings, animated: true)
     }
     
     func openScreenWholePost() {

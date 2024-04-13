@@ -13,6 +13,9 @@
 		9D3994DF2BA0AB97009F894A /* AppFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3994DE2BA0AB97009F894A /* AppFactory.swift */; };
 		9D3994E32BA0ACB6009F894A /* NavigationFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3994E22BA0ACB6009F894A /* NavigationFlowType.swift */; };
 		9D3994E52BA0B53D009F894A /* AuthenticationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3994E42BA0B53D009F894A /* AuthenticationFactory.swift */; };
+		9D3B11C92BC9B8D900733DB2 /* SettingsSheetAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B11C82BC9B8D800733DB2 /* SettingsSheetAssembly.swift */; };
+		9D3B11CB2BC9B8FD00733DB2 /* SettingsSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B11CA2BC9B8FD00733DB2 /* SettingsSheetViewController.swift */; };
+		9D3B11CD2BC9B90800733DB2 /* SettingsSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3B11CC2BC9B90800733DB2 /* SettingsSheetViewModel.swift */; };
 		9D609D552BA1CFAA001765C0 /* UserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D609D542BA1CFAA001765C0 /* UserCoordinator.swift */; };
 		9D609D572BA1CFC3001765C0 /* UserFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D609D562BA1CFC3001765C0 /* UserFactory.swift */; };
 		9D609D5F2BA336BD001765C0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D609D5E2BA336BD001765C0 /* MainViewController.swift */; };
@@ -120,6 +123,9 @@
 		9D3994DE2BA0AB97009F894A /* AppFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFactory.swift; sourceTree = "<group>"; };
 		9D3994E22BA0ACB6009F894A /* NavigationFlowType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationFlowType.swift; sourceTree = "<group>"; };
 		9D3994E42BA0B53D009F894A /* AuthenticationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationFactory.swift; sourceTree = "<group>"; };
+		9D3B11C82BC9B8D800733DB2 /* SettingsSheetAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheetAssembly.swift; sourceTree = "<group>"; };
+		9D3B11CA2BC9B8FD00733DB2 /* SettingsSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheetViewController.swift; sourceTree = "<group>"; };
+		9D3B11CC2BC9B90800733DB2 /* SettingsSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheetViewModel.swift; sourceTree = "<group>"; };
 		9D609D542BA1CFAA001765C0 /* UserCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoordinator.swift; sourceTree = "<group>"; };
 		9D609D562BA1CFC3001765C0 /* UserFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFactory.swift; sourceTree = "<group>"; };
 		9D609D5E2BA336BD001765C0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -232,6 +238,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D3B11C72BC9B85900733DB2 /* SettingsSheet */ = {
+			isa = PBXGroup;
+			children = (
+				9D3B11C82BC9B8D800733DB2 /* SettingsSheetAssembly.swift */,
+				9D3B11CA2BC9B8FD00733DB2 /* SettingsSheetViewController.swift */,
+				9D3B11CC2BC9B90800733DB2 /* SettingsSheetViewModel.swift */,
+			);
+			path = SettingsSheet;
+			sourceTree = "<group>";
+		};
 		9D609D522BA1CF47001765C0 /* UserFlow */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +260,7 @@
 				9D7FCBF42BB6F51C001546FC /* Subscriber */,
 				9D831D5E2BBDB4EB00E4E8A9 /* WholePost */,
 				9D9E9CB52BC099E900593B73 /* PhotoGallery */,
+				9D3B11C72BC9B85900733DB2 /* SettingsSheet */,
 			);
 			path = UserFlow;
 			sourceTree = "<group>";
@@ -569,8 +586,8 @@
 				9DC279C62B4BED7800FD401F /* CustomTextField.swift */,
 				9DC279B52B49D04100FD401F /* CustomButton.swift */,
 				9D7FCBE62BB624AF001546FC /* DateHeader.swift */,
-				9D7FCBFB2BB70159001546FC /* PostCell.swift */,
 				9D9E9CAF2BBDFF7600593B73 /* LikeCommentBookmarkView.swift */,
+				9D7FCBFB2BB70159001546FC /* PostCell.swift */,
 			);
 			path = CustomUIElements;
 			sourceTree = "<group>";
@@ -793,7 +810,9 @@
 				9DCAC4E32B4D78FE0040C327 /* ConfirmationViewController.swift in Sources */,
 				9D609D572BA1CFC3001765C0 /* UserFactory.swift in Sources */,
 				9D646ABA2B493FD400C0B2D3 /* LogInViewController.swift in Sources */,
+				9D3B11CB2BC9B8FD00733DB2 /* SettingsSheetViewController.swift in Sources */,
 				9D3994DF2BA0AB97009F894A /* AppFactory.swift in Sources */,
+				9D3B11CD2BC9B90800733DB2 /* SettingsSheetViewModel.swift in Sources */,
 				9D7FCBEC2BB6CE96001546FC /* DependencyWrapper.swift in Sources */,
 				9DC279B62B49D04100FD401F /* CustomButton.swift in Sources */,
 				9D609D632BA33700001765C0 /* MainCoordinator.swift in Sources */,
@@ -822,6 +841,7 @@
 				9D646AA42B48594B00C0B2D3 /* UIImage.swift in Sources */,
 				9D7FCBFA2BB6FA10001546FC /* SubscriberViewModel.swift in Sources */,
 				9D9E9CB92BC09A5300593B73 /* PhotoGalleryViewController.swift in Sources */,
+				9D3B11C92BC9B8D900733DB2 /* SettingsSheetAssembly.swift in Sources */,
 				9D3994E52BA0B53D009F894A /* AuthenticationFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1005,7 +1025,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1038,7 +1058,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

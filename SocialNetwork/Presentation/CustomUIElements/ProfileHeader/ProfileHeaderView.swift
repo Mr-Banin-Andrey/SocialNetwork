@@ -116,14 +116,13 @@ final class ProfileHeaderView: UIView {
         $0.font = .interRegular400Font
         return $0
     }(UILabel())
-    
-    private lazy var chevronButton: UIButton = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.setImage(.chevronRightImage, for: .normal)
-        $0.tintColor = .textAndButtonColor
-        $0.addTarget(self, action: #selector(didTapOpenGallery), for: .touchUpInside)
-        return $0
-    }(UIButton())
+        
+    private lazy var chevronButton = CustomButton(
+        image: .chevronRightImage,
+        tintColor: .textAndButtonColor
+    ) { [weak self] in
+        self?.delegate?.openScreenGallery()
+    }
     
     private lazy var layout: UICollectionViewFlowLayout = {
         $0.minimumLineSpacing = 0
@@ -146,7 +145,7 @@ final class ProfileHeaderView: UIView {
         
     private lazy var backgroundMyNotesView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .backgroundTextColor
+        $0.backgroundColor = .secondaryBackgroundColor
         return $0
     }(UIView())
     
@@ -158,14 +157,12 @@ final class ProfileHeaderView: UIView {
         return $0
     }(UILabel())
     
-    private lazy var createPostButton: UIButton = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.setImage(.squareAndPencilImage, for: .normal)
-        $0.tintColor = .textAndButtonColor
-        $0.addTarget(self, action: #selector(didTapCreatePost), for: .touchUpInside)
-        return $0
-    }(UIButton())
-    
+    private lazy var createPostButton = CustomButton(
+        image: .squareAndPencilImage,
+        tintColor: .textAndButtonColor
+    ) { [weak self] in
+        self?.delegate?.openScreenCreatePost()
+    }
     
     private var type: TypeView = .profileView {
         didSet{
