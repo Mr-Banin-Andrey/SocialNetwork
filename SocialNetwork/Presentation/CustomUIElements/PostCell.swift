@@ -8,10 +8,9 @@
 import UIKit
 
 protocol PostCellDelegate: AnyObject {
-    func openScreenSubscriber()
+    func openScreenSubscriber(userID: String)
     func openScreenMenuSheet()
     func openScreenWholePost()
-    func addPostToSaved()
 }
 
 final class PostCell: UITableViewCell {
@@ -24,18 +23,17 @@ final class PostCell: UITableViewCell {
 
     private lazy var avatarView = AvatarAssembly(size: .sizeSixty, isBorder: false).view()
     
-    private lazy var nameLabel = CustomButton(
+    private lazy var nameButton = CustomButton(
         title: "Ivanka Pushkin",
         font: .interMedium500Font,
         titleColor: .textAndButtonColor,
         backgroundColor: .clear
     ) { [weak self] in
-        self?.delegate?.openScreenSubscriber()
+        self?.delegate?.openScreenSubscriber(userID: self?.userCreatedID ?? "")
     }
     
     private lazy var professionLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.text = "Policmen"
         $0.textColor = .textSecondaryColor
         $0.font = .interRegular400Font
         return $0
@@ -63,7 +61,6 @@ final class PostCell: UITableViewCell {
     
     private lazy var textOfPostLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.text = "With prototyping in Figma, you can create multiple flows for your prototype in one page to preview a user's full journey and experience through your designs. A flow is a path users take through the network of connected frames that make up your prototype. For example, you can create a prototype for a shopping app that includes a flow for account creation, another for browsing items, and another for the checkout process–all in one page. When you add a connection between two frames with no existing connections in your prototype, a flow starting point is created. You can create multiple flows using the same network of connected frames by adding different flow starting points."
         $0.textColor = .textAndButtonColor
         $0.font = .interRegular400Font
         $0.numberOfLines = 4
@@ -91,6 +88,8 @@ final class PostCell: UITableViewCell {
     
     private lazy var likeCommentBookmarkView = LikeCommentBookmarkView()
     
+    private var userCreatedID: String?
+    
     //MARK: Initial
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -107,19 +106,19 @@ final class PostCell: UITableViewCell {
     
     //MARK: Methods
     
-    
-    func setupCell() {
-        //TODO: прокинуть данные из базы
-//        avatarView.setupAvatar(<#T##userID: String##String#>)
-//        nameLabel.text =
-//        professionLabel.text =
-//        textOfPostLabel.text =
-//        pictureImage.setupPhoto(<#T##photoID: String##String#>)
+    func setupCell(post: Post) {
+        avatarView.setupAvatar(post.userCreatedID)
+        nameButton.setTitle("\(post.firstName) \(post.lastName)", for: .normal)
+        professionLabel.text = post.profession
+        textOfPostLabel.text = post.text
+        pictureImage.setupPhoto(post.id)
+        userCreatedID = post.userCreatedID
+        likeCommentBookmarkView.setupView(post: post)
     }
     
     func setupCellForUser() {
 //        avatarView.is
-        nameLabel.isEnabled = false
+        nameButton.isEnabled = false
     }
     
     private func addGesture() {
@@ -129,7 +128,7 @@ final class PostCell: UITableViewCell {
     
     private func setupUI() {
         contentView.addSubview(avatarView)
-        contentView.addSubview(nameLabel)
+        contentView.addSubview(nameButton)
         contentView.addSubview(professionLabel)
         contentView.addSubview(verticalEllipseButton)
         contentView.addSubview(backgroundTextView)
@@ -146,11 +145,11 @@ final class PostCell: UITableViewCell {
             avatarView.heightAnchor.constraint(equalToConstant: 60),
             avatarView.widthAnchor.constraint(equalToConstant: 60),
             
-            nameLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 18),
-            nameLabel.leadingAnchor.constraint(equalTo: self.avatarView.trailingAnchor, constant: 16),
-            nameLabel.heightAnchor.constraint(equalToConstant: 24),
+            nameButton.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 18),
+            nameButton.leadingAnchor.constraint(equalTo: self.avatarView.trailingAnchor, constant: 16),
+            nameButton.heightAnchor.constraint(equalToConstant: 24),
             
-            professionLabel.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: 6),
+            professionLabel.topAnchor.constraint(equalTo: self.nameButton.bottomAnchor, constant: 6),
             professionLabel.leadingAnchor.constraint(equalTo: self.avatarView.trailingAnchor, constant: 16),
             
             verticalEllipseButton.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 24),
@@ -191,10 +190,7 @@ final class PostCell: UITableViewCell {
     }
     
     @objc private func didTapOnSubscriber() {
-        delegate?.openScreenSubscriber()
-    }
-    
-    @objc private func didTapOnBookmark() {
-        delegate?.addPostToSaved()
+        guard let userCreatedID = self.userCreatedID else { return }
+        delegate?.openScreenSubscriber(userID: userCreatedID)
     }
 }

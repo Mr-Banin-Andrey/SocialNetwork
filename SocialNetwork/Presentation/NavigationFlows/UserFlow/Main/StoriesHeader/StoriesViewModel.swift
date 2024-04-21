@@ -15,11 +15,11 @@ protocol StoriesViewModelProtocol: ViewModelProtocol where State == StoriesState
 
 enum StoriesState {
     case initial
-    case openScreenSubscriber
+    case openScreenSubscriber(User)
 }
 
 enum StoriesViewInput {
-    case didTapAvatar
+    case didTapAvatar(String)
 }
 
 // MARK: - StoriesViewModel
@@ -36,12 +36,28 @@ final class StoriesViewModel: StoriesViewModelProtocol {
         }
     }
     
+    @Dependency private var useCase: UserUseCase
+    
+    var followingAvatars: [String]
+    
+    
+    //MARK: Initial
+    
+    init(followingAvatars: [String]) {
+        self.followingAvatars = followingAvatars
+    }
+    
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {
         switch viewInput {
-        case .didTapAvatar:
-            state = .openScreenSubscriber
+        case .didTapAvatar(let userID):
+            
+            useCase.fetchUser(userID: userID) { [weak self] user in 
+                DispatchQueue.main.async {
+                    self?.state = .openScreenSubscriber(user)
+                }
+            }            
         }
     }
     

@@ -38,10 +38,27 @@ final class AvatarViewModel: AvatarViewModelProtocol {
         }
     }
     
+    @Dependency private var useCase: UserUseCase
+    
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {
-
+        switch viewInput {
+        case .startLoadAvatar(let userID):
+            self.state = .loadPicture
+            useCase.fetchImageData(imageID: userID, basePath: .userAvatars) { (result: Result<Data,Error>) in
+                switch result {
+                case .success(let dataImage):
+                    self.state = .didLoadPicture(dataImage)
+                case .failure(let error):
+                    print("Error didLoadTeamAvatar ImageForCellViewModel: >>>>> \(error)")
+                    self.state = .noAvatar
+                }
+            }
+            self.state = .initial
+        }
+        
+       
     }
     
 }

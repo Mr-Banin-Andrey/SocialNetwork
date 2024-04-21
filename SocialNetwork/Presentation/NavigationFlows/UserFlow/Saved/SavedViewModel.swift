@@ -35,6 +35,14 @@ final class SavedViewModel: SavedViewModelProtocol {
         }
     }
     
+    var user: User
+    
+    //MARK: Initial
+    
+    init(user: User) {
+        self.user = user
+    }
+    
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {

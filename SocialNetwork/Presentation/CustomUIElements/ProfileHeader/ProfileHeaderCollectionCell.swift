@@ -27,6 +27,10 @@ final class ProfileHeaderCollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setupCell(photoID: String) {
+        photoImage.setupPhoto(photoID)
+    }
+    
     //MARK: Methods
     
     private func setupUI() {

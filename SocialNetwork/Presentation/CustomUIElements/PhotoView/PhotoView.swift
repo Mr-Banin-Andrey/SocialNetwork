@@ -18,7 +18,7 @@ final class PhotoView: UIView {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
-        $0.image = .giraffeMockObjectImage
+        $0.image = .forPostMockObjectImage
         return $0
     }(UIImageView())
     

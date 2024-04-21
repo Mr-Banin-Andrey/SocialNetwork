@@ -88,12 +88,12 @@ final class GalleryHeaderView: UIView {
     //MARK: Methods
     
     private func bindViewModel() {
-        viewModel.onStateDidChange = { [weak self] state in
-            switch state {
-            case .initial:
-                break
-            }
-        }
+//        viewModel.onStateDidChange = { [weak self] state in
+//            switch state {
+//            case .initial:
+//                break
+//            }
+//        }
     }
     
     private func setupType(type: GalleryHeaderType) {

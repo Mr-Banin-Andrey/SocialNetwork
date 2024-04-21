@@ -81,7 +81,7 @@ final class MainViewController: UIViewController, Coordinatable {
         setupNavBar()
         setupUI()
         bindViewModel()
-        viewModel.updateState(with: .didTapAllPosts)
+        viewModel.updateState(with: .startLoadPosts)
     }
     
     //MARK: Methods
@@ -93,8 +93,9 @@ final class MainViewController: UIViewController, Coordinatable {
             switch state {
             case .initial:
                 break
-            case .openScreenSubscriber:
-                coordinator?.subscriber()
+                
+            case .openScreenSubscriber(let user):
+                coordinator?.subscriber(user: user)
             case .openScreenMenu:
                 let settings = SettingsSheetAssembly().viewController()
                 present(settings, animated: true)
@@ -104,8 +105,10 @@ final class MainViewController: UIViewController, Coordinatable {
                 
             case .showAllPosts:
                 updateViewVisibility(isSelected: true)
+                mainTable.reloadData()
             case .showPostsForUser:
                 updateViewVisibility(isSelected: false)
+                mainTable.reloadData()
             }
         }
     }
@@ -145,16 +148,16 @@ final class MainViewController: UIViewController, Coordinatable {
 extension MainViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        8
+        if viewModel.posts.count != 0 {
+            return viewModel.posts.count + 1
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 0
-        default:
-            return 1
-        }
+        guard section != 0 else { return 0 }
+        let postsCount = viewModel.posts[section-1].posts.count
+        return postsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -162,6 +165,8 @@ extension MainViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.delegate = self
+        let post = viewModel.posts[indexPath.section-1].posts[indexPath.row]
+        cell.setupCell(post: post)
         return cell
     }
 }
@@ -172,11 +177,13 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
-            let stories = StoriesAssembly().view()
+            let stories = StoriesAssembly(followingAvatars: viewModel.user.following).view()
             stories.coordinator = coordinator
             return stories
         default:
             guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: DateHeader.reuseID) as? DateHeader else { return nil }
+            let date = viewModel.posts[section-1].date
+            header.setupHeader(date: DateConverter.dateString(from: date))
             return header
         }
     }
@@ -194,12 +201,9 @@ extension MainViewController: UITableViewDelegate {
 //MARK: - PostCellDelegate
 
 extension MainViewController: PostCellDelegate {
-    func addPostToSaved() {
-        viewModel.updateState(with: .didTapAddPostToSaved)
-    }
     
-    func openScreenSubscriber() {
-        viewModel.updateState(with: .didTapOpenSubscriberProfile)
+    func openScreenSubscriber(userID: String) {
+        viewModel.updateState(with: .didTapOpenSubscriberProfile(userID))
     }
     
     func openScreenMenuSheet() {

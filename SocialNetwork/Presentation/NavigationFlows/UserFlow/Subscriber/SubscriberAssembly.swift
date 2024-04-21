@@ -9,8 +9,14 @@ import Foundation
 
 final class SubscriberAssembly {
     
+    private let user: User
+    
+    init(user: User) {
+        self.user = user
+    }
+    
     func viewController() -> SubscriberViewController {
-        let viewModel = SubscriberViewModel()
+        let viewModel = SubscriberViewModel(user: user)
         let viewController = SubscriberViewController(viewModel: viewModel)
         return viewController
     }

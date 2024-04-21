@@ -13,6 +13,21 @@ final class AuthenticationFactory {
     
     var rootCoordinator: AuthenticationCoordinator?
     
+    let authenticationUseCase: AuthenticationUseCase
+    
+    init(authenticationUseCase: AuthenticationUseCase) {
+        self.authenticationUseCase = authenticationUseCase
+        
+        ///
+        /// Здесь регистрируем в глобальный контейнер, чтобы ресолвить в экранах,
+        /// которые создаются в координаторах глубже по иерархии навигации,
+        /// которые не имеют доступа к фабрике, чтобы не было необходимости
+        /// тянуть `AuthenticationUseCase` при каждом создании нового объекта.
+        ///
+        
+        AppDIContainer.register(type: AuthenticationUseCase.self, authenticationUseCase)
+    }
+    
     //MARK: Public methods
     
     func makeLogInView() -> any UIViewController & Coordinatable {
@@ -27,8 +42,8 @@ final class AuthenticationFactory {
         return viewController
     }
 
-    func makeConfirmationView() -> any UIViewController & Coordinatable {
-        let viewModel = ConfirmationViewModel()
+    func makeConfirmationView(phone: String) -> any UIViewController & Coordinatable {
+        let viewModel = ConfirmationViewModel(phone: phone)
         let viewController = ConfirmationViewController(viewModel: viewModel)
         return viewController
     }

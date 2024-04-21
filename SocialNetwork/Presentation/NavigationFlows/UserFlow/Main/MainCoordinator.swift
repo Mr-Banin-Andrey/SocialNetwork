@@ -31,8 +31,8 @@ final class MainCoordinator: Coordinator {
         setupNavBarAppearance()
     }
     
-    func subscriber() {
-        let viewController = SubscriberAssembly().viewController()
+    func subscriber(user: User) {
+        let viewController = SubscriberAssembly(user: user).viewController()
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
     }

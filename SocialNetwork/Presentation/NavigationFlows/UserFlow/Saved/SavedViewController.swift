@@ -114,7 +114,7 @@ extension SavedViewController: UITableViewDelegate {
 //MARK: - ProfileHeaderViewDelegate
 
 extension SavedViewController: PostCellDelegate {
-    func openScreenSubscriber() {
+    func openScreenSubscriber(userID: String) {
         return
     }
     
@@ -125,9 +125,5 @@ extension SavedViewController: PostCellDelegate {
     func openScreenWholePost() {
         let wholePost = WholePostAssembly().viewController()
         navigationController?.pushViewController(wholePost, animated: true)
-    }
-    
-    func addPostToSaved() {
-        return
     }
 }

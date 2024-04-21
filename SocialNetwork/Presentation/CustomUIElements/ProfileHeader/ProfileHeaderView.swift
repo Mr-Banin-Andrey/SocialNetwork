@@ -39,7 +39,7 @@ final class ProfileHeaderView: UIView {
     
     private lazy var nameLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.text = "Ivanka Pushkin"
+        $0.text = "\(viewModel.user.firstName) \(viewModel.user.lastName)"
         $0.textColor = .textAndButtonColor
         $0.font = .interSemiBold600Font
         return $0
@@ -47,7 +47,7 @@ final class ProfileHeaderView: UIView {
     
     private lazy var professionLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.text = "Policemen"
+        $0.text = viewModel.user.profession
         $0.textColor = .textSecondaryColor
         $0.font = .interRegular400Font
         return $0
@@ -83,7 +83,7 @@ final class ProfileHeaderView: UIView {
         $0.textColor = .textTertiaryColor
         $0.numberOfLines = 2
         $0.font = .interRegular400Font
-        $0.text = "1400\nпубликаций"
+        $0.text = "\(viewModel.user.posts.count)\nпубликаций"
         $0.textAlignment = .center
         return $0
     }(UILabel())
@@ -93,7 +93,7 @@ final class ProfileHeaderView: UIView {
         $0.textColor = .textAndButtonColor
         $0.numberOfLines = 2
         $0.font = .interRegular400Font
-        $0.text = "245\nподписок"
+        $0.text = "\(viewModel.user.following.count)\nподписок"
         $0.textAlignment = .center
         return $0
     }(UILabel())
@@ -103,7 +103,7 @@ final class ProfileHeaderView: UIView {
         $0.textColor = .textSecondaryColor
         $0.numberOfLines = 2
         $0.font = .interRegular400Font
-        $0.text = "780\nподписчиков"
+        $0.text = "\(viewModel.user.followers.count)\nподписчиков"
         $0.textAlignment = .center
         return $0
     }(UILabel())
@@ -187,6 +187,7 @@ final class ProfileHeaderView: UIView {
         self.setupUI()
         setupImage(type: type)
         bindViewModel()
+        avatarImage.setupAvatar(viewModel.user.id)
     }
     
     required init?(coder: NSCoder) {
@@ -195,18 +196,18 @@ final class ProfileHeaderView: UIView {
     
     //MARK: Methods
     
-    func setupHeader(numberOfPhoto: Int) {
+    func setupHeader(numberOfPhoto: Int = 0) {
         photoLabel.attributedText = StringConverter.editColor(name: "Фотографии", count: numberOfPhoto)
     }
     
     private func bindViewModel() {
-        viewModel.onStateDidChange = { [weak self] state in
-            guard let self else { return }
-            switch state {
-            case .initial:
-                break
-            }
-        }
+//        viewModel.onStateDidChange = { [weak self] state in
+//            guard let self else { return }
+//            switch state {
+//            case .initial:
+//                break
+//            }
+//        }
     }
     
     private func setupImage(type: TypeView) {
@@ -298,13 +299,19 @@ final class ProfileHeaderView: UIView {
 extension ProfileHeaderView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        if viewModel.user.photos.count == 0 {
+            return 5
+        }
+        return viewModel.user.photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileHeaderCollectionCell.reuseID, for: indexPath) as? ProfileHeaderCollectionCell else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath)
             return cell
+        }
+        if viewModel.user.photos.count != 0 {
+            cell.setupCell(photoID: viewModel.user.photos[indexPath.row])
         }
         
         return cell

@@ -9,5 +9,5 @@ import Foundation
 
 enum NavigationFlowType {
     case authentication
-    case main
+    case main(User)
 }

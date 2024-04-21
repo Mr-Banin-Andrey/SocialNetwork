@@ -21,10 +21,11 @@ final class UserCoordinator: Coordinator {
     
     //MARK: Init
     
-    init( navigationController: UINavigationController) throws {
+    init(_ user: User, navigationController: UINavigationController) {
         self.navigationController = navigationController
-        
-        self.userFactory = UserFactory()
+                
+        let userUseCase = UserUseCase()
+        self.userFactory = UserFactory(user: user, useCase: userUseCase)
     }
     
     func start() {

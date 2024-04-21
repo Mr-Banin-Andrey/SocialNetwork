@@ -19,6 +19,7 @@ enum ProfileHeaderState {
 }
 
 enum ProfileHeaderViewInput {
+    
 }
 
 // MARK: - ProfileHeaderViewModel
@@ -35,10 +36,16 @@ final class ProfileHeaderViewModel: ProfileHeaderViewModelProtocol {
         }
     }
     
+    var user: User
+    
+    init(user: User) {
+        self.user = user
+    }
+    
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {
-
+        
     }
     
 }

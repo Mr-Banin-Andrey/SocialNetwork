@@ -98,15 +98,11 @@ extension UIImage {
     
     //MARK: - MockObject
     
-    class var giraffeMockObjectImage: UIImage {
-        UIImage(named: "giraffe") ?? UIImage()
+    class var forPostMockObjectImage: UIImage {
+        UIImage(named: "forPost") ?? UIImage()
     }
-    
-    class var avatarMockObjectImage: UIImage {
-        UIImage(named: "avatarMockObject") ?? UIImage()
-    }
-    
-    class var photoCellMockObjectImage: UIImage {
-        UIImage(named: "photoCelProfileHeader") ?? UIImage()
+
+    class var forGalleryCellMockObjectImage: UIImage {
+        UIImage(named: "forGallery") ?? UIImage()
     }
 }

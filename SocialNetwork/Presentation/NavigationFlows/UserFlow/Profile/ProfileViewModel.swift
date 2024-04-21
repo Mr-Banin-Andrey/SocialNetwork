@@ -35,6 +35,18 @@ final class ProfileViewModel: ProfileViewModelProtocol {
         }
     }
     
+    var user: User
+    
+    var posts: [(date: Date, posts: [Post])] = []
+ 
+    //MARK: Initial
+    
+    init(user: User) {
+        self.user = user
+        
+        posts = GroupingForPosts.groupByDate(user.posts)
+    }
+    
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {

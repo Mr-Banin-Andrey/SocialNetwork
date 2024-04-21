@@ -19,7 +19,7 @@ enum RegistrationState {
 }
 
 enum RegistrationViewInput {
-    case openScreenConfirmation
+    case openScreenConfirmation(String)
 }
 
 // MARK: - RegistrationViewModel
@@ -36,12 +36,22 @@ final class RegistrationViewModel: RegistrationViewModelProtocol {
         }
     }
     
+    @Dependency private var authenticationUseCase: AuthenticationUseCase
+    
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {
         switch viewInput {
-        case .openScreenConfirmation:
-            state = .showOpenConfirmation
+        case .openScreenConfirmation(let phone):
+            
+            authenticationUseCase.registrationSendingCodeToPhone(phone: phone) { [weak self] (result: Result<Void, AuthenticationService.AuthenticationError>) in
+                switch result {
+                case .success(_):
+                    self?.state = .showOpenConfirmation
+                case .failure(let failure):
+                    print("error registrationSendingCodeToPhone: \(failure)")
+                }
+            }
         }
     }
     

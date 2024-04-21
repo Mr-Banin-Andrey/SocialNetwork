@@ -23,14 +23,10 @@ final class AppFactory {
         }
     }
     
-    private func makeUserCoordinator(rootCoordinator: RootCoordinator) throws -> any Coordinator {
-        do {
-            let userCoordinator = try UserCoordinator(navigationController: rootCoordinator.navigationController)
-            userCoordinator.parentCoordinator = rootCoordinator
-            return userCoordinator
-        } catch {
-            throw AppFactoryError.emptyUserProfile
-        }
+    private func makeUserCoordinator(_ user: User, rootCoordinator: RootCoordinator) -> any Coordinator {
+        let userCoordinator = UserCoordinator(user, navigationController: rootCoordinator.navigationController)
+        userCoordinator.parentCoordinator = rootCoordinator
+        return userCoordinator
     }
     
     enum AppFactoryError: Error {
@@ -45,8 +41,8 @@ extension AppFactory: AppFactoryProtocol {
         case .authentication:
             return try makeAuthenticationCoordinator(rootCoordinator: rootCoordinator)
             
-        case .main:
-            return try makeUserCoordinator(rootCoordinator: rootCoordinator)
+        case .main(let user):
+            return makeUserCoordinator(user, rootCoordinator: rootCoordinator)
         }
     }
 }

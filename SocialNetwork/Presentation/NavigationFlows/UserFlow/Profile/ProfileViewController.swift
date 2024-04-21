@@ -30,7 +30,7 @@ final class ProfileViewController: UIViewController, Coordinatable {
     private lazy var titleLabel: UILabel = {
         $0.font = .interSemiBold600Font
         $0.textColor = .textAndButtonColor
-        $0.text = "super_ivanka98"
+        $0.text = viewModel.user.nickname
         return $0
     }(UILabel())
     
@@ -99,24 +99,27 @@ final class ProfileViewController: UIViewController, Coordinatable {
 extension ProfileViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        3
+        if viewModel.posts.count != 0 {
+            return viewModel.posts.count + 1
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 0
-        default:
-            return 2
-        }
+        guard section != 0 else { return 0 }
+        let postsCount = viewModel.posts[section-1].posts.count
+        return postsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCell.reuseID, for: indexPath) as? PostCell else {
             return UITableViewCell()
         }
+        
         cell.delegate = self
         cell.setupCellForUser()
+        let post = viewModel.posts[indexPath.section-1].posts[indexPath.row]
+        cell.setupCell(post: post)
         return cell
     }
 }
@@ -127,12 +130,14 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
-            let view = ProfileHeaderAssembly(type: .profileView).view()
-            view.setupHeader(numberOfPhoto: 20)
+            let view = ProfileHeaderAssembly(type: .profileView, user: viewModel.user).view()
+            view.setupHeader(numberOfPhoto: viewModel.user.photos.count)
             view.delegate = self
             return view
         default:
             guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: DateHeader.reuseID) as? DateHeader else { return nil }
+            let date = viewModel.posts[section-1].date
+            header.setupHeader(date: DateConverter.dateString(from: date))
             return header
         }
     }
@@ -172,7 +177,8 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
 //MARK: - PostCellDelegate
 
 extension ProfileViewController: PostCellDelegate {
-    func openScreenSubscriber() {
+    
+    func openScreenSubscriber(userID: String) {
         return
     }
     
@@ -184,10 +190,6 @@ extension ProfileViewController: PostCellDelegate {
     func openScreenWholePost() {
         let wholePost = WholePostAssembly().viewController()
         navigationController?.pushViewController(wholePost, animated: true)
-    }
-    
-    func addPostToSaved() {
-        return
     }
 }
 
