@@ -56,8 +56,8 @@ final class StoriesView: UIView {
             switch state {
             case .initial:
                 break
-            case .openScreenSubscriber:
-                coordinator?.subscriber()
+            case .openScreenSubscriber(let user):
+                coordinator?.subscriber(user: user)
             }
         }
     }
@@ -79,8 +79,7 @@ final class StoriesView: UIView {
 extension StoriesView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
-        //TODO: кол-во подписчиков
+        viewModel.usersID.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -88,8 +87,8 @@ extension StoriesView: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath)
             return cell
         }
-        //TODO: передать айди подписчика
-//        cell.setupCell(userID: <#T##String#>)
+
+        cell.setupCell(userID: viewModel.usersID[indexPath.item])
         return cell
     }
 }
@@ -103,9 +102,9 @@ extension StoriesView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? StorieCell {
-            //TODO: переход на профиль подписчика
-            let userID = cell.getUserID()
-            viewModel.updateState(with: .didTapAvatar)
+            guard let userID = cell.getUserID() else { return }
+            
+            viewModel.updateState(with: .didTapAvatar(userID))
         }
     }
 }

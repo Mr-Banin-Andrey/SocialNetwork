@@ -22,7 +22,8 @@ final class AuthenticationCoordinator: Coordinator {
     init(navigationController: UINavigationController) throws {
         self.navigationController = navigationController
         
-        self.authenticationFactory = AuthenticationFactory()
+        let authenticationUseCase = AuthenticationUseCase()
+        self.authenticationFactory = AuthenticationFactory(authenticationUseCase: authenticationUseCase)
         self.authenticationFactory.rootCoordinator = self
     }
     
@@ -35,10 +36,10 @@ final class AuthenticationCoordinator: Coordinator {
         setupNavBarAppearance()
     }
     
-    func stopUserFlow() { // (_userProfile: UserProfile)
+    func proceedToUserFlow(_ user: User) {
         stop()
-        (parentCoordinator as? RootCoordinator)?.startUserFlow()
-        navigationController.navigationBar.isHidden = true// (userProfile)
+        (parentCoordinator as? RootCoordinator)?.startUserFlow(user)
+        navigationController.navigationBar.isHidden = true
     }
     
     private func setupNavBarAppearance() {
@@ -55,7 +56,7 @@ final class AuthenticationCoordinator: Coordinator {
     
     enum Destination: DestinationProtocol {
         case registration(coordinator: AuthenticationCoordinator)
-        case confirmation(coordinator: AuthenticationCoordinator)
+        case confirmation(coordinator: AuthenticationCoordinator, phone: String)
         case haveAccount(coordinator: AuthenticationCoordinator)
         
         var module: any UIViewController & Coordinatable {
@@ -64,8 +65,8 @@ final class AuthenticationCoordinator: Coordinator {
                 let registrationVC = coordinator.authenticationFactory.makeRegistrationView()
                 (registrationVC as? RegistrationViewController)?.coordinator = coordinator
                 return registrationVC
-            case .confirmation(let coordinator):
-                let confirmationVC = coordinator.authenticationFactory.makeConfirmationView()
+            case .confirmation(let coordinator, let phone):
+                let confirmationVC = coordinator.authenticationFactory.makeConfirmationView(phone: phone)
                 (confirmationVC as? ConfirmationViewController)?.coordinator = coordinator
                 return confirmationVC
             case .haveAccount(let coordinator):

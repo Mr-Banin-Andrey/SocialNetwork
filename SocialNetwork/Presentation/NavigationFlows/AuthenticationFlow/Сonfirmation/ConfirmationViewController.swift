@@ -30,7 +30,7 @@ final class ConfirmationViewController: UIViewController, Coordinatable {
     
     private lazy var explanationLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.text = "Мы отправили SMS с кодом на номер \n +38 099 999 99 99 "
+        $0.text = "Мы отправили SMS с кодом на номер \n \(viewModel.phone) "
         $0.font = .interRegular400Font
         $0.textColor = .textAndButtonColor
         $0.textAlignment = .center
@@ -39,7 +39,7 @@ final class ConfirmationViewController: UIViewController, Coordinatable {
     }(UILabel())
     
     private lazy var codText = CustomTextField(
-        placeholder: "_ _ _ -_ _ _-_ _ ",
+        placeholder: "Введите код из СМС",
         mode: .forCode,
         borderColor: UIColor.textAndButtonColor.cgColor
     )
@@ -49,7 +49,7 @@ final class ConfirmationViewController: UIViewController, Coordinatable {
         font: .interMedium500Font,
         titleColor: .mainBackgroundColor,
         backgroundColor: .textAndButtonColor) { [weak self] in
-            self?.viewModel.updateState(with: .registrationOnSocialNetwork)
+            self?.viewModel.updateState(with: .registrationOnSocialNetwork(self?.codText.text ?? ""))
         }
     
     private lazy var checkMarkImage: UIImageView = {
@@ -90,8 +90,11 @@ final class ConfirmationViewController: UIViewController, Coordinatable {
             switch state {
             case .initial:
                 break
-            case .showUser:
-                self.coordinator?.stopUserFlow()
+            case .tryingToSignIn:
+                break
+            case .showUser(let user):
+                navigationController?.navigationBar.isHidden = true
+                self.coordinator?.proceedToUserFlow(user)
             }
         }
     }

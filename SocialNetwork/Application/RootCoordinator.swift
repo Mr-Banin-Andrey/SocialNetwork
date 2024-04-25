@@ -36,9 +36,9 @@ final class RootCoordinator: Coordinator {
         
     }
     
-    func startUserFlow() {
+    func startUserFlow(_ user: User) {
         do {
-            let userCoordinator = try appFactory.makeFlowCoordinator(.main, rootCoordinator: self)
+            let userCoordinator = try appFactory.makeFlowCoordinator(.main(user), rootCoordinator: self)
             DispatchQueue.main.async {
                 self.addChild(userCoordinator)
                 userCoordinator.start()

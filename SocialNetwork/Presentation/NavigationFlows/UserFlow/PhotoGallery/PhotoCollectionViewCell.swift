@@ -32,7 +32,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     
     func setupCell(photoID: String) {
         self.photoID = photoID
-//        pictureImage.setupAvatar(self.photoID ?? "")
+        pictureImage.setupPhoto(photoID)
     }
     
     func getPhotoID() -> String? {

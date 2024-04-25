@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 // MARK: - MainViewModelProtocol
 
@@ -15,18 +16,18 @@ protocol MainViewModelProtocol: ViewModelProtocol where State == MainState, View
 
 enum MainState {
     case initial
-    case openScreenSubscriber
+    case openScreenSubscriber(User)
     case openScreenMenu
-    case openScreenPost
+    case openScreenPost(Post)
     case showPostsForUser
     case showAllPosts
 }
 
 enum MainViewInput {
-    case didTapOpenSubscriberProfile
+    case startLoadPosts
+    case didTapOpenSubscriberProfile(String)
     case didTapOpenMenu
-    case didTapOpenPost
-    case didTapAddPostToSaved
+    case didTapOpenPost(Post)
     case didTapPostsForUser
     case didTapAllPosts
 }
@@ -45,23 +46,69 @@ final class MainViewModel: MainViewModelProtocol {
         }
     }
     
+    @Dependency private var useCase: UserUseCase
+    private var allPosts: [Post] = []
+    private var postsForUser: [Post] = []
+    
+    var user: User
+    var posts: [(date: Date, posts: [Post])] = []
+    var usersID: [String] = []
+    
+    
+    //MARK: Initial
+    
+    init(user: User) {
+        self.user = user
+    }
+    
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {
         switch viewInput {
-        case .didTapOpenSubscriberProfile:
-            state = .openScreenSubscriber
+            
+        case .startLoadPosts:
+            useCase.fetchPosts() { [weak self] allPosts in
+                guard let self else { return }
+                self.allPosts = allPosts.sorted(by: { $0.dateCreated < $1.dateCreated })
+                let users = Set(allPosts.map { $0.userCreatedID })
+                usersID = Array(users)
+                
+                var forUser: [Post] = []
+                for postID in user.following {
+                    let posts = allPosts.filter { $0.userCreatedID == postID }
+                    forUser += posts
+                }
+                
+                self.postsForUser = forUser.sorted(by: { $0.dateCreated < $1.dateCreated })
+                
+                DispatchQueue.main.async {
+                    self.posts = GroupingForPosts.groupByDate(self.allPosts)
+                    self.state = .showAllPosts
+                }
+            }
+
+        case .didTapOpenSubscriberProfile(let userID):
+
+            if userID != user.id {
+                let posts = allPosts.filter { $0.userCreatedID == userID}
+                useCase.fetchUser(userID: userID, posts: posts) { [weak self] user in
+                    DispatchQueue.main.async {
+                        self?.state = .openScreenSubscriber(user)
+                    }
+                }
+            }
+            
         case .didTapOpenMenu:
             state = .openScreenMenu
-        case .didTapOpenPost:
-            state = .openScreenPost
-        case .didTapAddPostToSaved:
-            break
+        case .didTapOpenPost(let post):
+            state = .openScreenPost(post)
         case .didTapAllPosts:
+            posts = GroupingForPosts.groupByDate(self.allPosts)
             state = .showAllPosts
+
         case .didTapPostsForUser:
+            posts = GroupingForPosts.groupByDate(self.postsForUser)
             state = .showPostsForUser
         }
     }
-    
 }

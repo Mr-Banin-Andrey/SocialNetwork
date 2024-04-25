@@ -65,12 +65,12 @@ final class LikeCommentBookmarkView: UIView {
         return $0
     }(UILabel())
     
-    private lazy var bookmarkButton: UIButton = {
+    private lazy var bookmarkImage: UIImageView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.image = .bookmarkImage
         $0.tintColor = .textAndButtonColor
-        $0.setImage(.bookmarkImage, for: .normal)
         return $0
-    }(UIButton())
+    }(UIImageView())
     
     //MARK: Initial
     
@@ -87,8 +87,20 @@ final class LikeCommentBookmarkView: UIView {
     
     //MARK: Methods
     
-    func setupView() {
-        //TODO: данные за базы
+    func setupView(post: Post) {
+        likeLabel.text = "\(post.likes.count)"
+        commentLabel.text = "\(post.comments.count)"
+        changeBookmark(isSaved: post.savedPost)
+    }
+    
+    private func changeBookmark(isSaved: Bool) {
+        if isSaved {
+            bookmarkImage.tintColor = .textTertiaryColor
+            bookmarkImage.image = .bookmarkFillImage
+        } else {
+            bookmarkImage.tintColor = .textAndButtonColor
+            bookmarkImage.image = .bookmarkImage
+        }
     }
     
     private func setupUI() {
@@ -99,15 +111,15 @@ final class LikeCommentBookmarkView: UIView {
         likeStack.addArrangedSubview(likeLabel)
         commentStack.addArrangedSubview(commentImage)
         commentStack.addArrangedSubview(commentLabel)
-        addSubview(bookmarkButton)
+        addSubview(bookmarkImage)
         
         NSLayoutConstraint.activate([
             likeAndCommentStack.topAnchor.constraint(equalTo: self.topAnchor),
             likeAndCommentStack.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             likeAndCommentStack.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
-            bookmarkButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            bookmarkButton.centerYAnchor.constraint(equalTo: likeAndCommentStack.centerYAnchor)
+            bookmarkImage.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            bookmarkImage.centerYAnchor.constraint(equalTo: likeAndCommentStack.centerYAnchor)
         ])
     }
 }

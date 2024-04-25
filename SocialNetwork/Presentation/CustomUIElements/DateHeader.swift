@@ -33,11 +33,11 @@ final class DateHeader: UITableViewHeaderFooterView {
         $0.layer.cornerRadius = 10
         $0.layer.borderColor = UIColor.textSecondaryColor.cgColor
         $0.textColor = .textSecondaryColor
-        $0.text = "12 июля"
-        $0.textAlignment = .center
+        $0.text = "12 сентября"
         return $0
     }(UILabel())
     
+    //MARK: Initial
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -49,20 +49,19 @@ final class DateHeader: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //TODO: - сделать загрузку данных из базы 
-//    func setupHeader() {
-//        dateLabel.text =
-//    }
+    //MARK: Methods
+    
+    func setupHeader(date: String) {
+        dateLabel.text = "    \(date)    "
+    }
     
     private func setupUI() {
         self.addSubview(dateLabel)
         self.addSubview(lineFirstView)
         self.addSubview(lineSecondView)
         
-        
         NSLayoutConstraint.activate([
             dateLabel.heightAnchor.constraint(equalToConstant: 24),
-            dateLabel.widthAnchor.constraint(equalToConstant: 100),
             dateLabel.topAnchor.constraint(equalTo: self.topAnchor),
             dateLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             dateLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),

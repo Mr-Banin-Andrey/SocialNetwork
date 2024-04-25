@@ -13,7 +13,7 @@ final class CommentHeader: UIView {
     
     private lazy var avatarImage = AvatarAssembly(size: .sizeThirty, isBorder: false).view()
     
-    private lazy var nameLabel: UILabel = {
+    private lazy var nicknameLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = .interMedium500Font.withSize(12)
         $0.textColor = .textTertiaryColor
@@ -65,9 +65,18 @@ final class CommentHeader: UIView {
     
     //MARK: Methods
     
+    func setupHeader(post: Post) {
+        avatarImage.setupAvatar(post.userCreatedID)
+        nicknameLabel.text = post.nickname
+        professionLabel.text = post.profession
+        photoImage.setupPhoto(post.id)
+        commentTextLabel.text = post.text
+        likeCommentBookmarkView.setupView(post: post)
+    }
+    
     private func setupUI() {
         addSubview(avatarImage)
-        addSubview(nameLabel)
+        addSubview(nicknameLabel)
         addSubview(professionLabel)
         addSubview(photoImage)
         addSubview(commentTextLabel)
@@ -81,10 +90,10 @@ final class CommentHeader: UIView {
             avatarImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             avatarImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),
             
-            nameLabel.topAnchor.constraint(equalTo: self.avatarImage.topAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: self.avatarImage.trailingAnchor, constant: 16),
+            nicknameLabel.topAnchor.constraint(equalTo: self.avatarImage.topAnchor),
+            nicknameLabel.leadingAnchor.constraint(equalTo: self.avatarImage.trailingAnchor, constant: 16),
             
-            professionLabel.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor),
+            professionLabel.topAnchor.constraint(equalTo: self.nicknameLabel.bottomAnchor),
             professionLabel.leadingAnchor.constraint(equalTo: self.avatarImage.trailingAnchor, constant: 16),
             
             photoImage.topAnchor.constraint(equalTo: self.avatarImage.bottomAnchor, constant: 16),

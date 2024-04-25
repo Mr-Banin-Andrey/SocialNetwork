@@ -11,6 +11,8 @@ import UIKit
 
 final class RegistrationViewController: UIViewController, Coordinatable {
     
+    //MARK: Properties
+    
     private let viewModel: RegistrationViewModel
     
     typealias CoordinatorType = AuthenticationCoordinator
@@ -46,19 +48,20 @@ final class RegistrationViewController: UIViewController, Coordinatable {
     }(UILabel())
     
     private lazy var numberText = CustomTextField(
-        placeholder: "+385 _ _ _ -_ _ _-_ _",
+        placeholder: "Ваш номер с +7",
         mode: .forNumber,
         borderColor: UIColor.textAndButtonColor.cgColor,
         keyboardType: .phonePad
     )
-    
+     
     private lazy var confirmationButton = CustomButton(
         title: "ДАЛЕЕ",
         font: .interMedium500Font,
         titleColor: .mainBackgroundColor,
-        backgroundColor: .textAndButtonColor) { [weak self] in
-            self?.viewModel.updateState(with: .openScreenConfirmation)
-        }
+        backgroundColor: .textAndButtonColor
+    ) { [weak self] in
+        self?.viewModel.updateState(with: .openScreenConfirmation(self?.numberText.text ?? ""))
+    }
     
     private lazy var privacyPolicyLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -88,7 +91,6 @@ final class RegistrationViewController: UIViewController, Coordinatable {
         
         self.setupBackButton()
         self.bindViewModel()
-        self.view.backgroundColor = .mainBackgroundColor
         self.setupUI()
     }
     
@@ -100,10 +102,10 @@ final class RegistrationViewController: UIViewController, Coordinatable {
             guard let self = self else { return }
             switch state {
             case .initial:
-                print("initial")
+                break
             case .showOpenConfirmation:
                 guard let coordinator else { return }
-                coordinator.navigateTo(.confirmation(coordinator: coordinator))
+                coordinator.navigateTo(.confirmation(coordinator: coordinator, phone: numberText.text ?? ""))
             }
         }
     }
@@ -115,6 +117,8 @@ final class RegistrationViewController: UIViewController, Coordinatable {
     }
     
     private func setupUI() {
+        self.view.backgroundColor = .mainBackgroundColor
+        
         self.view.addSubview(self.titleLabel)
         self.view.addSubview(self.nameNumberAndExplanationStack)
         self.nameNumberAndExplanationStack.addArrangedSubview(self.nameNumberLabel)

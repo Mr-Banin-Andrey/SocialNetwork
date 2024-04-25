@@ -35,6 +35,14 @@ final class PhotoGalleryViewModel: PhotoGalleryViewModelProtocol {
         }
     }
     
+    var albums: [AlbumCodable]
+    
+    //MARK: Initial
+    
+    init(albums: [AlbumCodable]) {
+        self.albums = albums
+    }
+    
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {

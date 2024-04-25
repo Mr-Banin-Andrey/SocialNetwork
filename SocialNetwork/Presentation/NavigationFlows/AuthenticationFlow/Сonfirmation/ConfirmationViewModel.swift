@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 // MARK: - ConfirmationViewModelProtocol
 
@@ -15,11 +16,12 @@ protocol ConfirmationViewModelProtocol: ViewModelProtocol where State == Confirm
 
 enum ConfirmationState {
     case initial
-    case showUser
+    case tryingToSignIn
+    case showUser(User)
 }
 
 enum ConfirmationViewInput {
-    case registrationOnSocialNetwork // получает юзера
+    case registrationOnSocialNetwork(String)
 }
 
 // MARK: - Associated enums
@@ -36,12 +38,53 @@ final class ConfirmationViewModel: ConfirmationViewModelProtocol {
         }
     }
     
+    @Dependency private var authenticationUseCase: AuthenticationUseCase
+    
+    var phone: String
+    
+    //MARK: Initial
+    
+    init(phone: String) {
+        self.phone = phone
+    }
+    
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {
         switch viewInput {
-        case .registrationOnSocialNetwork:
-            state = .showUser
+        case .registrationOnSocialNetwork(let verificationCode):
+            
+            authenticationUseCase.registrationLogInToAccount(code: verificationCode) { [weak self] result in
+                switch result {
+                case .success(let userID):
+                    
+                    print("userID - ", userID)
+                    self?.authenticationUseCase.fetchUser(userID: userID, completion: { [weak self] result in
+                        switch result {
+                        case .success(let user):
+                            DispatchQueue.main.async {
+                                self?.state = .showUser(user)
+                            }
+                        case .failure(let failure):
+                            if FirestoreService.FirestoreServiceError.notFoundUser == failure {
+                                self?.authenticationUseCase.addNewUser(userID: userID, completion: { [weak self] result in
+                                    switch result {
+                                    case .success(let user):
+                                        DispatchQueue.main.async {
+                                            self?.state = .showUser(user)
+                                        }
+                                    case .failure(let failure):
+                                        print("Error addNewUser: ... \(failure)")
+                                    }
+                                })
+                            }
+                        }
+                    })
+                    
+                case .failure(let failure):
+                    print("Error registrationLogInToAccount: ... \(failure)")
+                }
+            }
         }
     }
     

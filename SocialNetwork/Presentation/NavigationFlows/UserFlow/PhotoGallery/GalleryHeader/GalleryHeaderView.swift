@@ -88,12 +88,7 @@ final class GalleryHeaderView: UIView {
     //MARK: Methods
     
     private func bindViewModel() {
-        viewModel.onStateDidChange = { [weak self] state in
-            switch state {
-            case .initial:
-                break
-            }
-        }
+
     }
     
     private func setupType(type: GalleryHeaderType) {
@@ -142,8 +137,16 @@ final class GalleryHeaderView: UIView {
 extension GalleryHeaderView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        imageCount
-        //TODO: кол-во альбомов/фотографий
+        if !viewModel.albums.isEmpty {
+            switch galleryType {
+            case .album:
+                return viewModel.albums.count
+            case .photosInCollection:
+                return viewModel.albums[0].photos.count
+            }
+        } else {
+            return 1
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -151,8 +154,15 @@ extension GalleryHeaderView: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath)
             return cell
         }
-        //TODO: передать айди альбома/фотографии
-//        cell.setupCell(userID: <#T##String#>)
+
+        if !viewModel.albums.isEmpty {
+            switch galleryType {
+            case .album:
+                cell.setupCell(photoID: viewModel.albums[indexPath.row].id ?? "")
+            case .photosInCollection:
+                cell.setupCell(photoID: viewModel.albums[0].photos[indexPath.row])
+            }
+        }
         return cell
     }
 }
@@ -164,18 +174,5 @@ extension GalleryHeaderView: UICollectionViewDelegateFlowLayout {
 
         let wight = (UIScreen.main.bounds.width - 40) / 3
         return CGSize(width: wight, height: wight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch galleryType {
-        case .album:
-        if let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell {
-//            //TODO: открыть фотки альбома
-            let userID = cell.getPhotoID()
-//            viewModel.updateState(with: .didTapAvatar)
-        }
-        case .photosInCollection:
-            break
-        }
     }
 }

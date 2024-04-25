@@ -24,7 +24,6 @@ final class AvatarView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
-        $0.image = .avatarMockObjectImage
         return $0
     }(UIImageView())
     
@@ -73,7 +72,7 @@ final class AvatarView: UIView {
     //MARK: Methods
     
     func setupAvatar(_ userID: String) {
-        viewModel.updateState(with: .startLoadAvatar(userID))
+        viewModel.updateState(with: .startLoadAvatar(userID, UIImage.logInLogoImage.jpegData(compressionQuality: 1.0) ?? Data()))
     }
     
     private func bindViewModel() {
@@ -83,23 +82,20 @@ final class AvatarView: UIView {
             case .initial:
                 break
             case .loadPicture:
-                break
-//                self.updateViewVisibility(isHidden: true)
-//                self.activityIndicator.updateLoadingAnimation(isLoading: true)
+                self.updateViewVisibility(isHidden: true)
+                self.activityIndicator.updateLoadingAnimation(isLoading: true)
             case .didLoadPicture(let imageData):
-                break
-//                DispatchQueue.main.async {
-//                    self.activityIndicator.updateLoadingAnimation(isLoading: false)
-//                    self.updateViewVisibility(isHidden: false)
-//                    self.pictureImage.image = imageData.image
-//                }
+                DispatchQueue.main.async {
+                    self.activityIndicator.updateLoadingAnimation(isLoading: false)
+                    self.updateViewVisibility(isHidden: false)
+                    self.pictureImage.image = imageData.image
+                }
             case .noAvatar:
-                break
-//                DispatchQueue.main.async {
-//                    self.activityIndicator.updateLoadingAnimation(isLoading: false)
-//                    self.updateViewVisibility(isHidden: false)
-//                    self.profileImageView.image = .profilePlaceholderImage
-//                }
+                DispatchQueue.main.async {
+                    self.activityIndicator.updateLoadingAnimation(isLoading: false)
+                    self.updateViewVisibility(isHidden: false)
+                    self.pictureImage.image = .logInLogoImage
+                }
             }
         }
     }
@@ -130,9 +126,13 @@ final class AvatarView: UIView {
     }
     
     private func setupUI() {
+        self.addSubview(self.activityIndicator)
         self.addSubview(self.pictureImage)
-
+        
         NSLayoutConstraint.activate([
+            self.activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            
             self.pictureImage.topAnchor.constraint(equalTo: self.topAnchor),
             self.pictureImage.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.pictureImage.trailingAnchor.constraint(equalTo: self.trailingAnchor),

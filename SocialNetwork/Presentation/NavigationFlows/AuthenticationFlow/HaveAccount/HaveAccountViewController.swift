@@ -78,15 +78,15 @@ final class HaveAccountViewController: UIViewController, Coordinatable {
     //MARK: Private methods
     
     private func bindViewModel() {
-        viewModel.onStateDidChange = { [weak self] state in
-            guard let self = self else { return }
-            switch state {
-            case .initial:
-                break
-            case .showUser:
-                self.coordinator?.stopUserFlow()
-            }
-        }
+//        viewModel.onStateDidChange = { [weak self] state in
+//            guard let self = self else { return }
+//            switch state {
+//            case .initial:
+//                break
+//            case .showUser:
+//                break
+//            }
+//        }
     }
     
     private func setupBackButton() {
