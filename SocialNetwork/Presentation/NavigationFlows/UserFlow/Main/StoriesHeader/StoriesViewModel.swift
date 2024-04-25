@@ -38,13 +38,13 @@ final class StoriesViewModel: StoriesViewModelProtocol {
     
     @Dependency private var useCase: UserUseCase
     
-    var followingAvatars: [String]
+    var usersID: [String]
     
     
     //MARK: Initial
     
-    init(followingAvatars: [String]) {
-        self.followingAvatars = followingAvatars
+    init(usersID: [String]) {
+        self.usersID = usersID
     }
     
     //MARK: Methods

@@ -10,7 +10,7 @@ import UIKit
 protocol PostCellDelegate: AnyObject {
     func openScreenSubscriber(userID: String)
     func openScreenMenuSheet()
-    func openScreenWholePost()
+    func openScreenWholePost(post: Post)
 }
 
 final class PostCell: UITableViewCell {
@@ -29,7 +29,7 @@ final class PostCell: UITableViewCell {
         titleColor: .textAndButtonColor,
         backgroundColor: .clear
     ) { [weak self] in
-        self?.delegate?.openScreenSubscriber(userID: self?.userCreatedID ?? "")
+        self?.delegate?.openScreenSubscriber(userID: self?.postInCell?.userCreatedID ?? "")
     }
     
     private lazy var professionLabel: UILabel = {
@@ -74,7 +74,8 @@ final class PostCell: UITableViewCell {
         titleColor: .textSecondaryColor,
         backgroundColor: .clear
     ) { [weak self] in
-        self?.delegate?.openScreenWholePost()
+        guard let post = self?.postInCell else {return }
+        self?.delegate?.openScreenWholePost(post: post)
     }
     
     private lazy var pictureImage = PhotoAssembly().view()
@@ -88,7 +89,7 @@ final class PostCell: UITableViewCell {
     
     private lazy var likeCommentBookmarkView = LikeCommentBookmarkView()
     
-    private var userCreatedID: String?
+    private var postInCell: Post?
     
     //MARK: Initial
     
@@ -112,12 +113,11 @@ final class PostCell: UITableViewCell {
         professionLabel.text = post.profession
         textOfPostLabel.text = post.text
         pictureImage.setupPhoto(post.id)
-        userCreatedID = post.userCreatedID
+        self.postInCell = post
         likeCommentBookmarkView.setupView(post: post)
     }
     
     func setupCellForUser() {
-//        avatarView.is
         nameButton.isEnabled = false
     }
     
@@ -190,7 +190,7 @@ final class PostCell: UITableViewCell {
     }
     
     @objc private func didTapOnSubscriber() {
-        guard let userCreatedID = self.userCreatedID else { return }
+        guard let userCreatedID = self.postInCell?.userCreatedID else { return }
         delegate?.openScreenSubscriber(userID: userCreatedID)
     }
 }

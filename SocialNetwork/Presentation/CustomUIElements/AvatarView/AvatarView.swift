@@ -72,7 +72,7 @@ final class AvatarView: UIView {
     //MARK: Methods
     
     func setupAvatar(_ userID: String) {
-        viewModel.updateState(with: .startLoadAvatar(userID))
+        viewModel.updateState(with: .startLoadAvatar(userID, UIImage.logInLogoImage.jpegData(compressionQuality: 1.0) ?? Data()))
     }
     
     private func bindViewModel() {
@@ -126,17 +126,17 @@ final class AvatarView: UIView {
     }
     
     private func setupUI() {
-        self.addSubview(self.pictureImage)
         self.addSubview(self.activityIndicator)
+        self.addSubview(self.pictureImage)
         
         NSLayoutConstraint.activate([
+            self.activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            
             self.pictureImage.topAnchor.constraint(equalTo: self.topAnchor),
             self.pictureImage.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.pictureImage.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             self.pictureImage.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            
-            self.activityIndicator.centerXAnchor.constraint(equalTo: pictureImage.centerXAnchor),
-            self.activityIndicator.centerYAnchor.constraint(equalTo: pictureImage.centerYAnchor),
         ])
     }
 }

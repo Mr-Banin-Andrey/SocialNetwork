@@ -28,6 +28,7 @@ final class CommentCell: UITableViewCell {
         $0.font = .interRegular400Font.withSize(12)
         $0.textColor = .textSecondaryColor
         $0.text = "Очень интересно"
+        $0.numberOfLines = 0
         return $0
     }(UILabel())
     
@@ -79,6 +80,14 @@ final class CommentCell: UITableViewCell {
     
     //MARK: Methods
     
+    func setupCell(comment: CommentCodable) {
+        avatarView.setupAvatar(comment.userCreatedID)
+        nicknameLabel.text = comment.nickname
+        textCommentLabel.text = comment.text
+        dateCommentLabel.text = DateConverter.dateString(from: comment.dateCreated.dateValue())
+        likeLabel.text = "\(comment.likes.count)"
+    }
+    
     private func setupUI() {
         contentView.addSubview(avatarView)
         contentView.addSubview(nicknameLabel)
@@ -99,6 +108,7 @@ final class CommentCell: UITableViewCell {
             
             textCommentLabel.topAnchor.constraint(equalTo: self.nicknameLabel.bottomAnchor, constant: 3),
             textCommentLabel.leadingAnchor.constraint(equalTo: self.avatarView.trailingAnchor, constant: 8),
+            textCommentLabel.trailingAnchor.constraint(equalTo: self.likeStack.leadingAnchor, constant: -8),
             
             dateCommentLabel.topAnchor.constraint(equalTo: self.textCommentLabel.bottomAnchor),
             dateCommentLabel.leadingAnchor.constraint(equalTo: self.avatarView.trailingAnchor, constant: 8),

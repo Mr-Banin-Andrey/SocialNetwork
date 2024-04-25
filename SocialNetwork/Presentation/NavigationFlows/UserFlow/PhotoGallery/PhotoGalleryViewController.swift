@@ -62,14 +62,7 @@ final class PhotoGalleryViewController: UIViewController {
     //MARK: Methods
     
     func bindViewModel() {
-//        viewModel.onStateDidChange = { [weak self] state in
-//            guard let self else { return}
-//
-//            switch state {
-//            case .initial:
-//                break
-//            }
-//        }
+
     }
     
     private func setupNavBar(type: PhotoGalleryType) {
@@ -107,7 +100,7 @@ final class PhotoGalleryViewController: UIViewController {
     }
     
     @objc private func didTapAddPhoto() {
-//        //TODO: добавление картинок
+        
     }
     
     @objc private func comeBack() {
@@ -119,10 +112,10 @@ final class PhotoGalleryViewController: UIViewController {
 
 extension PhotoGalleryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return GalleryHeaderAssembly(galleryType: .album).view()
+        return GalleryHeaderAssembly(galleryType: .album, albums: viewModel.albums).view()
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return GalleryHeaderAssembly(galleryType: .photosInCollection).view()
+        return GalleryHeaderAssembly(galleryType: .photosInCollection, albums: viewModel.albums).view()
     }
 }

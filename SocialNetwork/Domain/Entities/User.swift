@@ -17,6 +17,6 @@ struct User {
     let following: [String]
     let followers: [String]
     let posts: [Post]
-    let photos: [String]
+    let photos: [AlbumCodable]
     let savedPosts: [Post]
 }

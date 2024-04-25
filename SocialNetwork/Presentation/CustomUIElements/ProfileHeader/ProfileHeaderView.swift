@@ -11,7 +11,7 @@ protocol ProfileHeaderViewDelegate: AnyObject {
     func openScreenCreatePost()
     func subscribeToProfile()
     func editProfile()
-    func openScreenGallery()
+    func openScreenGallery(albums: [AlbumCodable])
 }
 
 final class ProfileHeaderView: UIView {
@@ -121,7 +121,7 @@ final class ProfileHeaderView: UIView {
         image: .chevronRightImage,
         tintColor: .textAndButtonColor
     ) { [weak self] in
-        self?.delegate?.openScreenGallery()
+        self?.viewModel.updateState(with: .didTapOpenScreenGallery)
     }
     
     private lazy var layout: UICollectionViewFlowLayout = {
@@ -201,13 +201,15 @@ final class ProfileHeaderView: UIView {
     }
     
     private func bindViewModel() {
-//        viewModel.onStateDidChange = { [weak self] state in
-//            guard let self else { return }
-//            switch state {
-//            case .initial:
-//                break
-//            }
-//        }
+        viewModel.onStateDidChange = { [weak self] state in
+            guard let self else { return }
+            switch state {
+            case .initial:
+                break
+            case .showScreenGallery(let albums):
+                self.delegate?.openScreenGallery(albums: albums)
+            }
+        }
     }
     
     private func setupImage(type: TypeView) {
@@ -286,10 +288,11 @@ final class ProfileHeaderView: UIView {
     
     @objc private func didTapCreatePost() {
         delegate?.openScreenCreatePost()
+//        self?.viewModel.updateState(with: .didTapOpenScreenGallery)
     }
     
     @objc private func didTapOpenGallery() {
-        delegate?.openScreenGallery()
+        self.viewModel.updateState(with: .didTapOpenScreenGallery)
     }
     
 }
@@ -302,7 +305,7 @@ extension ProfileHeaderView: UICollectionViewDataSource {
         if viewModel.user.photos.count == 0 {
             return 5
         }
-        return viewModel.user.photos.count
+        return viewModel.user.photos[0].photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -311,7 +314,7 @@ extension ProfileHeaderView: UICollectionViewDataSource {
             return cell
         }
         if viewModel.user.photos.count != 0 {
-            cell.setupCell(photoID: viewModel.user.photos[indexPath.row])
+            cell.setupCell(photoID: viewModel.user.photos[0].photos[indexPath.row])
         }
         
         return cell

@@ -40,16 +40,53 @@ final class AuthenticationUseCase {
         }
     }
     
-    func fetchUser(userID: String, completionHandler: @escaping (User) -> Void = { _ in }) {
+    func fetchUser(userID: String, completion: @escaping (Result<User, FirestoreService.FirestoreServiceError>) -> Void ) {
         Task {
             do {
-                let userCodable = try await firestoreService.fetchUserData(id: userID, model: UserCodable.self, collections: .users)
-                let postsCodable = try await firestoreService.fetchObjects(givenBy: userCodable.id ?? "", model: PostCodable.self, collection: .posts, field: .userCreatedID)
-                let user = try dataConverter.convert(userCodable, postsCodable)
+                let userCodable = try await firestoreService.fetchObject(id: userID, model: UserCodable.self, collections: .users)
+                let allComments = try await firestoreService.fetchObjects(model: CommentCodable.self, collection: .comments)
+                let posts = try await firestoreService.fetchObjects(givenBy: userID, model: PostCodable.self, collection: .posts, field: .userCreatedID).map { dataConverter.convert($0, allComments)}
                 
-                completionHandler(user)
+                var savedPosts: [PostCodable] = []
+                for postID in userCodable.savedPosts {
+                    let post = try await firestoreService.fetchObject(id: postID, model: PostCodable.self, collections: .posts)
+                    savedPosts.append(post)
+                }
+                
+                var photos: [AlbumCodable] = []
+                for albumID in userCodable.photos {
+                    let album = try await firestoreService.fetchObject(id: albumID, model: AlbumCodable.self, collections: .album)
+                    photos.append(album)
+                }
+                
+                let user = try dataConverter.convert(userCodable, posts, savedPosts.map { dataConverter.convert($0, allComments) }, photos: photos )
+                completion(.success(user))
             } catch {
                 print("error: fetchUser")
+                completion(.failure(.notFoundUser))
+            }
+        }
+    }
+    
+    func addNewUser(userID: String, completion: @escaping (Result<User, FirestoreService.FirestoreServiceError>) -> Void ) {
+        Task {
+            do {
+                let newUserCodable = UserCodable(
+                    id: userID,
+                    nickname: "newUser",
+                    firstName: "Я",
+                    lastName: "Новенький",
+                    profession: "Новичок",
+                    following: [],
+                    followers: [],
+                    posts: [],
+                    photos: [],
+                    savedPosts: [])
+                try await firestoreService.createObjectDocument(userID: userID, newUserCodable, collection: .users)
+                let user = try dataConverter.convert(newUserCodable)
+                completion(.success(user))
+            } catch {
+                completion(.failure(.notFoundUser))
             }
         }
     }

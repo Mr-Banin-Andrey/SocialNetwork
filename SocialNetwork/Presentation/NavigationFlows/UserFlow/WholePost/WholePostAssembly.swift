@@ -9,8 +9,14 @@ import Foundation
 
 final class WholePostAssembly {
     
+    private let post: Post
+    
+    init(post: Post) {
+        self.post = post
+    }
+    
     func viewController() -> WholePostViewController {
-        let viewModel = WholePostViewModel()
+        let viewModel = WholePostViewModel(post: post)
         let viewController = WholePostViewController(viewModel: viewModel)
         return viewController
     }

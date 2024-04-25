@@ -14,11 +14,17 @@ final class FirestoreService {
     enum Collections: String {
         case users
         case posts
+        case comments
+        case album
     }
     
     enum Fields: String {
         case id
         case userCreatedID
+    }
+    
+    enum FirestoreServiceError: Error {
+        case notFoundUser
     }
     
     // MARK: Private properties
@@ -31,7 +37,7 @@ final class FirestoreService {
     
     // MARK: User related methods
     
-    func fetchUserData<T:Codable>(id: String, model: T.Type, collections: Collections) async throws -> T {
+    func fetchObject<T:Codable>(id: String, model: T.Type, collections: Collections) async throws -> T {
         rootCollectionReference = dataBase.collection(collections.rawValue)
         documentReference = rootCollectionReference.document(id)
         let objectCodable = try await documentReference.getDocument(as: T.self)
@@ -43,6 +49,7 @@ final class FirestoreService {
     func fetchObjects<T:Codable>(givenBy id: String = "", model: T.Type, collection: Collections, field: Fields? = .none) async throws -> [T] {
         rootCollectionReference = dataBase.collection(collection.rawValue)
         var querySnapshot: QuerySnapshot
+        
         if let field {
             querySnapshot = try await rootCollectionReference.whereField(field.rawValue, isEqualTo: id).getDocuments()
         } else {
@@ -55,5 +62,9 @@ final class FirestoreService {
             objects.append(object)
         }
         return objects
+    }
+    
+    func createObjectDocument(userID: String, _ model: UserCodable, collection: Collections) async throws  {
+        try dataBase.collection(collection.rawValue).document(userID).setData(from: model)
     }
 }

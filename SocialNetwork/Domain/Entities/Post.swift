@@ -16,10 +16,9 @@ struct Post {
     let profession: String
     let dateCreated: Date
     let userCreatedID: String
-    
     let text: String
     let likes: [String]
-    let comments: [String]
+    let comments: [CommentCodable]
     let savedPost: Bool
     
 }

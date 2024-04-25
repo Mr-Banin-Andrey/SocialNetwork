@@ -43,7 +43,7 @@ final class PhotoView: UIView {
     //MARK: Methods
     
     func setupPhoto(_ photoID: String) {
-        viewModel.updateState(with: .startLoadPhoto(photoID))
+        viewModel.updateState(with: .startLoadPhoto(photoID, UIImage.forGallery.jpegData(compressionQuality: 1.0) ?? Data()))
     }
     
     private func bindViewModel() {
@@ -53,23 +53,20 @@ final class PhotoView: UIView {
             case .initial:
                 break
             case .loadPicture:
-                break
-//                self.updateViewVisibility(isHidden: true)
-//                self.activityIndicator.updateLoadingAnimation(isLoading: true)
+                self.updateViewVisibility(isHidden: true)
+                self.activityIndicator.updateLoadingAnimation(isLoading: true)
             case .didLoadPicture(let imageData):
-                break
-//                DispatchQueue.main.async {
-//                    self.activityIndicator.updateLoadingAnimation(isLoading: false)
-//                    self.updateViewVisibility(isHidden: false)
-//                    self.pictureImage.image = imageData.image
-//                }
+                DispatchQueue.main.async {
+                    self.activityIndicator.updateLoadingAnimation(isLoading: false)
+                    self.updateViewVisibility(isHidden: false)
+                    self.pictureImage.image = imageData.image
+                }
             case .noAvatar:
-                break
-//                DispatchQueue.main.async {
-//                    self.activityIndicator.updateLoadingAnimation(isLoading: false)
-//                    self.updateViewVisibility(isHidden: false)
-//                    self.profileImageView.image = .giraffeMockObjectImage
-//                }
+                DispatchQueue.main.async {
+                    self.activityIndicator.updateLoadingAnimation(isLoading: false)
+                    self.updateViewVisibility(isHidden: false)
+                    self.pictureImage.image = .forPostMockObjectImage
+                }
             }
         }
     }
@@ -80,9 +77,13 @@ final class PhotoView: UIView {
     }
     
     private func setupUI() {
+        self.addSubview(self.activityIndicator)
         self.addSubview(self.pictureImage)
 
         NSLayoutConstraint.activate([
+            self.activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            
             self.pictureImage.topAnchor.constraint(equalTo: self.topAnchor),
             self.pictureImage.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.pictureImage.trailingAnchor.constraint(equalTo: self.trailingAnchor),

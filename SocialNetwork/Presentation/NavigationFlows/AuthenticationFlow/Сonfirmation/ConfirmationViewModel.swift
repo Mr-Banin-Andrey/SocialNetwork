@@ -53,17 +53,32 @@ final class ConfirmationViewModel: ConfirmationViewModelProtocol {
     func updateState(with viewInput: ViewInput) {
         switch viewInput {
         case .registrationOnSocialNetwork(let verificationCode):
-//            state = .tryingToSignIn
             
-            authenticationUseCase.registrationLogInToAccount(code: verificationCode) { [weak self] (result: Result<String, AuthenticationService.AuthenticationError>) in
+            authenticationUseCase.registrationLogInToAccount(code: verificationCode) { [weak self] result in
                 switch result {
                 case .success(let userID):
-                    self?.authenticationUseCase.fetchUser(userID: userID, completionHandler: { [weak self] user in
-                        
-                        DispatchQueue.main.async {
-                            self?.state = .showUser(user)
+                    
+                    print("userID - ", userID)
+                    self?.authenticationUseCase.fetchUser(userID: userID, completion: { [weak self] result in
+                        switch result {
+                        case .success(let user):
+                            DispatchQueue.main.async {
+                                self?.state = .showUser(user)
+                            }
+                        case .failure(let failure):
+                            if FirestoreService.FirestoreServiceError.notFoundUser == failure {
+                                self?.authenticationUseCase.addNewUser(userID: userID, completion: { [weak self] result in
+                                    switch result {
+                                    case .success(let user):
+                                        DispatchQueue.main.async {
+                                            self?.state = .showUser(user)
+                                        }
+                                    case .failure(let failure):
+                                        print("Error addNewUser: ... \(failure)")
+                                    }
+                                })
+                            }
                         }
-                        
                     })
                     
                 case .failure(let failure):

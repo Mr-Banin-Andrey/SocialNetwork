@@ -18,7 +18,7 @@ enum MainState {
     case initial
     case openScreenSubscriber(User)
     case openScreenMenu
-    case openScreenPost
+    case openScreenPost(Post)
     case showPostsForUser
     case showAllPosts
 }
@@ -27,7 +27,7 @@ enum MainViewInput {
     case startLoadPosts
     case didTapOpenSubscriberProfile(String)
     case didTapOpenMenu
-    case didTapOpenPost
+    case didTapOpenPost(Post)
     case didTapPostsForUser
     case didTapAllPosts
 }
@@ -52,7 +52,9 @@ final class MainViewModel: MainViewModelProtocol {
     
     var user: User
     var posts: [(date: Date, posts: [Post])] = []
-
+    var usersID: [String] = []
+    
+    
     //MARK: Initial
     
     init(user: User) {
@@ -65,22 +67,30 @@ final class MainViewModel: MainViewModelProtocol {
         switch viewInput {
             
         case .startLoadPosts:
-            useCase.fetchPosts(following: user.following) { [weak self] allPosts, postsForUser in
+            useCase.fetchPosts() { [weak self] allPosts in
                 guard let self else { return }
                 self.allPosts = allPosts.sorted(by: { $0.dateCreated < $1.dateCreated })
-                self.postsForUser = postsForUser.sorted(by: { $0.dateCreated < $1.dateCreated })
+                let users = Set(allPosts.map { $0.userCreatedID })
+                usersID = Array(users)
+                
+                var forUser: [Post] = []
+                for postID in user.following {
+                    let posts = allPosts.filter { $0.userCreatedID == postID }
+                    forUser += posts
+                }
+                
+                self.postsForUser = forUser.sorted(by: { $0.dateCreated < $1.dateCreated })
                 
                 DispatchQueue.main.async {
                     self.posts = GroupingForPosts.groupByDate(self.allPosts)
                     self.state = .showAllPosts
                 }
             }
-            
+
         case .didTapOpenSubscriberProfile(let userID):
 
             if userID != user.id {
                 let posts = allPosts.filter { $0.userCreatedID == userID}
-                
                 useCase.fetchUser(userID: userID, posts: posts) { [weak self] user in
                     DispatchQueue.main.async {
                         self?.state = .openScreenSubscriber(user)
@@ -90,8 +100,8 @@ final class MainViewModel: MainViewModelProtocol {
             
         case .didTapOpenMenu:
             state = .openScreenMenu
-        case .didTapOpenPost:
-            state = .openScreenPost
+        case .didTapOpenPost(let post):
+            state = .openScreenPost(post)
         case .didTapAllPosts:
             posts = GroupingForPosts.groupByDate(self.allPosts)
             state = .showAllPosts

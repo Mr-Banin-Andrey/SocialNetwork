@@ -22,7 +22,6 @@ final class CloudStorageService {
     enum Constants: String {
         case userAvatars
         case userGallery
-        case photoPost
     }
 }
 

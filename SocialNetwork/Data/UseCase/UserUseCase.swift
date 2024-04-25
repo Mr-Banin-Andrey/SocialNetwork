@@ -21,15 +21,30 @@ final class UserUseCase {
     func fetchUser(userID: String, posts: [Post] = [], completionHandler: @escaping (User) -> Void = { _ in }) {
         Task {
             do {
-                let userCodable = try await firestoreService.fetchUserData(id: userID, model: UserCodable.self, collections: .users)
+                let userCodable = try await firestoreService.fetchObject(id: userID, model: UserCodable.self, collections: .users)
                 
                 if posts.isEmpty {
-                    let postCodable = try await firestoreService.fetchObjects(givenBy: userID, model: PostCodable.self, collection: .posts, field: .userCreatedID)
-                    let user = try dataConverter.convert(userCodable, postCodable)
+                    let allComments = try await firestoreService.fetchObjects(model: CommentCodable.self, collection: .comments)
+                    let postsCodable = try await firestoreService.fetchObjects(givenBy: userID, model: PostCodable.self, collection: .posts, field: .userCreatedID).map { dataConverter.convert($0, allComments)}
+                    
+                    var photos: [AlbumCodable] = []
+                    for albumID in userCodable.photos {
+                        let album = try await firestoreService.fetchObject(id: albumID, model: AlbumCodable.self, collections: .album)
+                        photos.append(album)
+                    }
+                    
+                    let user = try dataConverter.convert(userCodable, postsCodable, photos: photos)
                     completionHandler(user)
                     
                 } else {
-                    let user = try dataConverter.convert(userCodable, posts)
+                    
+                    var photos: [AlbumCodable] = []
+                    for albumID in userCodable.photos {
+                        let album = try await firestoreService.fetchObject(id: albumID, model: AlbumCodable.self, collections: .album)
+                        photos.append(album)
+                    }
+                    
+                    let user = try dataConverter.convert(userCodable, posts, photos: photos)
                     completionHandler(user)
                 }
                 
@@ -39,17 +54,13 @@ final class UserUseCase {
         }
     }
     
-    func fetchPosts(following: [String], completionHandler: @escaping ([Post], [Post]) -> Void = { _,_ in }) {
+    func fetchPosts(completionHandler: @escaping ([Post]) -> Void = { _ in }) {
         Task {
             do {
-                let allPosts = try await firestoreService.fetchObjects(model: PostCodable.self, collection: .posts).map { dataConverter.convert($0)}
-                var postsForUser: [Post] = []
-                for id in following {
-                    let posts = try await firestoreService.fetchObjects(givenBy: id, model: PostCodable.self, collection: .posts, field: .userCreatedID).map { dataConverter.convert($0)}
-                    postsForUser += posts
-                }
-                
-                completionHandler(allPosts, postsForUser)
+                let allComments = try await firestoreService.fetchObjects(model: CommentCodable.self, collection: .comments)
+                let allPosts = try await firestoreService.fetchObjects(model: PostCodable.self, collection: .posts).map { dataConverter.convert($0, allComments)}
+            
+                completionHandler(allPosts)
             } catch {
                 print("error: fetchPosts")
             }
@@ -57,18 +68,28 @@ final class UserUseCase {
     }
     
     func fetchImageData(imageID: String, basePath: CloudStorageService.Constants, completion: @escaping (Result<Data, Error>) -> Void = { _ in }) {
-        if let imageData = imageCacheService.getImageFromCache(idImage: imageID) {
+        if let imageData = imageCacheService.getImageFromCache(imageID: imageID) {
             completion(.success(imageData))
         } else {
             Task {
                 do {
                     let imageData = try await cloudStorageService.downloadFile(basePath: basePath, pathString: imageID)
-                    try imageCacheService.add(imageData: imageData, idImage: imageID)
+                    try imageCacheService.add(imageData: imageData, imageID: imageID)
                     
                     completion(.success(imageData))
                 } catch {
                     completion(.failure(error))
                 }
+            }
+        }
+    }
+    
+    func addImageInCache(image: Data, imageID: String) {
+        Task {
+            do {
+                try imageCacheService.add(imageData: image, imageID: imageID)
+            } catch {
+                print(">>>... error add in cache")
             }
         }
     }

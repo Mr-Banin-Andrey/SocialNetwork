@@ -50,14 +50,7 @@ final class SavedViewController: UIViewController, Coordinatable {
     //MARK: Methods
     
     func bindViewModel() {
-//        viewModel.onStateDidChange = { [weak self] state in
-//            guard let self else { return}
-//
-//            switch state {
-//            case .initial:
-//                break
-//            }
-//        }
+
     }
     
     
@@ -80,19 +73,23 @@ final class SavedViewController: UIViewController, Coordinatable {
 extension SavedViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        3
+        return viewModel.posts.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        let postsCount = viewModel.posts[section].posts.count
+        return postsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCell.reuseID, for: indexPath) as? PostCell else {
             return UITableViewCell()
         }
+
         cell.delegate = self
         cell.setupCellForUser()
+        let post = viewModel.posts[indexPath.section].posts[indexPath.row]
+        cell.setupCell(post: post)
         return cell
     }
 }
@@ -102,6 +99,8 @@ extension SavedViewController: UITableViewDataSource {
 extension SavedViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: DateHeader.reuseID) as? DateHeader else { return nil }
+        let date = viewModel.posts[section].date
+        header.setupHeader(date: DateConverter.dateString(from: date))
         return header
     }
     
@@ -122,8 +121,8 @@ extension SavedViewController: PostCellDelegate {
         return
     }
     
-    func openScreenWholePost() {
-        let wholePost = WholePostAssembly().viewController()
+    func openScreenWholePost(post: Post) {
+        let wholePost = WholePostAssembly(post: post).viewController()
         navigationController?.pushViewController(wholePost, animated: true)
     }
 }

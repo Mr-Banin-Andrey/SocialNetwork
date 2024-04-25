@@ -15,10 +15,15 @@ protocol SubscriberViewModelProtocol: ViewModelProtocol where State == Subscribe
 
 enum SubscriberState {
     case initial
+    case openScreenMenu
+    case openScreenPost(Post)
+    case openScreenGallery([AlbumCodable])
 }
 
 enum SubscriberViewInput {
-    
+    case didTapOpenMenu
+    case didTapOpenPost(Post)
+    case didTapOpenGallery([AlbumCodable])
 }
 
 // MARK: - SubscriberViewModel
@@ -50,7 +55,14 @@ final class SubscriberViewModel: SubscriberViewModelProtocol {
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {
-
+        switch viewInput {
+        case .didTapOpenMenu:
+            state = .openScreenMenu
+        case .didTapOpenPost(let post):
+            state = .openScreenPost(post)
+        case .didTapOpenGallery(let albums):
+            state = .openScreenGallery(albums)
+        }
     }
     
 }

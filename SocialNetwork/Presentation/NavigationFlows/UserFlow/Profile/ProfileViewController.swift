@@ -58,14 +58,23 @@ final class ProfileViewController: UIViewController, Coordinatable {
     //MARK: Methods
     
     func bindViewModel() {
-//        viewModel.onStateDidChange = { [weak self] state in
-//            guard let self else { return}
-//
-//            switch state {
-//            case .initial:
-//                break
-//            }
-//        }
+        viewModel.onStateDidChange = { [weak self] state in
+            guard let self else { return}
+
+            switch state {
+            case .initial:
+                break
+            case .openScreenMenu:
+                let settings = SettingsSheetAssembly().viewController()
+                present(settings, animated: true)
+            case .openScreenPost(let post):
+                let wholePost = WholePostAssembly(post: post).viewController()
+                navigationController?.pushViewController(wholePost, animated: true)
+            case .openScreenGallery(let albums):
+                let gallery = PhotoGalleryAssembly(photoGalleryType: .forUser, albums: albums).viewController()
+                navigationController?.pushViewController(gallery, animated: true)
+            }
+        }
     }
     
     private func setupNavBar() {
@@ -102,7 +111,7 @@ extension ProfileViewController: UITableViewDataSource {
         if viewModel.posts.count != 0 {
             return viewModel.posts.count + 1
         }
-        return 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -131,7 +140,12 @@ extension ProfileViewController: UITableViewDelegate {
         switch section {
         case 0:
             let view = ProfileHeaderAssembly(type: .profileView, user: viewModel.user).view()
-            view.setupHeader(numberOfPhoto: viewModel.user.photos.count)
+            if !viewModel.user.photos.isEmpty {
+                view.setupHeader(numberOfPhoto: viewModel.user.photos[0].photos.count)
+            } else {
+                view.setupHeader(numberOfPhoto: 0)
+            }
+            
             view.delegate = self
             return view
         default:
@@ -156,9 +170,9 @@ extension ProfileViewController: UITableViewDelegate {
 //MARK: - ProfileHeaderViewDelegate
 
 extension ProfileViewController: ProfileHeaderViewDelegate {
-    func openScreenGallery() {
-        let gallery = PhotoGalleryAssembly(photoGalleryType: .forUser).viewController()
-        navigationController?.pushViewController(gallery, animated: true)
+        
+    func openScreenGallery(albums: [AlbumCodable]) {
+        viewModel.updateState(with: .didTapOpenGallery(albums))
     }
     
     func openScreenCreatePost() {
@@ -183,13 +197,11 @@ extension ProfileViewController: PostCellDelegate {
     }
     
     func openScreenMenuSheet() {
-        let settings = SettingsSheetAssembly().viewController()
-        present(settings, animated: true)
+        viewModel.updateState(with: .didTapOpenMenu)
     }
     
-    func openScreenWholePost() {
-        let wholePost = WholePostAssembly().viewController()
-        navigationController?.pushViewController(wholePost, animated: true)
+    func openScreenWholePost(post: Post) {
+        viewModel.updateState(with: .didTapOpenPost(post))
     }
 }
 

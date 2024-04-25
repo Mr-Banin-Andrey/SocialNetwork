@@ -48,7 +48,7 @@ final class RegistrationViewController: UIViewController, Coordinatable {
     }(UILabel())
     
     private lazy var numberText = CustomTextField(
-        placeholder: "+385 _ _ _ -_ _ _-_ _",
+        placeholder: "Ваш номер с +7",
         mode: .forNumber,
         borderColor: UIColor.textAndButtonColor.cgColor,
         keyboardType: .phonePad

@@ -9,14 +9,14 @@ import Foundation
 
 final class StoriesAssembly {
     
-    private var followingAvatars: [String]
+    private var usersID: [String]
     
-    init(followingAvatars: [String]) {
-        self.followingAvatars = followingAvatars
+    init(usersID: [String]) {
+        self.usersID = usersID
     }
     
     func view() -> StoriesView {
-        let viewModel = StoriesViewModel(followingAvatars: followingAvatars)
+        let viewModel = StoriesViewModel(usersID: usersID)
         let view = StoriesView(viewModel: viewModel)
         return view
     }

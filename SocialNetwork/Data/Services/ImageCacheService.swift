@@ -8,8 +8,8 @@
 import Foundation
 
 protocol ImageCacheServiceProtocol {
-    func add(imageData: Data, idImage: String) throws
-    func getImageFromCache(idImage: String) -> Data?
+    func add(imageData: Data, imageID: String) throws
+    func getImageFromCache(imageID: String) -> Data?
 }
 
 final class ImageCacheService {
@@ -20,17 +20,17 @@ final class ImageCacheService {
 
 extension ImageCacheService: ImageCacheServiceProtocol {
     
-    func add(imageData: Data, idImage: String) throws {
+    func add(imageData: Data, imageID: String) throws {
         
-        imagesCache.setObject(imageData as NSData, forKey: idImage as NSString)
+        imagesCache.setObject(imageData as NSData, forKey: imageID as NSString)
         
-        guard let _ = imagesCache.object(forKey: idImage as NSString) else {
+        guard let _ = imagesCache.object(forKey: imageID as NSString) else {
             throw ImageRepositoryError.unsuccessfulAdditionToCache
         }
     }
     
-    func getImageFromCache(idImage: String) -> Data? {
-        if let imageData = imagesCache.object(forKey: idImage as NSString) {
+    func getImageFromCache(imageID: String) -> Data? {
+        if let imageData = imagesCache.object(forKey: imageID as NSString) {
             return imageData as Data
         } else {
             return nil

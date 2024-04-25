@@ -58,14 +58,23 @@ final class SubscriberViewController: UIViewController, Coordinatable {
     //MARK: Methods
     
     func bindViewModel() {
-//        viewModel.onStateDidChange = { [weak self] state in
-//            guard let self else { return}
-//
-//            switch state {
-//            case .initial:
-//                break
-//            }
-//        }
+        viewModel.onStateDidChange = { [weak self] state in
+            guard let self else { return}
+
+            switch state {
+            case .initial:
+                break
+            case .openScreenMenu:
+                let settings = SettingsSheetAssembly().viewController()
+                present(settings, animated: true)
+            case .openScreenPost(let post):
+                let wholePost = WholePostAssembly(post: post).viewController()
+                navigationController?.pushViewController(wholePost, animated: true)
+            case .openScreenGallery(let albums):
+                let gallery = PhotoGalleryAssembly(photoGalleryType: .forUser, albums: albums).viewController()
+                navigationController?.pushViewController(gallery, animated: true)
+            }
+        }
     }
     
     private func setupNavBar() {
@@ -161,9 +170,9 @@ extension SubscriberViewController: UITableViewDelegate {
 //MARK: - SubscriberHeaderViewDelegate
 
 extension SubscriberViewController: ProfileHeaderViewDelegate {
-    func openScreenGallery() {
-        let gallery = PhotoGalleryAssembly(photoGalleryType: .forSubscriber).viewController()
-        navigationController?.pushViewController(gallery, animated: true)
+    
+    func openScreenGallery(albums: [AlbumCodable]) {
+        viewModel.updateState(with: .didTapOpenGallery(albums))
     }
     
     func openScreenCreatePost() {
@@ -188,13 +197,11 @@ extension SubscriberViewController: PostCellDelegate {
     }
     
     func openScreenMenuSheet() {
-        let settings = SettingsSheetAssembly().viewController()
-        present(settings, animated: true)
+        viewModel.updateState(with: .didTapOpenMenu)
     }
     
-    func openScreenWholePost() {
-        let wholePost = WholePostAssembly().viewController()
-        navigationController?.pushViewController(wholePost, animated: true)
+    func openScreenWholePost(post: Post) {
+        viewModel.updateState(with: .didTapOpenPost(post))
     }
     
 }

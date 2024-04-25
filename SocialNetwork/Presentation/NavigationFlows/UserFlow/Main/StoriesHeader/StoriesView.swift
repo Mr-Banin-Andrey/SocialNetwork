@@ -79,7 +79,7 @@ final class StoriesView: UIView {
 extension StoriesView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.followingAvatars.count
+        viewModel.usersID.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -88,7 +88,7 @@ extension StoriesView: UICollectionViewDataSource {
             return cell
         }
 
-        cell.setupCell(userID: viewModel.followingAvatars[indexPath.item])
+        cell.setupCell(userID: viewModel.usersID[indexPath.item])
         return cell
     }
 }

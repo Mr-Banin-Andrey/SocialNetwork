@@ -37,10 +37,14 @@ final class SavedViewModel: SavedViewModelProtocol {
     
     var user: User
     
+    var posts: [(date: Date, posts: [Post])] = []
+    
     //MARK: Initial
     
     init(user: User) {
         self.user = user
+        
+        posts = GroupingForPosts.groupByDate(user.savedPosts)        
     }
     
     //MARK: Methods

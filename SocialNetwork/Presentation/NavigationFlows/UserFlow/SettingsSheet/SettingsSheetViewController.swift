@@ -72,14 +72,7 @@ final class SettingsSheetViewController: UIViewController {
     //MARK: Methods
     
     func bindViewModel() {
-//        viewModel.onStateDidChange = { [weak self] state in
-//            guard let self else { return}
-//
-//            switch state {
-//            case .initial:
-//                break
-//            }
-//        }
+
     }
     
     private func sheetPresentationController() {

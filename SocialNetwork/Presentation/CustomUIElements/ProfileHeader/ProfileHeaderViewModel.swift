@@ -15,11 +15,11 @@ protocol ProfileHeaderViewModelProtocol: ViewModelProtocol where State == Profil
 
 enum ProfileHeaderState {
     case initial
-    
+    case showScreenGallery([AlbumCodable])
 }
 
 enum ProfileHeaderViewInput {
-    
+    case didTapOpenScreenGallery
 }
 
 // MARK: - ProfileHeaderViewModel
@@ -45,7 +45,10 @@ final class ProfileHeaderViewModel: ProfileHeaderViewModelProtocol {
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {
-        
+        switch viewInput {
+        case .didTapOpenScreenGallery:
+            state = .showScreenGallery(user.photos)
+        }
     }
     
 }

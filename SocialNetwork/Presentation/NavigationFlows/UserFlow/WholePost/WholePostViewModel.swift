@@ -35,10 +35,18 @@ final class WholePostViewModel: WholePostViewModelProtocol {
         }
     }
     
+    var post: Post
+    
+    //MARK: Initial
+    
+    init(post: Post) {
+        self.post = post
+    }
+    
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {
-
+        
     }
     
 }

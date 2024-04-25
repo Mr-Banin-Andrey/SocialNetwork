@@ -99,8 +99,8 @@ final class MainViewController: UIViewController, Coordinatable {
             case .openScreenMenu:
                 let settings = SettingsSheetAssembly().viewController()
                 present(settings, animated: true)
-            case .openScreenPost:
-                let wholePost = WholePostAssembly().viewController()
+            case .openScreenPost(let post):
+                let wholePost = WholePostAssembly(post: post).viewController()
                 navigationController?.pushViewController(wholePost, animated: true)
                 
             case .showAllPosts:
@@ -177,7 +177,7 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
-            let stories = StoriesAssembly(followingAvatars: viewModel.user.following).view()
+            let stories = StoriesAssembly(usersID: viewModel.usersID).view()
             stories.coordinator = coordinator
             return stories
         default:
@@ -210,7 +210,7 @@ extension MainViewController: PostCellDelegate {
         viewModel.updateState(with: .didTapOpenMenu)
     }
     
-    func openScreenWholePost() {
-        viewModel.updateState(with: .didTapOpenPost)
+    func openScreenWholePost(post: Post) {
+        viewModel.updateState(with: .didTapOpenPost(post))
     }
 }

@@ -62,14 +62,7 @@ final class WholePostViewController: UIViewController {
     //MARK: Methods
     
     func bindViewModel() {
-//        viewModel.onStateDidChange = { [weak self] state in
-//            guard let self else { return}
-//
-//            switch state {
-//            case .initial:
-//                break
-//            }
-//        }
+
     }
     
     private func setupNavBar() {
@@ -122,7 +115,7 @@ final class WholePostViewController: UIViewController {
 extension WholePostViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return viewModel.post.comments.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -130,6 +123,8 @@ extension WholePostViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
+        let comment = viewModel.post.comments[indexPath.row]
+        cell.setupCell(comment: comment)
         return cell
     }
 }
@@ -138,6 +133,8 @@ extension WholePostViewController: UITableViewDataSource {
 
 extension WholePostViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return CommentHeader()
+        let header = CommentHeader()
+        header.setupHeader(post: viewModel.post)
+        return header
     }
 }

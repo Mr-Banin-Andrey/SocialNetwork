@@ -39,7 +39,7 @@ final class ConfirmationViewController: UIViewController, Coordinatable {
     }(UILabel())
     
     private lazy var codText = CustomTextField(
-        placeholder: "_ _ _ -_ _ _-_ _ ",
+        placeholder: "Введите код из СМС",
         mode: .forCode,
         borderColor: UIColor.textAndButtonColor.cgColor
     )

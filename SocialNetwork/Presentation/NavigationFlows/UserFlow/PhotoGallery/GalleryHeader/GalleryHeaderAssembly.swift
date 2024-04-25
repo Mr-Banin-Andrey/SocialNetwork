@@ -10,13 +10,16 @@ import Foundation
 final class GalleryHeaderAssembly {
     
     private let galleryType: GalleryHeaderView.GalleryHeaderType
+    private var albums: [AlbumCodable]
     
-    init(galleryType: GalleryHeaderView.GalleryHeaderType) {
+    
+    init(galleryType: GalleryHeaderView.GalleryHeaderType, albums: [AlbumCodable]) {
         self.galleryType = galleryType
+        self.albums = albums
     }
     
     func view() -> GalleryHeaderView {
-        let viewModel = GalleryHeaderViewModel()
+        let viewModel = GalleryHeaderViewModel(albums: albums)
         let view = GalleryHeaderView(viewModel: viewModel, galleryType: galleryType)
         return view
     }

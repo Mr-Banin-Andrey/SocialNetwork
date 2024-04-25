@@ -22,6 +22,7 @@ extension UIImage {
                 return nil
             }
             if (CGFloat(jpegData.count) < maxSizeInBytes)  {
+                
                 return jpegData
             }
             compressionQuality -= 0.1
