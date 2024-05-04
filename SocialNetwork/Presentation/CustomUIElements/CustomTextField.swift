@@ -12,20 +12,17 @@ import IQKeyboardManagerSwift
 
 final class CustomTextField: UITextField {
     
-    enum Mode: CGFloat {
-        case forNumber = 165
-        case forCode = 120
-        case onlyPlaceholder
+    enum Mode {
+        case forAll
         case forComment
     }
     
     // MARK: Private properties
     
     private var edgeInsets = UIEdgeInsets()
-    private var mode: Mode = .onlyPlaceholder
-    private var textIndentation: CGFloat = 0
+    private var mode: Mode = .forAll
         
-    private let onlyPlaceholder = UIEdgeInsets(top: 11, left: 20, bottom: 11, right: 20)
+    private let onlyPlaceholder = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
     
     private lazy var paperclipBackgroundView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +47,8 @@ final class CustomTextField: UITextField {
         mode: Mode,
         borderColor: CGColor = UIColor.clear.cgColor,
         keyboardType: UIKeyboardType = .default,
-        backgroundColor: UIColor? = .clear
+        backgroundColor: UIColor? = .clear,
+        isSecureTextEntry: Bool = false
     ) {
         self.mode = mode
         super.init(frame: .zero)
@@ -59,8 +57,10 @@ final class CustomTextField: UITextField {
         self.keyboardType = keyboardType
         self.layer.borderColor = borderColor
         self.backgroundColor = backgroundColor
+        self.isSecureTextEntry = isSecureTextEntry
         self.setupMode(self.mode)
         self.setup()
+        self.font = .interMedium500Font
         
         IQKeyboardManager.shared.toolbarTintColor = .textAndButtonColor
         IQKeyboardManager.shared.toolbarBarTintColor = .mainBackgroundColor
@@ -74,36 +74,20 @@ final class CustomTextField: UITextField {
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         let rect = super.textRect(forBounds: bounds)
-        return rect.inset(by: edgeInsets)
+        return rect.inset(by: onlyPlaceholder)
     }
    
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
         let rect = super.editingRect(forBounds: bounds)
-        return rect.inset(by: edgeInsets)
-    }
-    
-    // MARK: Public methods
-
-    func countIndents() -> CGFloat {
-        let textIndentation = ((UIScreen.main.bounds.width - mode.rawValue) / 2) / 2
-        return textIndentation
+        return rect.inset(by: onlyPlaceholder)
     }
     
     // MARK: Private methods
     
     private func setupMode(_ mode: Mode) {
         switch mode {
-        case .forNumber:
-            self.edgeInsets = countIndents()
-            self.font = .interMedium500Font
+        case .forAll:
             setupLayer()
-        case .forCode:
-            self.edgeInsets = countIndents()
-            self.font = .interMedium500Font
-            setupLayer()
-        case .onlyPlaceholder:
-            self.edgeInsets = onlyPlaceholder
-            setupLayer() 
         case .forComment:
             paperclipBackgroundView.addSubview(paperclipImage)
             paperclipImage.centerYAnchor.constraint(equalTo: self.paperclipBackgroundView.centerYAnchor).isActive = true
@@ -126,21 +110,13 @@ final class CustomTextField: UITextField {
         self.attributedPlaceholder = attributedTitle
     }
     
-    private func countIndents() -> UIEdgeInsets {
-        return UIEdgeInsets(top: 14.5, left: countIndents(), bottom: 14.5, right: countIndents())
-    }
-    
     private func setup() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.delegate = self
+        self.heightAnchor.constraint(equalToConstant: 48).isActive = true
     }
     
     private func setupLayer() {
         self.layer.cornerRadius = 10
         self.layer.borderWidth = 1
     }
-}
-
-extension CustomTextField: UITextFieldDelegate {
-    
 }

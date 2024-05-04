@@ -117,6 +117,8 @@
 		9DCAC4EA2B4D82CC0040C327 /* UILabelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4E92B4D82CC0040C327 /* UILabelExt.swift */; };
 		9DCAC4ED2B4D96130040C327 /* HaveAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4EC2B4D96130040C327 /* HaveAccountViewController.swift */; };
 		9DCAC4F12B4D96280040C327 /* HaveAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4F02B4D96280040C327 /* HaveAccountViewModel.swift */; };
+		9DCF411F2BE6A74A0058214B /* ValidationCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF411E2BE6A74A0058214B /* ValidationCheck.swift */; };
+		9DCF41212BE6B0EA0058214B /* UIViewController+PresentAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41202BE6B0EA0058214B /* UIViewController+PresentAlert.swift */; };
 		9DDBF07C2BD62D5700000863 /* CommentCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF07B2BD62D5700000863 /* CommentCodable.swift */; };
 		9DDBF07E2BD982D200000863 /* AlbumCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF07D2BD982D200000863 /* AlbumCodable.swift */; };
 		9DDBF0812BDAC7F100000863 /* FIRIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF0802BDAC7F100000863 /* FIRIdentifiable.swift */; };
@@ -246,6 +248,8 @@
 		9DCAC4E92B4D82CC0040C327 /* UILabelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExt.swift; sourceTree = "<group>"; };
 		9DCAC4EC2B4D96130040C327 /* HaveAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaveAccountViewController.swift; sourceTree = "<group>"; };
 		9DCAC4F02B4D96280040C327 /* HaveAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaveAccountViewModel.swift; sourceTree = "<group>"; };
+		9DCF411E2BE6A74A0058214B /* ValidationCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationCheck.swift; sourceTree = "<group>"; };
+		9DCF41202BE6B0EA0058214B /* UIViewController+PresentAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PresentAlert.swift"; sourceTree = "<group>"; };
 		9DDBF07B2BD62D5700000863 /* CommentCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCodable.swift; sourceTree = "<group>"; };
 		9DDBF07D2BD982D200000863 /* AlbumCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCodable.swift; sourceTree = "<group>"; };
 		9DDBF0802BDAC7F100000863 /* FIRIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRIdentifiable.swift; sourceTree = "<group>"; };
@@ -377,6 +381,7 @@
 				9D41B9152BD5623C002CBAA8 /* DateConverter.swift */,
 				9D41B9132BD557D8002CBAA8 /* GroupingForPosts.swift */,
 				9D9E9CC92BC2C54600593B73 /* StringConverter.swift */,
+				9DCF411E2BE6A74A0058214B /* ValidationCheck.swift */,
 				9D646A9F2B48582100C0B2D3 /* UIColor.swift */,
 				9D646AA52B48596E00C0B2D3 /* UIFont.swift */,
 				9D646AA32B48594B00C0B2D3 /* UIImage.swift */,
@@ -392,6 +397,7 @@
 				9D7FCBE42BB60C4B001546FC /* UIActivityIndicatorViewExt.swift */,
 				9D831D652BBDF9E800E4E8A9 /* UIViewExt.swift */,
 				9D41B9172BD57327002CBAA8 /* UIImage+JPEGData.swift */,
+				9DCF41202BE6B0EA0058214B /* UIViewController+PresentAlert.swift */,
 			);
 			path = UIExtensions;
 			sourceTree = "<group>";
@@ -871,6 +877,7 @@
 			files = (
 				9D59C4D02BCC27F100EB835C /* UserCodables.swift in Sources */,
 				9D9E9CB42BBF2BC600593B73 /* CommentCell.swift in Sources */,
+				9DCF411F2BE6A74A0058214B /* ValidationCheck.swift in Sources */,
 				9DCAC4DE2B4D72BF0040C327 /* RegistrationViewModel.swift in Sources */,
 				9D3994DD2BA09A52009F894A /* Coordinatable.swift in Sources */,
 				9D41B9162BD5623C002CBAA8 /* DateConverter.swift in Sources */,
@@ -891,6 +898,7 @@
 				9D6BE4372BA6C70500462B12 /* ProfileCoordinator.swift in Sources */,
 				9D6BE4352BA6BF1F00462B12 /* UserTabBar.swift in Sources */,
 				9D3994E32BA0ACB6009F894A /* NavigationFlowType.swift in Sources */,
+				9DCF41212BE6B0EA0058214B /* UIViewController+PresentAlert.swift in Sources */,
 				9D41B91C2BD58665002CBAA8 /* ImageCacheService.swift in Sources */,
 				9D41B91A2BD57A59002CBAA8 /* Data+Image.swift in Sources */,
 				9D6BE43F2BA6C89300462B12 /* SavedCoordinator.swift in Sources */,

@@ -100,7 +100,7 @@ final class LogInViewController: UIViewController, Coordinatable {
         self.view.addSubview(self.uiStack)
         self.uiStack.addArrangedSubview(self.logoImage)
         self.uiStack.addArrangedSubview(self.registrationButton)
-//        self.uiStack.addArrangedSubview(self.haveAccountButton)
+        self.uiStack.addArrangedSubview(self.haveAccountButton)
         
         NSLayoutConstraint.activate([
             self.uiStack.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
@@ -112,7 +112,7 @@ final class LogInViewController: UIViewController, Coordinatable {
             self.registrationButton.heightAnchor.constraint(equalToConstant: 47),
             self.registrationButton.widthAnchor.constraint(equalToConstant: 300),
 
-//            self.haveAccountButton.heightAnchor.constraint(equalToConstant: 30),
+            self.haveAccountButton.heightAnchor.constraint(equalToConstant: 30),
         ])
     }
 }

@@ -15,11 +15,17 @@ protocol RegistrationViewModelProtocol: ViewModelProtocol where State == Registr
 
 enum RegistrationState {
     case initial
-    case showOpenConfirmation
+    case showUser(User)
+    case showAlertFieldsEmpty
+    case showAlertPasswordsDoNotMatch
+    case showAlertInvalidEmail
+    case showAlertInvalidPassword
 }
 
 enum RegistrationViewInput {
-    case openScreenConfirmation(String)
+    case openScreenConfirmation(email: String, password: String, user: User)
+    case fieldsEmpty
+    case passwordsDoNotMatch
 }
 
 // MARK: - RegistrationViewModel
@@ -42,17 +48,32 @@ final class RegistrationViewModel: RegistrationViewModelProtocol {
     
     func updateState(with viewInput: ViewInput) {
         switch viewInput {
-        case .openScreenConfirmation(let phone):
+        case .openScreenConfirmation(let email,let password, let user):
             
-            authenticationUseCase.registrationSendingCodeToPhone(phone: phone) { [weak self] (result: Result<Void, AuthenticationService.AuthenticationError>) in
+            guard ValidationCheck.emailCheck(email) else {
+                state = .showAlertInvalidEmail
+                return
+            }
+            
+            guard ValidationCheck.passwordCheck(password) else {
+                state = .showAlertInvalidPassword
+                return
+            }
+            
+            authenticationUseCase.singUp(email: email, password: password, user: user) { [weak self] (result:Result<User, AuthenticationService.AuthenticationError>) in
                 switch result {
-                case .success(_):
-                    self?.state = .showOpenConfirmation
+                case .success(let user):
+                    DispatchQueue.main.async {
+                        self?.state = .showUser(user)
+                    }
                 case .failure(let failure):
-                    print("error registrationSendingCodeToPhone: \(failure)")
+                    print("Error createNewUser: ... \(failure)")
                 }
             }
+        case .fieldsEmpty:
+            state = .showAlertFieldsEmpty
+        case .passwordsDoNotMatch:
+            state = .showAlertPasswordsDoNotMatch
         }
     }
-    
 }

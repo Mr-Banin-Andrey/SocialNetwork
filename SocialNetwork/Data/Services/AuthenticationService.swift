@@ -10,47 +10,84 @@ import FirebaseAuth
 
 final class AuthenticationService {
     
-    private var verificationID = ""
+    // MARK: Private propeties
     
-    func registrationSendingCodeToPhone(phone: String, completion: @escaping (Result<Void, AuthenticationError>) -> Void) {
-        PhoneAuthProvider.provider()
-          .verifyPhoneNumber(phone, uiDelegate: nil) { verificationID, error in
-              if let error = error {
-                  completion(.failure(.failedSendCode))
-                  return
-              }
-              
-              guard let verificationID = verificationID else { return }
-              self.verificationID = verificationID
-              completion(.success(Void()))
-          }
-    }
+    private let auth = Auth.auth()
     
-    func registrationLogInToAccount(code: String, completion: @escaping (Result<String, AuthenticationError>) -> Void) {
+    // MARK: Public methods
+    
+    func signIn(email: String, password: String, completion: @escaping (Result<String, AuthenticationError>) -> Void) {
         
-        let credential = PhoneAuthProvider.provider().credential(
-          withVerificationID: verificationID,
-          verificationCode: code
-        )
-        
-        Auth.auth().signIn(with: credential) { authResult, error in
-            if let error = error {
-                completion(.failure(.failedToRegistration))
-            }
+        auth.signIn(withEmail: email, password: password) {  [weak self] authResult, error in
+            guard let self else { return }
             
-            guard let authUser = authResult else {
-                completion(.failure(.failedToRegistration))
+            if let error {
+                print(error)
+                completion(.failure(.failedToSignIn))
                 return
             }
             
-            let id = authUser.user.uid
+            guard let authUser = authResult?.user, let email = authUser.email else {
+                completion(.failure(.authResultIsNil))
+                return
+            }
+            
+            let id = authUser.uid
+            completion(.success(id))
+        }
+       
+    }
+    
+    func signUp(email: String, password: String, completion: @escaping (Result<String, AuthenticationError>) -> Void) {
+        
+        auth.createUser(withEmail: email, password: password) { [weak self] authResult, error in
+            guard let self else { return }
+            
+            if let error {
+                print(error)
+                return
+            }
+            
+            guard let authUser  = authResult?.user, let email = authUser.email else {
+                completion(.failure(.authResultIsNil))
+                return
+            }
+            
+            let id = authUser.uid
             completion(.success(id))
         }
     }
     
+    func checkIfUserNotExists(email: String, completion: @escaping (Result<String, AuthenticationError>) -> Void) {
+
+        auth.fetchSignInMethods(forEmail: email) { signInMethods, error in
+            if let error {
+                print(error)
+                completion(.failure(.failedToCheckIfEmailIsRegistered))
+            }
+            
+            if let signInMethods {
+                completion(.failure(.emailAlreadyExists))
+            } else {
+                completion(.success(email))
+            }
+        }
+    }
+    
+    func signOut() {
+        try? auth.signOut()
+        
+    }
+    
+    // MARK: Types
     
     enum AuthenticationError: Error {
-        case failedToRegistration
-        case failedSendCode
+        case loginNotRegistered(errorMessage: String)
+        case authResultIsNil
+        case failedToCreateUser
+        case failedToSignIn
+        case failedToSignUp
+        case failedToCheckIfEmailIsRegistered
+        case emailAlreadyExists
     }
 }

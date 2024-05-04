@@ -42,11 +42,11 @@ final class AuthenticationFactory {
         return viewController
     }
 
-    func makeConfirmationView(phone: String) -> any UIViewController & Coordinatable {
-        let viewModel = ConfirmationViewModel(phone: phone)
-        let viewController = ConfirmationViewController(viewModel: viewModel)
-        return viewController
-    }
+//    func makeConfirmationView(phone: String) -> any UIViewController & Coordinatable {
+//        let viewModel = ConfirmationViewModel(phone: phone)
+//        let viewController = ConfirmationViewController(viewModel: viewModel)
+//        return viewController
+//    }
 
     func makeHaveAccountView() -> any UIViewController & Coordinatable {
         let viewModel = HaveAccountViewModel()

@@ -25,6 +25,7 @@ final class FirestoreService {
     
     enum FirestoreServiceError: Error {
         case notFoundUser
+        case errorСreatingProfile
     }
     
     // MARK: Private properties

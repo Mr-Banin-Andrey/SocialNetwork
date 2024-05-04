@@ -17,25 +17,26 @@ final class AuthenticationUseCase {
     
     
     // MARK: Methods
-
-    func registrationSendingCodeToPhone(phone: String, completion: @escaping (Result<Void,AuthenticationService.AuthenticationError>) -> Void) {
-        authenticationService.registrationSendingCodeToPhone(phone: phone) { (result: Result<Void,AuthenticationService.AuthenticationError>) in
-            switch result {
-            case .success(let success):
-                completion(.success(success))
-            case .failure(let failure):
-                completion(.failure(failure))
-            }
-        }
-    }
     
-    func registrationLogInToAccount(code: String, completion: @escaping (Result<String,AuthenticationService.AuthenticationError>) -> Void) {
-        authenticationService.registrationLogInToAccount(code: code) { (result: Result<String,AuthenticationService.AuthenticationError>) in
+    func singUp(
+        email: String,
+        password:String,
+        user: User,
+        completion: @escaping (Result<User, AuthenticationService.AuthenticationError>) -> Void
+    ) {
+        authenticationService.signUp(email: email, password: password) { [weak self] (result: Result<String,AuthenticationService.AuthenticationError>) in
             switch result {
             case .success(let userID):
-                completion(.success(userID))
-            case .failure(let failure):
-                completion(.failure(failure))
+                self?.addNewUser(userID: userID, user: user) { (result:Result<User,FirestoreService.FirestoreServiceError>) in
+                    switch result {
+                    case .success(let user):
+                        completion(.success(user))
+                    case .failure(let failure):
+                        completion(.failure(.failedToCreateUser))
+                    }
+                }
+            case .failure(let error):
+                print("failedToCreateUser \(error)")
             }
         }
     }
@@ -68,15 +69,18 @@ final class AuthenticationUseCase {
         }
     }
     
-    func addNewUser(userID: String, completion: @escaping (Result<User, FirestoreService.FirestoreServiceError>) -> Void ) {
+    func addNewUser(
+        userID: String,
+        user: User,
+        completion: @escaping (Result<User, FirestoreService.FirestoreServiceError>) -> Void ) {
         Task {
             do {
                 let newUserCodable = UserCodable(
                     id: userID,
-                    nickname: "newUser",
-                    firstName: "Я",
-                    lastName: "Новенький",
-                    profession: "Новичок",
+                    nickname: user.nickname,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    profession: "",
                     following: [],
                     followers: [],
                     posts: [],
@@ -86,7 +90,7 @@ final class AuthenticationUseCase {
                 let user = try dataConverter.convert(newUserCodable)
                 completion(.success(user))
             } catch {
-                completion(.failure(.notFoundUser))
+                completion(.failure(.errorСreatingProfile))
             }
         }
     }

@@ -40,7 +40,7 @@ final class HaveAccountViewController: UIViewController, Coordinatable {
     
     private lazy var numberText = CustomTextField(
         placeholder: "+385 _ _ _ -_ _ _-_ _",
-        mode: .forNumber,
+        mode: .forAll,
         borderColor: UIColor.textAndButtonColor.cgColor,
         keyboardType: .phonePad
     )
@@ -109,8 +109,8 @@ final class HaveAccountViewController: UIViewController, Coordinatable {
             self.titleAndExplanationStack.leadingAnchor.constraint(equalTo: self.registrationButton.leadingAnchor, constant: 10),
             self.titleAndExplanationStack.trailingAnchor.constraint(equalTo: self.registrationButton.trailingAnchor, constant: -10),
             
-            self.numberText.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: numberText.countIndents()),
-            self.numberText.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -numberText.countIndents()),
+            self.numberText.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            self.numberText.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
             self.numberText.heightAnchor.constraint(equalToConstant: 48),
             self.numberText.bottomAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 0),
             
