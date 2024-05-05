@@ -31,11 +31,11 @@ final class AuthenticationUseCase {
                     switch result {
                     case .success(let user):
                         completion(.success(user))
-                    case .failure(let failure):
+                    case .failure(_):
                         completion(.failure(.failedLoadingProfile))
                     }
                 }
-            case .failure(let failure):
+            case .failure(_):
                 completion(.failure(.failedToSignIn))
             }
         }
@@ -61,6 +61,17 @@ final class AuthenticationUseCase {
             case .failure(let error):
                 print("failedToCreateUser \(error)")
                 completion(.failure(.failedToSignUp))
+            }
+        }
+    }
+    
+    func forgotPassword(email: String, completion: @escaping (Result<Void, AuthenticationService.AuthenticationError>) -> Void) {
+        authenticationService.sendPasswordReset(email: "79150444919@ya.ru") { [weak self] (result: Result<Void,AuthenticationService.AuthenticationError>)  in
+            switch result {
+            case .success():
+                completion(.success(Void()))
+            case .failure(let error):
+                completion(.failure(.emailDoesNotExist))
             }
         }
     }

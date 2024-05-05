@@ -58,19 +58,15 @@ final class AuthenticationService {
         }
     }
     
-    func checkIfUserNotExists(email: String, completion: @escaping (Result<String, AuthenticationError>) -> Void) {
+    func sendPasswordReset(email: String, completion: @escaping (Result<Void, AuthenticationError>) -> Void) {
 
-        auth.fetchSignInMethods(forEmail: email) { signInMethods, error in
-            if let error {
-                print(error)
-                completion(.failure(.failedToCheckIfEmailIsRegistered))
+        auth.sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                print("Error sendPasswordReset: \(error.localizedDescription)")
+                completion(.failure(.emailDoesNotExist))
             }
             
-            if let signInMethods {
-                completion(.failure(.emailAlreadyExists))
-            } else {
-                completion(.success(email))
-            }
+            completion(.success(Void()))
         }
     }
     
@@ -87,8 +83,7 @@ final class AuthenticationService {
         case failedToCreateUser
         case failedToSignIn
         case failedToSignUp
-        case failedToCheckIfEmailIsRegistered
         case failedLoadingProfile
-        case emailAlreadyExists
+        case emailDoesNotExist
     }
 }

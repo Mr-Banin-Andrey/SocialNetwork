@@ -112,13 +112,13 @@
 		9DC279CF2B4C64BC00FD401F /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9DC279CB2B4C64BC00FD401F /* Inter-Regular.ttf */; };
 		9DC279D02B4C64BC00FD401F /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9DC279CC2B4C64BC00FD401F /* Inter-SemiBold.ttf */; };
 		9DCAC4DE2B4D72BF0040C327 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4DD2B4D72BF0040C327 /* RegistrationViewModel.swift */; };
-		9DCAC4E32B4D78FE0040C327 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4E22B4D78FE0040C327 /* ConfirmationViewController.swift */; };
-		9DCAC4E72B4D79150040C327 /* ConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4E62B4D79150040C327 /* ConfirmationViewModel.swift */; };
 		9DCAC4EA2B4D82CC0040C327 /* UILabelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4E92B4D82CC0040C327 /* UILabelExt.swift */; };
 		9DCAC4ED2B4D96130040C327 /* HaveAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4EC2B4D96130040C327 /* HaveAccountViewController.swift */; };
 		9DCAC4F12B4D96280040C327 /* HaveAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4F02B4D96280040C327 /* HaveAccountViewModel.swift */; };
 		9DCF411F2BE6A74A0058214B /* ValidationCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF411E2BE6A74A0058214B /* ValidationCheck.swift */; };
 		9DCF41212BE6B0EA0058214B /* UIViewController+PresentAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41202BE6B0EA0058214B /* UIViewController+PresentAlert.swift */; };
+		9DCF41242BE760AB0058214B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41232BE760AB0058214B /* ForgotPasswordViewController.swift */; };
+		9DCF41262BE7615C0058214B /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41252BE7615B0058214B /* ForgotPasswordViewModel.swift */; };
 		9DDBF07C2BD62D5700000863 /* CommentCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF07B2BD62D5700000863 /* CommentCodable.swift */; };
 		9DDBF07E2BD982D200000863 /* AlbumCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF07D2BD982D200000863 /* AlbumCodable.swift */; };
 		9DDBF0812BDAC7F100000863 /* FIRIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF0802BDAC7F100000863 /* FIRIdentifiable.swift */; };
@@ -243,13 +243,13 @@
 		9DC279CB2B4C64BC00FD401F /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		9DC279CC2B4C64BC00FD401F /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		9DCAC4DD2B4D72BF0040C327 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
-		9DCAC4E22B4D78FE0040C327 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
-		9DCAC4E62B4D79150040C327 /* ConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewModel.swift; sourceTree = "<group>"; };
 		9DCAC4E92B4D82CC0040C327 /* UILabelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExt.swift; sourceTree = "<group>"; };
 		9DCAC4EC2B4D96130040C327 /* HaveAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaveAccountViewController.swift; sourceTree = "<group>"; };
 		9DCAC4F02B4D96280040C327 /* HaveAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaveAccountViewModel.swift; sourceTree = "<group>"; };
 		9DCF411E2BE6A74A0058214B /* ValidationCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationCheck.swift; sourceTree = "<group>"; };
 		9DCF41202BE6B0EA0058214B /* UIViewController+PresentAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PresentAlert.swift"; sourceTree = "<group>"; };
+		9DCF41232BE760AB0058214B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		9DCF41252BE7615B0058214B /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		9DDBF07B2BD62D5700000863 /* CommentCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCodable.swift; sourceTree = "<group>"; };
 		9DDBF07D2BD982D200000863 /* AlbumCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCodable.swift; sourceTree = "<group>"; };
 		9DDBF0802BDAC7F100000863 /* FIRIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRIdentifiable.swift; sourceTree = "<group>"; };
@@ -407,7 +407,7 @@
 			children = (
 				9D3994D82BA0752F009F894A /* AuthenticationCoordinator.swift */,
 				9D3994E42BA0B53D009F894A /* AuthenticationFactory.swift */,
-				9D646AB52B493F1C00C0B2D3 /* Сonfirmation */,
+				9DCF41222BE760830058214B /* ForgotPassword */,
 				9D646AB22B49326000C0B2D3 /* HaveAccount */,
 				9D646AB42B493EE000C0B2D3 /* LogIn */,
 				9D646AB32B493B5400C0B2D3 /* Registration */,
@@ -482,15 +482,6 @@
 				9D646ABD2B493FF300C0B2D3 /* LogInViewModel.swift */,
 			);
 			path = LogIn;
-			sourceTree = "<group>";
-		};
-		9D646AB52B493F1C00C0B2D3 /* Сonfirmation */ = {
-			isa = PBXGroup;
-			children = (
-				9DCAC4E22B4D78FE0040C327 /* ConfirmationViewController.swift */,
-				9DCAC4E62B4D79150040C327 /* ConfirmationViewModel.swift */,
-			);
-			path = "Сonfirmation";
 			sourceTree = "<group>";
 		};
 		9D653A562B0F9D6E009B98A5 = {
@@ -717,6 +708,15 @@
 			path = NavigationFlows;
 			sourceTree = "<group>";
 		};
+		9DCF41222BE760830058214B /* ForgotPassword */ = {
+			isa = PBXGroup;
+			children = (
+				9DCF41232BE760AB0058214B /* ForgotPasswordViewController.swift */,
+				9DCF41252BE7615B0058214B /* ForgotPasswordViewModel.swift */,
+			);
+			path = ForgotPassword;
+			sourceTree = "<group>";
+		};
 		9DDBF07F2BDAC7D200000863 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
@@ -899,6 +899,7 @@
 				9D6BE4352BA6BF1F00462B12 /* UserTabBar.swift in Sources */,
 				9D3994E32BA0ACB6009F894A /* NavigationFlowType.swift in Sources */,
 				9DCF41212BE6B0EA0058214B /* UIViewController+PresentAlert.swift in Sources */,
+				9DCF41262BE7615C0058214B /* ForgotPasswordViewModel.swift in Sources */,
 				9D41B91C2BD58665002CBAA8 /* ImageCacheService.swift in Sources */,
 				9D41B91A2BD57A59002CBAA8 /* Data+Image.swift in Sources */,
 				9D6BE43F2BA6C89300462B12 /* SavedCoordinator.swift in Sources */,
@@ -916,6 +917,7 @@
 				9D59C4DC2BD3E7FD00EB835C /* CloudStorageService.swift in Sources */,
 				9DDBF0812BDAC7F100000863 /* FIRIdentifiable.swift in Sources */,
 				9D9E9CBB2BC09A6F00593B73 /* PhotoGalleryViewModel.swift in Sources */,
+				9DCF41242BE760AB0058214B /* ForgotPasswordViewController.swift in Sources */,
 				9D7FCBE52BB60C4B001546FC /* UIActivityIndicatorViewExt.swift in Sources */,
 				9D7FCBD62BB5DAF9001546FC /* StoriesViewModel.swift in Sources */,
 				9D7FCC0C2BB887BE001546FC /* ProfileHeaderCollectionCell.swift in Sources */,
@@ -928,7 +930,6 @@
 				9D59C4D62BCC4CCC00EB835C /* AuthenticationService.swift in Sources */,
 				9D7FCBD42BB5D985001546FC /* StoriesView.swift in Sources */,
 				9D9E9CC22BC2B71800593B73 /* GalleryHeaderViewModel.swift in Sources */,
-				9DCAC4E32B4D78FE0040C327 /* ConfirmationViewController.swift in Sources */,
 				9D59C4D42BCC4C6800EB835C /* UserUseCase.swift in Sources */,
 				9D609D572BA1CFC3001765C0 /* UserFactory.swift in Sources */,
 				9D646ABA2B493FD400C0B2D3 /* LogInViewController.swift in Sources */,
@@ -947,7 +948,6 @@
 				9D59C4D22BCC2FD500EB835C /* PostCodable.swift in Sources */,
 				9DC279B32B49CB4B00FD401F /* ViewModelProtocol.swift in Sources */,
 				9D831D622BBDB54000E4E8A9 /* WholePostViewController.swift in Sources */,
-				9DCAC4E72B4D79150040C327 /* ConfirmationViewModel.swift in Sources */,
 				9D3994D92BA0752F009F894A /* AuthenticationCoordinator.swift in Sources */,
 				9D59C4D82BCC4CDC00EB835C /* FirestoreService.swift in Sources */,
 				9D41B90C2BD50910002CBAA8 /* DataConverter.swift in Sources */,

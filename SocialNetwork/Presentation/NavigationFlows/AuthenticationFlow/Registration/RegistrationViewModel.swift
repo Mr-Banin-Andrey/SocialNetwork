@@ -60,7 +60,7 @@ final class RegistrationViewModel: RegistrationViewModelProtocol {
                 return
             }
             
-            authenticationUseCase.signUp(email: email, password: password, user: user) { [weak self] (result:Result<User, AuthenticationService.AuthenticationError>) in
+            authenticationUseCase.signUp(email: email, password: password, user: user) { [weak self] result in
                 switch result {
                 case .success(let user):
                     DispatchQueue.main.async {

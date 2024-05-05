@@ -113,8 +113,8 @@ final class HaveAccountViewController: UIViewController, Coordinatable {
                     actionTitle: "Попробовать ещё раз"
                 )
             case .openScreenForgotPassword:
-                break
-//                self.coordinator?.navigateTo(.forgotPassword(coordinator: <#T##AuthenticationCoordinator#>))
+                guard let coordinator = coordinator else { return }
+                coordinator.navigateTo(.forgotPassword(coordinator: coordinator))
             }
         }
     }

@@ -48,7 +48,7 @@ final class HaveAccountViewModel: HaveAccountViewModelProtocol {
 
         case .didTapSignIn(email: let email, password: let password):
             
-            authenticationUseCase.signIn(email: email, password: password) { [weak self] (result:Result<User, AuthenticationService.AuthenticationError>) in
+            authenticationUseCase.signIn(email: email, password: password) { [weak self] result in
                 guard let self else { return }
                 switch result {
                 case .success(let user):
