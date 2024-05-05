@@ -18,7 +18,30 @@ final class AuthenticationUseCase {
     
     // MARK: Methods
     
-    func singUp(
+    func signIn(
+        email: String,
+        password:String,
+        completion: @escaping (Result<User, AuthenticationService.AuthenticationError>) -> Void
+    ) {
+        authenticationService.signIn(email: email, password: password) { [weak self] (result: Result<String,AuthenticationService.AuthenticationError>) in
+            guard let self else { return }
+            switch result {
+            case .success(let userID):
+                self.fetchUser(userID: userID) { (result:Result<User,FirestoreService.FirestoreServiceError>) in
+                    switch result {
+                    case .success(let user):
+                        completion(.success(user))
+                    case .failure(let failure):
+                        completion(.failure(.failedLoadingProfile))
+                    }
+                }
+            case .failure(let failure):
+                completion(.failure(.failedToSignIn))
+            }
+        }
+    }
+    
+    func signUp(
         email: String,
         password:String,
         user: User,
@@ -31,17 +54,20 @@ final class AuthenticationUseCase {
                     switch result {
                     case .success(let user):
                         completion(.success(user))
-                    case .failure(let failure):
+                    case .failure(_):
                         completion(.failure(.failedToCreateUser))
                     }
                 }
             case .failure(let error):
                 print("failedToCreateUser \(error)")
+                completion(.failure(.failedToSignUp))
             }
         }
     }
     
-    func fetchUser(userID: String, completion: @escaping (Result<User, FirestoreService.FirestoreServiceError>) -> Void ) {
+    // MARK: Private methods
+    
+    private func fetchUser(userID: String, completion: @escaping (Result<User, FirestoreService.FirestoreServiceError>) -> Void ) {
         Task {
             do {
                 let userCodable = try await firestoreService.fetchObject(id: userID, model: UserCodable.self, collections: .users)
@@ -69,7 +95,7 @@ final class AuthenticationUseCase {
         }
     }
     
-    func addNewUser(
+    private func addNewUser(
         userID: String,
         user: User,
         completion: @escaping (Result<User, FirestoreService.FirestoreServiceError>) -> Void ) {

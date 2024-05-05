@@ -18,40 +18,62 @@ final class HaveAccountViewController: UIViewController, Coordinatable {
     
     private let viewModel: HaveAccountViewModel
     
-    private lazy var titleAndExplanationStack: UIStackView = {
+    private lazy var mainView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.axis = .vertical
-        $0.spacing = 24
-        $0.alignment = .center
+        $0.backgroundColor = .clear
         return $0
-    }(UIStackView())
+    }(UIView())
+    
+    private lazy var checkMarkImage: UIImageView = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.image = .confirmationCheckMarkImage
+        $0.contentMode = .scaleAspectFill
+        return $0
+    }(UIImageView())
     
     private lazy var titleLabel = UILabel(text: "С возвращением", state: .logInTitleLabel)
     
-    private lazy var explanationLabel: UILabel = {
+    private lazy var textFieldsStack: UIStackView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.text = "Введите номер телефона для входа в приложение"
-        $0.font = .interRegular400Font
-        $0.textColor = .textAndButtonColor
-        $0.textAlignment = .center
-        $0.numberOfLines = 0
+        $0.axis = .vertical
+        $0.distribution = .fillEqually
+        $0.spacing = 12
+        $0.backgroundColor = .clear
         return $0
-    }(UILabel())
+    }(UIStackView())
     
-    private lazy var numberText = CustomTextField(
-        placeholder: "+385 _ _ _ -_ _ _-_ _",
+    private lazy var emailTextField = CustomTextField(
+        placeholder: "E-mail",
         mode: .forAll,
         borderColor: UIColor.textAndButtonColor.cgColor,
-        keyboardType: .phonePad
+        keyboardType: .emailAddress
     )
     
-    private lazy var registrationButton = CustomButton(
-        title: "ПОДТВЕРДИТЬ",
+    private lazy var passTextField = CustomTextField(
+        placeholder: "Пароль",
+        mode: .forAll,
+        borderColor: UIColor.textAndButtonColor.cgColor,
+        isSecureTextEntry: true
+    )
+    
+    private lazy var forgotPasswordButton = CustomButton(
+        title: "Забыли пароль?",
+        font: .interSemiBold600Font.withSize(12),
+        titleColor: .textSecondaryColor,
+        backgroundColor: .clear
+    ) { [weak self] in
+        self?.viewModel.updateState(with: .didTapForgotPassword)
+    }
+        
+    
+    private lazy var singInButton = CustomButton(
+        title: "ВОЙТИ",
         font: .interMedium500Font,
         titleColor: .mainBackgroundColor,
-        backgroundColor: .textAndButtonColor) { [weak self] in
-            self?.viewModel.updateState(with: .goToScreenMain)
-        }
+        backgroundColor: .textAndButtonColor
+    ) { [weak self] in
+        self?.viewModel.updateState(with: .didTapSignIn(email: self?.emailTextField.text ?? "", password: self?.passTextField.text ?? ""))
+    }
     
     //MARK: Initial
     
@@ -71,22 +93,30 @@ final class HaveAccountViewController: UIViewController, Coordinatable {
         
         self.bindViewModel()
         self.setupBackButton()
-        self.view.backgroundColor = .mainBackgroundColor
         self.setupUI()
     }
     
     //MARK: Private methods
     
     private func bindViewModel() {
-//        viewModel.onStateDidChange = { [weak self] state in
-//            guard let self = self else { return }
-//            switch state {
-//            case .initial:
-//                break
-//            case .showUser:
-//                break
-//            }
-//        }
+        viewModel.onStateDidChange = { [weak self] state in
+            guard let self = self else { return }
+            switch state {
+            case .initial:
+                break
+            case .showUser(let user):
+                navigationController?.navigationBar.isHidden = true
+                self.coordinator?.proceedToUserFlow(user)
+            case .showAlertError:
+                presentAlert(
+                    message: "Неверные логин или пароль",
+                    actionTitle: "Попробовать ещё раз"
+                )
+            case .openScreenForgotPassword:
+                break
+//                self.coordinator?.navigateTo(.forgotPassword(coordinator: <#T##AuthenticationCoordinator#>))
+            }
+        }
     }
     
     private func setupBackButton() {
@@ -96,30 +126,46 @@ final class HaveAccountViewController: UIViewController, Coordinatable {
     }
     
     private func setupUI() {
-        self.view.addSubview(self.titleAndExplanationStack)
-        self.titleAndExplanationStack.addArrangedSubview(self.titleLabel)
-        self.titleAndExplanationStack.addArrangedSubview(self.explanationLabel)
+        self.view.backgroundColor = .mainBackgroundColor
         
-        self.view.addSubview(self.numberText)
-        self.view.addSubview(self.registrationButton)
+        self.view.addSubview(self.checkMarkImage)
+        self.view.addSubview(self.mainView)
+        self.view.addSubview(self.titleLabel)
         
+        self.mainView.addSubview(self.textFieldsStack)
+        self.textFieldsStack.addArrangedSubview(self.emailTextField)
+        self.textFieldsStack.addArrangedSubview(self.passTextField)
+        self.mainView.addSubview(self.forgotPasswordButton)
+        self.mainView.addSubview(self.singInButton)
+                
         NSLayoutConstraint.activate([
-            self.titleAndExplanationStack.bottomAnchor.constraint(equalTo: self.numberText.topAnchor, constant: -100),
-            self.titleAndExplanationStack.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            self.titleAndExplanationStack.leadingAnchor.constraint(equalTo: self.registrationButton.leadingAnchor, constant: 10),
-            self.titleAndExplanationStack.trailingAnchor.constraint(equalTo: self.registrationButton.trailingAnchor, constant: -10),
             
-            self.numberText.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
-            self.numberText.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
-            self.numberText.heightAnchor.constraint(equalToConstant: 48),
-            self.numberText.bottomAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 0),
+            self.mainView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 50),
+            self.mainView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            self.mainView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
-            self.registrationButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            self.registrationButton.topAnchor.constraint(equalTo: self.numberText.bottomAnchor, constant: 88),
-            self.registrationButton.heightAnchor.constraint(equalToConstant: 48),
-            self.registrationButton.widthAnchor.constraint(equalToConstant: 261),
+            self.checkMarkImage.bottomAnchor.constraint(equalTo: self.mainView.topAnchor, constant: -48),
+            self.checkMarkImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            self.checkMarkImage.heightAnchor.constraint(equalToConstant: 86),
+            self.checkMarkImage.widthAnchor.constraint(equalToConstant: 100),
+            
+            self.titleLabel.topAnchor.constraint(equalTo: self.mainView.topAnchor, constant: 16),
+            self.titleLabel.centerXAnchor.constraint(equalTo: self.mainView.centerXAnchor),
+            
+            self.textFieldsStack.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 16),
+            self.textFieldsStack.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 8),
+            self.textFieldsStack.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -8),
+            
+            self.forgotPasswordButton.topAnchor.constraint(equalTo: self.textFieldsStack.bottomAnchor, constant: 16),
+            self.forgotPasswordButton.heightAnchor.constraint(equalToConstant: 16),
+            self.forgotPasswordButton.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 8),
+            
+            self.singInButton.topAnchor.constraint(equalTo: self.textFieldsStack.bottomAnchor, constant: 56),
+            self.singInButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.singInButton.heightAnchor.constraint(equalToConstant: 48),
+            self.singInButton.widthAnchor.constraint(equalToConstant: 122),
+            self.singInButton.bottomAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: -16)
         ])
-
     }
     
     //MARK: @objc private methods

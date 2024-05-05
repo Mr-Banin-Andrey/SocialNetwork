@@ -83,7 +83,7 @@ final class RegistrationViewController: UIViewController, Coordinatable {
         guard let self else { return }
         
         if fieldCheck() {
-            viewModel.updateState(with: .openScreenConfirmation(
+            viewModel.updateState(with: .didTapRegistration(
                 email: emailTextField.text ?? "",
                 password: passTextField.text ?? "",
                 user: createUser()

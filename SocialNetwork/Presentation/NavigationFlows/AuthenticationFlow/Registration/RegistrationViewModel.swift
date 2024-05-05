@@ -23,7 +23,7 @@ enum RegistrationState {
 }
 
 enum RegistrationViewInput {
-    case openScreenConfirmation(email: String, password: String, user: User)
+    case didTapRegistration(email: String, password: String, user: User)
     case fieldsEmpty
     case passwordsDoNotMatch
 }
@@ -48,7 +48,7 @@ final class RegistrationViewModel: RegistrationViewModelProtocol {
     
     func updateState(with viewInput: ViewInput) {
         switch viewInput {
-        case .openScreenConfirmation(let email,let password, let user):
+        case .didTapRegistration(let email,let password, let user):
             
             guard ValidationCheck.emailCheck(email) else {
                 state = .showAlertInvalidEmail
@@ -60,7 +60,7 @@ final class RegistrationViewModel: RegistrationViewModelProtocol {
                 return
             }
             
-            authenticationUseCase.singUp(email: email, password: password, user: user) { [weak self] (result:Result<User, AuthenticationService.AuthenticationError>) in
+            authenticationUseCase.signUp(email: email, password: password, user: user) { [weak self] (result:Result<User, AuthenticationService.AuthenticationError>) in
                 switch result {
                 case .success(let user):
                     DispatchQueue.main.async {

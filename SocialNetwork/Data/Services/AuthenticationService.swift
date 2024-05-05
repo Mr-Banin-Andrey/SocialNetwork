@@ -88,6 +88,7 @@ final class AuthenticationService {
         case failedToSignIn
         case failedToSignUp
         case failedToCheckIfEmailIsRegistered
+        case failedLoadingProfile
         case emailAlreadyExists
     }
 }
