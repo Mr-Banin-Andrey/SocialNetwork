@@ -82,6 +82,7 @@ final class MainViewController: UIViewController, Coordinatable {
         setupUI()
         bindViewModel()
         viewModel.updateState(with: .startLoadPosts)
+        updateView()
     }
     
     //MARK: Methods
@@ -112,7 +113,14 @@ final class MainViewController: UIViewController, Coordinatable {
             }
         }
     }
-        
+    
+    private func updateView() {
+        NotificationCenter.default.addObserver(forName: NotificationKey.updateViewKey, object: nil, queue: .main) { [weak self] notification in
+            guard let self else { return }
+            viewModel.updateState(with: .startLoadPosts)
+        }
+    }
+    
     private func setupNavBar() {
         let leftButtonTwo = UIBarButtonItem(customView: titleLabel)
         self.navigationItem.leftBarButtonItems = [leftButtonTwo]

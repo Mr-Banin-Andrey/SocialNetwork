@@ -45,6 +45,10 @@ extension UIImage {
         UIImage(systemName: "heart") ?? UIImage()
     }
     
+    class var likeFillImage: UIImage {
+        UIImage(systemName: "heart.fill") ?? UIImage()
+    }
+    
     class var commentImage: UIImage {
         UIImage(systemName: "message") ?? UIImage()
     }

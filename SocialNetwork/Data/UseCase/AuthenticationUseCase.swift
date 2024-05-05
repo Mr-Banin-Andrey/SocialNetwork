@@ -100,7 +100,7 @@ final class AuthenticationUseCase {
     private func fetchUser(userID: String, completion: @escaping (Result<User, FirestoreService.FirestoreServiceError>) -> Void ) {
         Task {
             do {
-                let userCodable = try await firestoreService.fetchObject(id: userID, model: UserCodable.self, collections: .users)
+                let userCodable = try await self.firestoreService.fetchObject(id: userID, model: UserCodable.self, collections: .users)
                 let allComments = try await firestoreService.fetchObjects(model: CommentCodable.self, collection: .comments)
                 let posts = try await firestoreService.fetchObjects(givenBy: userID, model: PostCodable.self, collection: .posts, field: .userCreatedID).map { dataConverter.convert($0, allComments)}
                 
@@ -116,7 +116,11 @@ final class AuthenticationUseCase {
                     photos.append(album)
                 }
                 
-                let user = try dataConverter.convert(userCodable, posts, savedPosts.map { dataConverter.convert($0, allComments) }, photos: photos )
+                var user = try dataConverter.convert(userCodable, posts, savedPosts.map { dataConverter.convert($0, allComments) }, photos: photos )
+                
+                user.posts = user.posts.map { dataConverter.convertForUser($0, user) }
+                user.savedPosts = user.savedPosts.map { dataConverter.convertForUser($0, user) }
+                
                 completion(.success(user))
             } catch {
                 print("error: fetchUser")
@@ -142,7 +146,7 @@ final class AuthenticationUseCase {
                     posts: [],
                     photos: [],
                     savedPosts: [])
-                try await firestoreService.createObjectDocument(userID: userID, newUserCodable, collection: .users)
+                try await firestoreService.createObjectDocument(id: userID, newUserCodable, collection: .users)
                 let user = try dataConverter.convert(newUserCodable)
                 completion(.success(user))
             } catch {

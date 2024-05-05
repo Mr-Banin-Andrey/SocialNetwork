@@ -89,6 +89,7 @@ final class CustomTextField: UITextField {
         case .forAll:
             setupLayer()
         case .forComment:
+            returnKeyType = .send
             paperclipBackgroundView.addSubview(paperclipImage)
             paperclipImage.centerYAnchor.constraint(equalTo: self.paperclipBackgroundView.centerYAnchor).isActive = true
             paperclipImage.leadingAnchor.constraint(equalTo: self.paperclipBackgroundView.leadingAnchor, constant: 16).isActive = true

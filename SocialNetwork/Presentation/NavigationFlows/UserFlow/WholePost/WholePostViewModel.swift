@@ -15,10 +15,15 @@ protocol WholePostViewModelProtocol: ViewModelProtocol where State == WholePostS
 
 enum WholePostState {
     case initial
+    case tryingToSendComment
+    case updateView
+    case failedAddComment
+    case failedAddLike
 }
 
 enum WholePostViewInput {
-    
+    case sendComment(String)
+    case likePost
 }
 
 // MARK: - WholePostViewModel
@@ -37,6 +42,10 @@ final class WholePostViewModel: WholePostViewModelProtocol {
     
     var post: Post
     
+    @Dependency private var userUseCase: UserUseCase
+    
+    private let notificationCenter = NotificationCenter.default
+    
     //MARK: Initial
     
     init(post: Post) {
@@ -46,7 +55,43 @@ final class WholePostViewModel: WholePostViewModelProtocol {
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {
-        
+        switch viewInput {
+        case .sendComment(let comment):
+            state = .tryingToSendComment
+            userUseCase.addCommentInPost(post: post, comment: comment) { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case .success(let comment):
+                    DispatchQueue.main.async {
+                        self.post.comments.append(comment)
+                        self.state = .updateView
+                        self.notificationCenterPost()
+                    }
+                case .failure(let failure):
+                    state = .failedAddComment
+                    print("error addCommentInPost \(failure)")
+                }
+            }
+        case .likePost:
+            state = .tryingToSendComment
+            userUseCase.addLikePost(post: post) { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case .success(let likes):
+                    DispatchQueue.main.async {
+                        self.post.likes = likes
+                        self.state = .updateView
+                        self.notificationCenterPost()
+                    }
+                case .failure(let failure):
+                    state = .failedAddComment
+                    print("error addLikePost \(failure)")
+                }
+            }
+        }
     }
     
+    private func notificationCenterPost() {
+        notificationCenter.post(name: NotificationKey.updateViewKey, object: nil)
+    }
 }

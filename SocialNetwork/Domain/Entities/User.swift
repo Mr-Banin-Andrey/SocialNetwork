@@ -10,13 +10,13 @@ import Foundation
 struct User {
     
     let id: String
-    let nickname: String
-    let firstName: String
-    let lastName: String
-    let profession: String
-    let following: [String]
-    let followers: [String]
-    let posts: [Post]
-    let photos: [AlbumCodable]
-    let savedPosts: [Post]
+    var nickname: String
+    var firstName: String
+    var lastName: String
+    var profession: String
+    var following: [String]
+    var followers: [String]
+    var posts: [Post]
+    var photos: [AlbumCodable]
+    var savedPosts: [Post]
 }

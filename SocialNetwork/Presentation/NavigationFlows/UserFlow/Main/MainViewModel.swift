@@ -67,15 +67,16 @@ final class MainViewModel: MainViewModelProtocol {
         switch viewInput {
             
         case .startLoadPosts:
-            useCase.fetchPosts() { [weak self] allPosts in
+            useCase.fetchPosts() { [weak self] allPostsFromDataBase in
                 guard let self else { return }
-                self.allPosts = allPosts.sorted(by: { $0.dateCreated < $1.dateCreated })
-                let users = Set(allPosts.map { $0.userCreatedID })
+                                
+                self.allPosts = allPostsFromDataBase.sorted(by: { $0.dateCreated < $1.dateCreated })
+                let users = Set(allPostsFromDataBase.map { $0.userCreatedID })
                 usersID = Array(users)
                 
                 var forUser: [Post] = []
                 for postID in user.following {
-                    let posts = allPosts.filter { $0.userCreatedID == postID }
+                    let posts = allPostsFromDataBase.filter { $0.userCreatedID == postID }
                     forUser += posts
                 }
                 

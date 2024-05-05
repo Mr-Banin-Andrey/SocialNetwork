@@ -24,7 +24,7 @@ final class UserCoordinator: Coordinator {
     init(_ user: User, navigationController: UINavigationController) {
         self.navigationController = navigationController
                 
-        let userUseCase = UserUseCase()
+        let userUseCase = UserUseCase(user: user)
         self.userFactory = UserFactory(user: user, useCase: userUseCase)
     }
     

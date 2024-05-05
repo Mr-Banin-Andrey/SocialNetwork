@@ -7,7 +7,15 @@
 
 import UIKit
 
+protocol CommentHeaderDelegate: LikeCommentBookmarkViewDelegate, AnyObject { }
+
 final class CommentHeader: UIView {
+    
+    weak var delegate: CommentHeaderDelegate? {
+        didSet {
+            likeCommentBookmarkView.delegate = delegate
+        }
+    }
     
     //MARK: Properties
     

@@ -121,6 +121,7 @@
 		9DCF41262BE7615C0058214B /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41252BE7615B0058214B /* ForgotPasswordViewModel.swift */; };
 		9DCF41292BE78D6A0058214B /* DimmingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41282BE78D6A0058214B /* DimmingViewController.swift */; };
 		9DCF412B2BE78D8F0058214B /* LoadingDimmingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF412A2BE78D8F0058214B /* LoadingDimmingViewController.swift */; };
+		9DCF412D2BE811D40058214B /* NotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF412C2BE811D40058214B /* NotificationKey.swift */; };
 		9DDBF07C2BD62D5700000863 /* CommentCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF07B2BD62D5700000863 /* CommentCodable.swift */; };
 		9DDBF07E2BD982D200000863 /* AlbumCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF07D2BD982D200000863 /* AlbumCodable.swift */; };
 		9DDBF0812BDAC7F100000863 /* FIRIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF0802BDAC7F100000863 /* FIRIdentifiable.swift */; };
@@ -254,6 +255,7 @@
 		9DCF41252BE7615B0058214B /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		9DCF41282BE78D6A0058214B /* DimmingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimmingViewController.swift; sourceTree = "<group>"; };
 		9DCF412A2BE78D8F0058214B /* LoadingDimmingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingDimmingViewController.swift; sourceTree = "<group>"; };
+		9DCF412C2BE811D40058214B /* NotificationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationKey.swift; sourceTree = "<group>"; };
 		9DDBF07B2BD62D5700000863 /* CommentCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCodable.swift; sourceTree = "<group>"; };
 		9DDBF07D2BD982D200000863 /* AlbumCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCodable.swift; sourceTree = "<group>"; };
 		9DDBF0802BDAC7F100000863 /* FIRIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRIdentifiable.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				9D41B90E2BD5097D002CBAA8 /* Entities */,
+				9DCF412C2BE811D40058214B /* NotificationKey.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -891,6 +894,7 @@
 			files = (
 				9D59C4D02BCC27F100EB835C /* UserCodables.swift in Sources */,
 				9D9E9CB42BBF2BC600593B73 /* CommentCell.swift in Sources */,
+				9DCF412D2BE811D40058214B /* NotificationKey.swift in Sources */,
 				9DCF411F2BE6A74A0058214B /* ValidationCheck.swift in Sources */,
 				9DCAC4DE2B4D72BF0040C327 /* RegistrationViewModel.swift in Sources */,
 				9D3994DD2BA09A52009F894A /* Coordinatable.swift in Sources */,

@@ -17,8 +17,9 @@ struct Post {
     let dateCreated: Date
     let userCreatedID: String
     let text: String
-    let likes: [String]
-    let comments: [CommentCodable]
-    let savedPost: Bool
+    var likes: [String]
+    var comments: [CommentCodable]
+    var savedPost: Bool
+    var likePost: Bool
     
 }

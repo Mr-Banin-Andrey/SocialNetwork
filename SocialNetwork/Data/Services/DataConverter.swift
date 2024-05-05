@@ -51,6 +51,31 @@ final class DataConverter {
                     text: postCodable.text,
                     likes: postCodable.likes,
                     comments: comments,
-                    savedPost: postCodable.savedPost)
+                    savedPost: false,
+                    likePost: false
+        )
+    }
+    
+    func convertForUser(_ post: Post, _ user: User) -> Post {
+        
+        var isLike = post.likes.filter { $0 == user.id }.isEmpty
+        isLike.toggle()
+        
+        var isSave = user.savedPosts.filter { $0.id == post.id}.isEmpty
+        isSave.toggle()
+        
+        return Post(id: post.id,
+                    nickname: post.nickname,
+                    firstName: post.firstName,
+                    lastName: post.lastName,
+                    profession: post.profession,
+                    dateCreated: post.dateCreated,
+                    userCreatedID: post.userCreatedID,
+                    text: post.text,
+                    likes: post.likes,
+                    comments: post.comments,
+                    savedPost: isSave,
+                    likePost: isLike
+        )
     }
 }
