@@ -15,6 +15,7 @@ protocol RegistrationViewModelProtocol: ViewModelProtocol where State == Registr
 
 enum RegistrationState {
     case initial
+    case tryingToSignUp
     case showUser(User)
     case showAlertFieldsEmpty
     case showAlertPasswordsDoNotMatch
@@ -49,6 +50,8 @@ final class RegistrationViewModel: RegistrationViewModelProtocol {
     func updateState(with viewInput: ViewInput) {
         switch viewInput {
         case .didTapRegistration(let email,let password, let user):
+            
+            state = .tryingToSignUp
             
             guard ValidationCheck.emailCheck(email) else {
                 state = .showAlertInvalidEmail

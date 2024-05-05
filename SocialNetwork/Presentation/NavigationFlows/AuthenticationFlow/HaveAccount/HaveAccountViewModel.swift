@@ -15,6 +15,7 @@ protocol HaveAccountViewModelProtocol: ViewModelProtocol where State == HaveAcco
 
 enum HaveAccountState {
     case initial
+    case tryingToSignIn
     case showUser(User)
     case showAlertError
     case openScreenForgotPassword
@@ -48,6 +49,7 @@ final class HaveAccountViewModel: HaveAccountViewModelProtocol {
 
         case .didTapSignIn(email: let email, password: let password):
             
+            state = .tryingToSignIn
             authenticationUseCase.signIn(email: email, password: password) { [weak self] result in
                 guard let self else { return }
                 switch result {

@@ -11,6 +11,7 @@ final class UserUseCase {
     
     // MARK: Private properties
     
+    private lazy var authenticationService = AuthenticationService()
     private lazy var firestoreService = FirestoreService()
     private lazy var dataConverter = DataConverter()
     private lazy var cloudStorageService = CloudStorageService()
@@ -92,5 +93,9 @@ final class UserUseCase {
                 print(">>>... error add in cache")
             }
         }
+    }
+    
+    func signOut() {
+        authenticationService.signOut()
     }
 }

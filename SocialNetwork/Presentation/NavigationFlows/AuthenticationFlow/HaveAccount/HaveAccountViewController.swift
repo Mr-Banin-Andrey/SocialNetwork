@@ -75,6 +75,8 @@ final class HaveAccountViewController: UIViewController, Coordinatable {
         self?.viewModel.updateState(with: .didTapSignIn(email: self?.emailTextField.text ?? "", password: self?.passTextField.text ?? ""))
     }
     
+    private lazy var loadingViewController = LoadingDimmingViewController()
+    
     //MARK: Initial
     
     init(viewModel: HaveAccountViewModel) {
@@ -96,6 +98,14 @@ final class HaveAccountViewController: UIViewController, Coordinatable {
         self.setupUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     //MARK: Private methods
     
     private func bindViewModel() {
@@ -104,14 +114,20 @@ final class HaveAccountViewController: UIViewController, Coordinatable {
             switch state {
             case .initial:
                 break
+            case .tryingToSignIn:
+                self.loadingViewController.show(on: self)
             case .showUser(let user):
-                navigationController?.navigationBar.isHidden = true
-                self.coordinator?.proceedToUserFlow(user)
+                self.loadingViewController.hide {
+                    self.navigationController?.navigationBar.isHidden = true
+                    self.coordinator?.proceedToUserFlow(user)
+                }
             case .showAlertError:
-                presentAlert(
-                    message: "Неверные логин или пароль",
-                    actionTitle: "Попробовать ещё раз"
-                )
+                self.loadingViewController.hide {
+                    self.presentAlert(
+                        message: "Неверные логин или пароль",
+                        actionTitle: "Попробовать ещё раз"
+                    )
+                }
             case .openScreenForgotPassword:
                 guard let coordinator = coordinator else { return }
                 coordinator.navigateTo(.forgotPassword(coordinator: coordinator))

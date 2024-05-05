@@ -32,4 +32,9 @@ final class UserCoordinator: Coordinator {
         let mainTabBar = userFactory.makeRootTabBar(parentCoordinator: self)
         navigationController.setViewControllers([mainTabBar], animated: true)
     }
+    
+    func stopUserFlow() {
+        stop()
+        (parentCoordinator as? RootCoordinator)?.startLogInFlow()
+    }
 }

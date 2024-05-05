@@ -45,9 +45,12 @@ final class LogInViewController: UIViewController, Coordinatable {
         title: "Уже есть аккаунт",
         font: .interRegular400Font,
         titleColor: .textAndButtonColor,
-        backgroundColor: nil) { [weak self] in
-            self?.viewModel.updateState(with: .openScreenHaveAccount)
-        }
+        backgroundColor: nil
+    ) { [weak self] in
+        self?.viewModel.updateState(with: .openScreenHaveAccount)
+    }
+    
+    private lazy var loadingViewController = LoadingDimmingViewController()
     
     //MARK: Initial
     
@@ -68,14 +71,12 @@ final class LogInViewController: UIViewController, Coordinatable {
         self.bindViewModel()
         self.view.backgroundColor = .mainBackgroundColor
         self.setupUI()
+        
+        viewModel.updateState(with: .willCheckUser)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = false
     }
     
     //MARK: Private methods
@@ -85,13 +86,20 @@ final class LogInViewController: UIViewController, Coordinatable {
             guard let self = self else { return }
             switch state {
             case .initial:
-                print("initial")
+                break
             case .showOpenRegistration:
                 guard let coordinator else { return }
                 coordinator.navigateTo(.registration(coordinator: coordinator))
             case .showOpenHaveAccount:
                 guard let coordinator else { return }
                 coordinator.navigateTo(.haveAccount(coordinator: coordinator))
+            case .tryingToSignIn:
+                self.loadingViewController.show(on: self)
+            case .showUser(let user):
+                self.loadingViewController.hide {
+                    self.navigationController?.navigationBar.isHidden = true
+                    self.coordinator?.proceedToUserFlow(user)
+                }
             }
         }
     }

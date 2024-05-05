@@ -119,6 +119,8 @@
 		9DCF41212BE6B0EA0058214B /* UIViewController+PresentAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41202BE6B0EA0058214B /* UIViewController+PresentAlert.swift */; };
 		9DCF41242BE760AB0058214B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41232BE760AB0058214B /* ForgotPasswordViewController.swift */; };
 		9DCF41262BE7615C0058214B /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41252BE7615B0058214B /* ForgotPasswordViewModel.swift */; };
+		9DCF41292BE78D6A0058214B /* DimmingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41282BE78D6A0058214B /* DimmingViewController.swift */; };
+		9DCF412B2BE78D8F0058214B /* LoadingDimmingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF412A2BE78D8F0058214B /* LoadingDimmingViewController.swift */; };
 		9DDBF07C2BD62D5700000863 /* CommentCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF07B2BD62D5700000863 /* CommentCodable.swift */; };
 		9DDBF07E2BD982D200000863 /* AlbumCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF07D2BD982D200000863 /* AlbumCodable.swift */; };
 		9DDBF0812BDAC7F100000863 /* FIRIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF0802BDAC7F100000863 /* FIRIdentifiable.swift */; };
@@ -250,6 +252,8 @@
 		9DCF41202BE6B0EA0058214B /* UIViewController+PresentAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PresentAlert.swift"; sourceTree = "<group>"; };
 		9DCF41232BE760AB0058214B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		9DCF41252BE7615B0058214B /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
+		9DCF41282BE78D6A0058214B /* DimmingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimmingViewController.swift; sourceTree = "<group>"; };
+		9DCF412A2BE78D8F0058214B /* LoadingDimmingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingDimmingViewController.swift; sourceTree = "<group>"; };
 		9DDBF07B2BD62D5700000863 /* CommentCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCodable.swift; sourceTree = "<group>"; };
 		9DDBF07D2BD982D200000863 /* AlbumCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCodable.swift; sourceTree = "<group>"; };
 		9DDBF0802BDAC7F100000863 /* FIRIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRIdentifiable.swift; sourceTree = "<group>"; };
@@ -667,6 +671,7 @@
 			isa = PBXGroup;
 			children = (
 				9D7FCBDB2BB5F218001546FC /* AvatarView */,
+				9DCF41272BE78D4E0058214B /* DimmingViews */,
 				9D7FCC0D2BB9B254001546FC /* PhotoView */,
 				9D7FCC002BB82388001546FC /* ProfileHeader */,
 				9DC279C62B4BED7800FD401F /* CustomTextField.swift */,
@@ -715,6 +720,15 @@
 				9DCF41252BE7615B0058214B /* ForgotPasswordViewModel.swift */,
 			);
 			path = ForgotPassword;
+			sourceTree = "<group>";
+		};
+		9DCF41272BE78D4E0058214B /* DimmingViews */ = {
+			isa = PBXGroup;
+			children = (
+				9DCF41282BE78D6A0058214B /* DimmingViewController.swift */,
+				9DCF412A2BE78D8F0058214B /* LoadingDimmingViewController.swift */,
+			);
+			path = DimmingViews;
 			sourceTree = "<group>";
 		};
 		9DDBF07F2BDAC7D200000863 /* Interfaces */ = {
@@ -882,6 +896,7 @@
 				9D3994DD2BA09A52009F894A /* Coordinatable.swift in Sources */,
 				9D41B9162BD5623C002CBAA8 /* DateConverter.swift in Sources */,
 				9D7FCBE32BB60229001546FC /* AvatarAssembly.swift in Sources */,
+				9DCF412B2BE78D8F0058214B /* LoadingDimmingViewController.swift in Sources */,
 				9D6BE4432BA6C8B700462B12 /* SavedViewModel.swift in Sources */,
 				9D9E9CB72BC09A3700593B73 /* PhotoGalleryAssembly.swift in Sources */,
 				9DCAC4F12B4D96280040C327 /* HaveAccountViewModel.swift in Sources */,
@@ -960,6 +975,7 @@
 				9D9E9CC42BC2B72A00593B73 /* GalleryHeaderAssembly.swift in Sources */,
 				9D41B9182BD57327002CBAA8 /* UIImage+JPEGData.swift in Sources */,
 				9D7FCBDF2BB601EF001546FC /* AvatarViewModel.swift in Sources */,
+				9DCF41292BE78D6A0058214B /* DimmingViewController.swift in Sources */,
 				9D6BE4412BA6C8A700462B12 /* SavedViewController.swift in Sources */,
 				9D646AA02B48582100C0B2D3 /* UIColor.swift in Sources */,
 				9D831D642BBDB55200E4E8A9 /* WholePostViewModel.swift in Sources */,

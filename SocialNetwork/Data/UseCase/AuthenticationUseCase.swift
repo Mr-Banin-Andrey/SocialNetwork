@@ -66,12 +66,31 @@ final class AuthenticationUseCase {
     }
     
     func forgotPassword(email: String, completion: @escaping (Result<Void, AuthenticationService.AuthenticationError>) -> Void) {
-        authenticationService.sendPasswordReset(email: "79150444919@ya.ru") { [weak self] (result: Result<Void,AuthenticationService.AuthenticationError>)  in
+        authenticationService.sendPasswordReset(email: "79150444919@ya.ru") { [weak self] result in
             switch result {
             case .success():
                 completion(.success(Void()))
             case .failure(let error):
                 completion(.failure(.emailDoesNotExist))
+            }
+        }
+    }
+    
+    func authUser(completion: @escaping (Result<User, AuthenticationService.AuthenticationError>) -> Void) {
+        authenticationService.authUser() { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let userID):
+                fetchUser(userID: userID) { (result:Result<User,FirestoreService.FirestoreServiceError>) in
+                    switch result {
+                    case .success(let user):
+                        completion(.success(user))
+                    case .failure(_):
+                        completion(.failure(.failedLoadingProfile))
+                    }
+                }
+            case .failure(let failure):
+                completion(.failure(.userIsNotLoggedIn))
             }
         }
     }

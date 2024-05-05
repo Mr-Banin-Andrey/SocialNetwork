@@ -70,6 +70,16 @@ final class AuthenticationService {
         }
     }
     
+    func authUser(completion: @escaping (Result<String, AuthenticationError>) -> Void) {
+        
+        if let currentUser = auth.currentUser {
+            completion(.success(currentUser.uid))
+        } else {
+            completion(.failure(.userIsNotLoggedIn))
+        }
+    }
+    
+    
     func signOut() {
         try? auth.signOut()
         
@@ -78,7 +88,7 @@ final class AuthenticationService {
     // MARK: Types
     
     enum AuthenticationError: Error {
-        case loginNotRegistered(errorMessage: String)
+        case userIsNotLoggedIn
         case authResultIsNil
         case failedToCreateUser
         case failedToSignIn

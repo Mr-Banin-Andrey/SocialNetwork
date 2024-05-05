@@ -49,6 +49,7 @@ final class ForgotPasswordViewController: UIViewController, Coordinatable {
         return $0
     }(UIImageView())
 
+    private lazy var loadingViewController = LoadingDimmingViewController()
 
     //MARK: Initial
 
@@ -72,6 +73,14 @@ final class ForgotPasswordViewController: UIViewController, Coordinatable {
         bindViewModel()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     //MARK: Private methods
 
     private func bindViewModel() {
@@ -80,16 +89,22 @@ final class ForgotPasswordViewController: UIViewController, Coordinatable {
             switch state {
             case .initial:
                 break
+            case .tryingToSendEmail:
+                self.loadingViewController.show(on: self)
             case .showAlertSuccess:
-                presentAlert(
-                    message: "Ссылка на восстановление пароля отправлена на почту",
-                    actionTitle: "Хорошо"
-                )
+                self.loadingViewController.hide {
+                    self.presentAlert(
+                        message: "Ссылка на восстановление пароля отправлена на почту",
+                        actionTitle: "Хорошо"
+                    )
+                }
             case .showAlertFailed:
-                presentAlert(
-                    message: "Ошибка в восстановлении почты",
-                    actionTitle: "Попробовать ещё раз"
-                )
+                self.loadingViewController.hide {
+                    self.presentAlert(
+                        message: "Ошибка в восстановлении почты",
+                        actionTitle: "Попробовать ещё раз"
+                    )
+                }
             }
         }
     }

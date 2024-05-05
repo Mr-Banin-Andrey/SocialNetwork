@@ -101,6 +101,8 @@ final class RegistrationViewController: UIViewController, Coordinatable {
         return $0
     }(UILabel())
     
+    private lazy var loadingViewController = LoadingDimmingViewController()
+    
     //MARK: Initial
     
     init(viewModel: RegistrationViewModel) {
@@ -122,6 +124,14 @@ final class RegistrationViewController: UIViewController, Coordinatable {
         self.setupUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     //MARK: Private methods
     
     private func bindViewModel() {
@@ -130,29 +140,37 @@ final class RegistrationViewController: UIViewController, Coordinatable {
             switch state {
             case .initial:
                 break
+            case .tryingToSignUp:
+                self.loadingViewController.show(on: self)
             case .showUser(let user):
-                navigationController?.navigationBar.isHidden = true
-                self.coordinator?.proceedToUserFlow(user)
+                self.loadingViewController.hide {
+                    self.navigationController?.navigationBar.isHidden = true
+                    self.coordinator?.proceedToUserFlow(user)
+                }
             case .showAlertFieldsEmpty:
-                presentAlert(
+                self.presentAlert(
                     message: "Все поля должны быть заполнены",
                     title: "Ошибка"
                 )
             case .showAlertPasswordsDoNotMatch:
-                presentAlert(
+                self.presentAlert(
                     message: "Пароли не совпадают",
                     title: "Ошибка"
                 )
             case .showAlertInvalidPassword:
-                presentAlert(
-                    message: "Некорректный пароль",
-                    title: "Ошибка"
-                )
+                self.loadingViewController.hide {
+                    self.presentAlert(
+                        message: "Некорректный пароль",
+                        title: "Ошибка"
+                    )
+                }
             case .showAlertInvalidEmail:
-                presentAlert(
-                    message: "Некорректная почта",
-                    title: "Ошибка"
-                )
+                self.loadingViewController.hide {
+                    self.presentAlert(
+                        message: "Некорректная почта",
+                        title: "Ошибка"
+                    )
+                }
             }
         }
     }

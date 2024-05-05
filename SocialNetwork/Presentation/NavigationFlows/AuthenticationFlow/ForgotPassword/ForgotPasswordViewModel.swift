@@ -16,6 +16,7 @@ protocol ForgotPasswordViewModelProtocol: ViewModelProtocol where State == Forgo
 
 enum ForgotPasswordState {
     case initial
+    case tryingToSendEmail
     case showAlertSuccess
     case showAlertFailed
 }
@@ -45,6 +46,7 @@ final class ForgotPasswordViewModel: ForgotPasswordViewModelProtocol {
     func updateState(with viewInput: ViewInput) {
         switch viewInput {
         case .didTapPasswordRecovery(let email):
+            state = .tryingToSendEmail
             authenticationUseCase.forgotPassword(email: email) { [weak self] result in
                 switch result {
                 case .success():
