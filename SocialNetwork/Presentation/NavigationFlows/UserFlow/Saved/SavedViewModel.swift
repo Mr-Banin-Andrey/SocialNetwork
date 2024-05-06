@@ -15,10 +15,15 @@ protocol SavedViewModelProtocol: ViewModelProtocol where State == SavedState, Vi
 
 enum SavedState {
     case initial
+    case updateView
+    case openScreenMenu(Post)
+    case openScreenPost(Post)
 }
 
 enum SavedViewInput {
-    
+    case willStartUpdate
+    case didTapOpenMenu(Post)
+    case didTapOpenPost(Post)
 }
 
 // MARK: - SavedViewModel
@@ -35,22 +40,26 @@ final class SavedViewModel: SavedViewModelProtocol {
         }
     }
     
-    var user: User
+    @Dependency private var useCase: UserUseCase
+    
+    var user: User?
     
     var posts: [(date: Date, posts: [Post])] = []
-    
-    //MARK: Initial
-    
-    init(user: User) {
-        self.user = user
-        
-        posts = GroupingForPosts.groupByDate(user.savedPosts)        
-    }
     
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {
-
+        switch viewInput {
+        case .willStartUpdate:
+            user = useCase.user
+            guard let user = user else {return}
+            posts = GroupingForPosts.groupByDate(user.savedPosts)
+            state = .updateView
+        case .didTapOpenMenu(let post):
+            state = .openScreenMenu(post)
+        case .didTapOpenPost(let post):
+            state = .openScreenPost(post)
+        }
     }
     
 }

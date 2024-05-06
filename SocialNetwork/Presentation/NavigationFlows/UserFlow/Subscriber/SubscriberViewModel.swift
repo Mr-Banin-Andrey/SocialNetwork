@@ -15,13 +15,13 @@ protocol SubscriberViewModelProtocol: ViewModelProtocol where State == Subscribe
 
 enum SubscriberState {
     case initial
-    case openScreenMenu
+    case openScreenMenu(Post)
     case openScreenPost(Post)
     case openScreenGallery([AlbumCodable])
 }
 
 enum SubscriberViewInput {
-    case didTapOpenMenu
+    case didTapOpenMenu(Post)
     case didTapOpenPost(Post)
     case didTapOpenGallery([AlbumCodable])
 }
@@ -40,14 +40,14 @@ final class SubscriberViewModel: SubscriberViewModelProtocol {
         }
     }
     
-    var user: User
+    var subscriber: User
     
     var posts: [(date: Date, posts: [Post])] = [] 
     
     //MARK: Initial
     
     init(user: User) {
-        self.user = user
+        self.subscriber = user
         
         posts = GroupingForPosts.groupByDate(user.posts)
     }
@@ -56,8 +56,8 @@ final class SubscriberViewModel: SubscriberViewModelProtocol {
     
     func updateState(with viewInput: ViewInput) {
         switch viewInput {
-        case .didTapOpenMenu:
-            state = .openScreenMenu
+        case .didTapOpenMenu(let post):
+            state = .openScreenMenu(post)
         case .didTapOpenPost(let post):
             state = .openScreenPost(post)
         case .didTapOpenGallery(let albums):

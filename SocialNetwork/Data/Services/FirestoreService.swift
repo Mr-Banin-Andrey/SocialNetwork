@@ -18,9 +18,17 @@ final class FirestoreService {
         case album
     }
     
-    enum Fields: String {
+    enum UserFields: String {
         case id
         case userCreatedID
+    }
+    
+    enum FieldsForUpdate: String {
+        case posts
+        case likes
+        case savedPosts
+        case followers
+        case following
     }
     
     enum FirestoreServiceError: Error {
@@ -28,6 +36,8 @@ final class FirestoreService {
         case errorСreatingProfile
         case failedToCreateComment
         case failedToCreateLike
+        case failedToUpdateSavedPosts
+        case failedToSubscribe
     }
     
     // MARK: Private properties
@@ -49,7 +59,7 @@ final class FirestoreService {
     
     //MARK: Posts related methods
     
-    func fetchObjects<T:Codable>(givenBy id: String = "", model: T.Type, collection: Collections, field: Fields? = .none) async throws -> [T] {
+    func fetchObjects<T:Codable>(givenBy id: String = "", model: T.Type, collection: Collections, field: UserFields? = .none) async throws -> [T] {
         rootCollectionReference = dataBase.collection(collection.rawValue)
         var querySnapshot: QuerySnapshot
         
@@ -71,15 +81,8 @@ final class FirestoreService {
         try dataBase.collection(collection.rawValue).document(id).setData(from: model)
     }
     
-    func addCommentInPost(id: String, collection: Collections, posts: [String]) async throws {
-        let postReference = dataBase.collection(collection.rawValue).document(id)
-        try await postReference.updateData(["posts": posts])
+    func updateObject(id: String, collection: Collections, field: FieldsForUpdate, objectsArray: [String]) async throws {
+        let reference = dataBase.collection(collection.rawValue).document(id)
+        try await reference.updateData([field.rawValue: objectsArray])
     }
-    
-    func likePost(id: String, collection: Collections, likes: [String]) async throws {
-        let postReference = dataBase.collection(collection.rawValue).document(id)
-        try await postReference.updateData(["likes": likes])
-    }
-    
-    
 }

@@ -10,15 +10,12 @@ import UIKit
 final class UserFactory {
     
     //MARK: Properties
-    
-    private let user: User
-    
+        
     let userUseCase: UserUseCase
     
     //MARK: Initial
     
-    init(user: User, useCase: UserUseCase) {
-        self.user = user
+    init(useCase: UserUseCase) {
         self.userUseCase = useCase
         
         ///
@@ -61,7 +58,7 @@ final class UserFactory {
     }
     
     func makeMainScreen() -> any UIViewController & Coordinatable {
-        let viewModel = MainViewModel(user: user)
+        let viewModel = MainViewModel()
         let viewController = MainViewController(viewModel: viewModel)
         let mainTitle = "Main"
         let mainTabBarItem = UITabBarItem(title: mainTitle, 
@@ -73,7 +70,7 @@ final class UserFactory {
     }
     
     func makeProfileScreen() -> any UIViewController & Coordinatable {
-        let viewModel = ProfileViewModel(user: user)
+        let viewModel = ProfileViewModel()
         let viewController = ProfileViewController(viewModel: viewModel)
         let mainTitle = "Profile"
         let profileTabBarItem = UITabBarItem(title: mainTitle,
@@ -85,7 +82,7 @@ final class UserFactory {
     }
     
     func makeSavedScreen() -> any UIViewController & Coordinatable {
-        let viewModel = SavedViewModel(user: user)
+        let viewModel = SavedViewModel()
         let viewController = SavedViewController(viewModel: viewModel)
         let mainTitle = "Saved"
         let mainTabBarItem = UITabBarItem(title: mainTitle,

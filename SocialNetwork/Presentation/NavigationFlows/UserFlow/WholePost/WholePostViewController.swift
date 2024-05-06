@@ -130,7 +130,7 @@ final class WholePostViewController: UIViewController {
     }
     
     @objc private func didTapSettings() {
-        let settings = SettingsSheetAssembly().viewController()
+        let settings = SettingsSheetAssembly(post: viewModel.post).viewController()
         present(settings, animated: true)
     }
     

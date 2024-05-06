@@ -30,7 +30,7 @@ final class SubscriberViewController: UIViewController, Coordinatable {
     private lazy var titleLabel: UILabel = {
         $0.font = .interSemiBold600Font
         $0.textColor = .textAndButtonColor
-        $0.text = viewModel.user.nickname
+        $0.text = viewModel.subscriber.nickname
         return $0
     }(UILabel())
     
@@ -64,8 +64,8 @@ final class SubscriberViewController: UIViewController, Coordinatable {
             switch state {
             case .initial:
                 break
-            case .openScreenMenu:
-                let settings = SettingsSheetAssembly().viewController()
+            case .openScreenMenu(let post):
+                let settings = SettingsSheetAssembly(post: post).viewController()
                 present(settings, animated: true)
             case .openScreenPost(let post):
                 let wholePost = WholePostAssembly(post: post).viewController()
@@ -144,8 +144,8 @@ extension SubscriberViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
-            let view = ProfileHeaderAssembly(type: .subscriberView, user: viewModel.user).view()
-            view.setupHeader(numberOfPhoto: viewModel.user.photos.count)
+            let view = ProfileHeaderAssembly(type: .subscriberView, user: viewModel.subscriber).view()
+            view.setupHeader(numberOfPhoto: viewModel.subscriber.photos.count)
             view.delegate = self
             return view
         default:
@@ -196,8 +196,8 @@ extension SubscriberViewController: PostCellDelegate {
         return
     }
     
-    func openScreenMenuSheet() {
-        viewModel.updateState(with: .didTapOpenMenu)
+    func openScreenMenuSheet(post: Post) {
+        viewModel.updateState(with: .didTapOpenMenu(post))
     }
     
     func openScreenWholePost(post: Post) {

@@ -97,8 +97,8 @@ final class MainViewController: UIViewController, Coordinatable {
                 
             case .openScreenSubscriber(let user):
                 coordinator?.subscriber(user: user)
-            case .openScreenMenu:
-                let settings = SettingsSheetAssembly().viewController()
+            case .openScreenMenu(let post):
+                let settings = SettingsSheetAssembly(post: post).viewController()
                 present(settings, animated: true)
             case .openScreenPost(let post):
                 let wholePost = WholePostAssembly(post: post).viewController()
@@ -115,7 +115,12 @@ final class MainViewController: UIViewController, Coordinatable {
     }
     
     private func updateView() {
-        NotificationCenter.default.addObserver(forName: NotificationKey.updateViewKey, object: nil, queue: .main) { [weak self] notification in
+        NotificationCenter.default.addObserver(forName: NotificationKey.wholePostKey, object: nil, queue: .main) { [weak self] notification in
+            guard let self else { return }
+            viewModel.updateState(with: .startLoadPosts)
+        } 
+        
+        NotificationCenter.default.addObserver(forName: NotificationKey.settingsSheetKey, object: nil, queue: .main) { [weak self] notification in
             guard let self else { return }
             viewModel.updateState(with: .startLoadPosts)
         }
@@ -214,8 +219,8 @@ extension MainViewController: PostCellDelegate {
         viewModel.updateState(with: .didTapOpenSubscriberProfile(userID))
     }
     
-    func openScreenMenuSheet() {
-        viewModel.updateState(with: .didTapOpenMenu)
+    func openScreenMenuSheet(post: Post) {
+        viewModel.updateState(with: .didTapOpenMenu(post))
     }
     
     func openScreenWholePost(post: Post) {

@@ -8,5 +8,6 @@
 import Foundation
 
 enum NotificationKey {
-    static let updateViewKey = Notification.Name("updateViewKey")
+    static let wholePostKey = Notification.Name("wholePostKey")
+    static let settingsSheetKey = Notification.Name("settingsSheetKey")
 }

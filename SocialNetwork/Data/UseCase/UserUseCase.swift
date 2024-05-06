@@ -13,7 +13,7 @@ final class UserUseCase {
     
     // MARK: Private properties
     
-    private var user: User
+    var user: User
     
     private lazy var authenticationService = AuthenticationService()
     private lazy var firestoreService = FirestoreService()
@@ -130,7 +130,7 @@ final class UserUseCase {
                 try await firestoreService.createObjectDocument(id: commentCodable.id ?? "", commentCodable, collection: .comments)
                 var comments: [String] = post.comments.map { $0.postID }
                 comments.append(commentCodable.postID)
-                try await firestoreService.addCommentInPost(id: post.id, collection: .posts, posts: comments)
+                try await firestoreService.updateObject(id: post.id, collection: .posts, field: .posts, objectsArray: comments)
                 DispatchQueue.main.async {
                     completion(.success(commentCodable))
                 }
@@ -147,11 +147,20 @@ final class UserUseCase {
         
         Task {
             do {
-                var likes: [String] = post.likes.map { $0 }
-                likes.append(user.id)
-                try await firestoreService.likePost(id: post.id, collection: .posts, likes: likes)
-                DispatchQueue.main.async {
-                    completion(.success(likes))
+                if post.likePost {
+                    var likes: [String] = post.likes.map { $0 }
+                    likes.removeAll { $0 == user.id }
+                    try await firestoreService.updateObject(id: post.id, collection: .posts, field: .likes, objectsArray: likes)
+                    DispatchQueue.main.async {
+                        completion(.success(likes))
+                    }
+                } else {
+                    var likes: [String] = post.likes.map { $0 }
+                    likes.append(user.id)
+                    try await firestoreService.updateObject(id: post.id, collection: .posts, field: .likes, objectsArray: likes)
+                    DispatchQueue.main.async {
+                        completion(.success(likes))
+                    }
                 }
             } catch (let error) {
                 print("Error update likes: \(error)")
@@ -162,4 +171,66 @@ final class UserUseCase {
         }
     }
     
+    func updateStateSubscriber(userCreatedID: String) -> Bool {
+        var subscriber = user.following.filter { $0 == userCreatedID }.isEmpty
+        subscriber.toggle()
+        return subscriber
+    }
+    
+    func addBookmark(post: Post, completion: @escaping (Result<Void, FirestoreService.FirestoreServiceError>) -> Void = { _ in }) {
+        
+        Task {
+            do {
+                if post.savedPost {
+                    var post = post
+                    post.savedPost = false
+                    var savedPosts: [String] = user.savedPosts.map { $0.id }
+                    savedPosts.removeAll { $0 == post.id }
+                    user.savedPosts.removeAll { $0.id == post.id }
+                    
+                    try await firestoreService.updateObject(id: user.id, collection: .users, field: .savedPosts, objectsArray: savedPosts)
+                    DispatchQueue.main.async {
+                        completion(.success(Void()))
+                    }
+                } else {
+                    var post = post
+                    post.savedPost = true
+                    user.savedPosts.append(post)
+                    var savedPosts: [String] = user.savedPosts.map { $0.id }
+                    try await firestoreService.updateObject(id: user.id, collection: .users, field: .savedPosts, objectsArray: savedPosts)
+                    DispatchQueue.main.async {
+                        completion(.success(Void()))
+                    }
+                }
+            } catch (let error) {
+                print("Error update likes: \(error)")
+                DispatchQueue.main.async {
+                    completion(.failure(.failedToUpdateSavedPosts))
+                }
+            }
+        }
+    }
+    
+    func toSubscribe(subscriberID: String, completion: @escaping (Result<Void, FirestoreService.FirestoreServiceError>) -> Void = { _ in }) {
+        Task {
+            do {
+                
+                let subscriber = try await firestoreService.fetchObject(id: subscriberID, model: UserCodable.self, collections: .users)
+                var followers = subscriber.followers
+                followers.append(user.id)
+                try await firestoreService.updateObject(id: subscriber.id ?? "", collection: .users, field: .followers, objectsArray: followers)
+                
+                user.following.append(subscriberID)
+                try await firestoreService.updateObject(id: user.id, collection: .users, field: .following, objectsArray: user.following)
+                DispatchQueue.main.async {
+                    completion(.success(Void()))
+                }
+            } catch (let error) {
+                print("Error toSubscribe: \(error)")
+                DispatchQueue.main.async {
+                    completion(.failure(.failedToSubscribe))
+                }
+            }
+        }
+    }
 }

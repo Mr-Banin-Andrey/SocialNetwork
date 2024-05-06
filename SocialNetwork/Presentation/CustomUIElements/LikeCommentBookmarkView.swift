@@ -39,9 +39,7 @@ final class LikeCommentBookmarkView: UIView {
         image: .likeImage,
         tintColor: .textAndButtonColor
     ) { [weak self] in
-        if self?.post?.likePost == false {
-            self?.delegate?.didTapLike()
-        }
+        self?.delegate?.didTapLike()
     }
     
     private lazy var likeLabel: UILabel = {

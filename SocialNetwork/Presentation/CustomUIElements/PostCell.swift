@@ -9,7 +9,7 @@ import UIKit
 
 protocol PostCellDelegate: AnyObject {
     func openScreenSubscriber(userID: String)
-    func openScreenMenuSheet()
+    func openScreenMenuSheet(post: Post)
     func openScreenWholePost(post: Post)
 }
 
@@ -43,7 +43,8 @@ final class PostCell: UITableViewCell {
         image: .verticalEllipseImage,
         tintColor: .textTertiaryColor
     ) { [weak self] in
-        self?.delegate?.openScreenMenuSheet()
+        guard let post = self?.postInCell else {return }
+        self?.delegate?.openScreenMenuSheet(post: post)
     }
         
     private lazy var backgroundTextView: UIView = {

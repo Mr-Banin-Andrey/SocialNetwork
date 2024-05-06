@@ -15,14 +15,16 @@ protocol ProfileViewModelProtocol: ViewModelProtocol where State == ProfileState
 
 enum ProfileState {
     case initial
-    case openScreenMenu
+    case updateView
+    case openScreenMenu(Post)
     case openScreenPost(Post)
     case openScreenGallery([AlbumCodable])
 }
 
 enum ProfileViewInput {
+    case willStartUpdate
     case didTapAddNewPost
-    case didTapOpenMenu
+    case didTapOpenMenu(Post)
     case didTapOpenPost(Post)
     case didTapOpenGallery([AlbumCodable])
 }
@@ -41,26 +43,25 @@ final class ProfileViewModel: ProfileViewModelProtocol {
         }
     }
     
-    var user: User
+    @Dependency private var useCase: UserUseCase
+    
+    var user: User?
     
     var posts: [(date: Date, posts: [Post])] = []
- 
-    //MARK: Initial
-    
-    init(user: User) {
-        self.user = user
-        
-        posts = GroupingForPosts.groupByDate(user.posts)
-    }
     
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {
         switch viewInput {
+        case .willStartUpdate:
+            user = useCase.user
+            guard let user = user else {return}
+            posts = GroupingForPosts.groupByDate(user.posts)
+            state = .updateView
         case .didTapAddNewPost:
             break
-        case .didTapOpenMenu:
-            state = .openScreenMenu
+        case .didTapOpenMenu(let post):
+            state = .openScreenMenu(post)
         case .didTapOpenPost(let post):
             state = .openScreenPost(post)
         case .didTapOpenGallery(let albums):

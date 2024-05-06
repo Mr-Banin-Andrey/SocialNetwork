@@ -15,10 +15,17 @@ protocol SettingsSheetViewModelProtocol: ViewModelProtocol where State == Settin
 
 enum SettingsSheetState {
     case initial
+    case tryingToUpdateView
+    case updateView(Bool)
+//    case updateStateButton(Bool)
+    case showAlertFailedToAddBookmark
+    case showAlertFailedToSubscriber
 }
 
 enum SettingsSheetViewInput {
-    
+    case willUpdateState
+    case didTapCancelSubscription
+    case didTapAddToBookmarks
 }
 
 // MARK: - SettingsSheetViewModel
@@ -35,10 +42,60 @@ final class SettingsSheetViewModel: SettingsSheetViewModelProtocol {
         }
     }
     
+    @Dependency private var userUseCase: UserUseCase
+    
+    var post: Post
+    
+    private let notificationCenter = NotificationCenter.default
+    
+    //MARK: Post
+    
+    init(post: Post) {
+        self.post = post
+    }
+    
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {
-
+        switch viewInput {
+        case .willUpdateState:
+            let isFriend = userUseCase.updateStateSubscriber(userCreatedID: post.userCreatedID)
+            state = .updateView(isFriend)
+        case .didTapCancelSubscription:
+            
+            state = .tryingToUpdateView
+            userUseCase.toSubscribe(subscriberID: post.userCreatedID) { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case .success(_):
+                    let isFriend = userUseCase.updateStateSubscriber(userCreatedID: post.userCreatedID)
+                    state = .updateView(isFriend)
+                    notificationCenterPost()
+                case .failure(let failure):
+                    print("error didTapCancelSubscription\(failure)")
+                    state = .showAlertFailedToSubscriber
+                }
+            }
+            
+        case .didTapAddToBookmarks:
+            
+            state = .tryingToUpdateView
+            userUseCase.addBookmark(post: post) { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case .success(_):
+                    let isFriend = userUseCase.updateStateSubscriber(userCreatedID: post.userCreatedID)
+                    state = .updateView(isFriend)
+                    notificationCenterPost()
+                case .failure(let failure):
+                    print("error didTapAddToBookmarks\(failure)")
+                    state = .showAlertFailedToAddBookmark
+                }
+            }
+        }
     }
     
+    private func notificationCenterPost() {
+        notificationCenter.post(name: NotificationKey.settingsSheetKey, object: nil)
+    }
 }

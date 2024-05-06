@@ -107,6 +107,10 @@ final class CustomButton: UIButton {
         }
     }
     
+    func updateTitle(title: String) {
+        setTitle(title, for: .normal)
+    }
+    
     //MARK: Private methods
     
     private func setupUnderline(text: String) -> NSAttributedString {

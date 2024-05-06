@@ -36,7 +36,7 @@ final class SettingsSheetViewController: UIViewController {
         titleColor: .textAndButtonColor,
         backgroundColor: nil
     ) { [weak self] in
-        return
+        self?.viewModel.updateState(with: .didTapAddToBookmarks)
     }
     
     private lazy var unsubscribedButton = CustomButton(
@@ -45,8 +45,10 @@ final class SettingsSheetViewController: UIViewController {
         titleColor: .textAndButtonColor, 
         backgroundColor: nil
     ) { [weak self] in
-        return
+        self?.viewModel.updateState(with: .didTapCancelSubscription)
     }
+    
+    private lazy var loadingViewController = LoadingDimmingViewController()
     
     //MARK: Init
     
@@ -67,12 +69,40 @@ final class SettingsSheetViewController: UIViewController {
         sheetPresentationController()
         setupUI()
         bindViewModel()
+        viewModel.updateState(with: .willUpdateState)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     //MARK: Methods
     
     func bindViewModel() {
-
+        viewModel.onStateDidChange = { [weak self] state in
+            guard let self else { return }
+            switch state {
+            case .initial:
+                break
+            case .tryingToUpdateView:
+                self.loadingViewController.show(on: self)
+            case .updateView(let isFriend):
+                self.loadingViewController.hide {
+                    self.updateStateButtons(savedPost: self.viewModel.post.savedPost, friend: isFriend)
+                    self.dismiss(animated: true)
+                }
+            case .showAlertFailedToAddBookmark:
+                self.presentAlert(
+                    message: "Не удалось добавить в Сохранные",
+                    title: "Неудачно"
+                )
+            case .showAlertFailedToSubscriber:
+                self.presentAlert(
+                    message: "Не удалось подписаться",
+                    title: "Неудачно"
+                )
+            }
+        }
     }
     
     private func sheetPresentationController() {
@@ -88,6 +118,20 @@ final class SettingsSheetViewController: UIViewController {
             sheet.prefersGrabberVisible = false
             sheet.preferredCornerRadius = 20
             sheet.largestUndimmedDetentIdentifier = .medium
+        }
+    }
+    
+    private func updateStateButtons(savedPost: Bool, friend: Bool) {
+        if savedPost {
+            self.savedButton.updateTitle(title: "Удалить из закладок")
+        } else {
+            self.savedButton.updateTitle(title: "Сохранить в закладках")
+        }
+        
+        if friend {
+            self.unsubscribedButton.updateTitle(title: "Отменить подписку")
+        } else {
+            self.unsubscribedButton.updateTitle(title: "Подписаться")
         }
     }
     

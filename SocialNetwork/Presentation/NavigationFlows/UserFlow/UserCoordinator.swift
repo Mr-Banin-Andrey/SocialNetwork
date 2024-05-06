@@ -25,7 +25,7 @@ final class UserCoordinator: Coordinator {
         self.navigationController = navigationController
                 
         let userUseCase = UserUseCase(user: user)
-        self.userFactory = UserFactory(user: user, useCase: userUseCase)
+        self.userFactory = UserFactory(useCase: userUseCase)
     }
     
     func start() {

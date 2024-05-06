@@ -173,7 +173,7 @@ final class ProfileHeaderView: UIView {
             case .subscriberView:
                 editButton.changeColorAndTitle(title: "Подписаться", color: .textAndButtonColor)
                 createPostButton.isHidden = true
-                myNotesLabel.text = "Посты кого-то..."
+                myNotesLabel.text = "Посты \(viewModel.user.firstName)"
             }
         }
     }
@@ -188,6 +188,7 @@ final class ProfileHeaderView: UIView {
         setupImage(type: type)
         bindViewModel()
         avatarImage.setupAvatar(viewModel.user.id)
+        viewModel.updateState(with: .willLoadData)
     }
     
     required init?(coder: NSCoder) {
@@ -208,6 +209,8 @@ final class ProfileHeaderView: UIView {
                 break
             case .showScreenGallery(let albums):
                 self.delegate?.openScreenGallery(albums: albums)
+            case .updateSubscribe(let isSubscriber):
+                editButtonState(isSubscriber)
             }
         }
     }
@@ -218,6 +221,14 @@ final class ProfileHeaderView: UIView {
             self.type = .profileView
         case .subscriberView:
             self.type = .subscriberView
+        }
+    }
+    
+    private func editButtonState(_ isSubscriber: Bool) {
+        if isSubscriber {
+            editButton.changeColorAndTitle(title: "Отписаться", color: .textSecondaryColor)
+        } else {
+            editButton.changeColorAndTitle(title: "Подписаться", color: .textAndButtonColor)
         }
     }
     

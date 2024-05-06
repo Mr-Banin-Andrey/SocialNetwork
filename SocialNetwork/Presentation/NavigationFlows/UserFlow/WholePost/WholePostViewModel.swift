@@ -79,6 +79,7 @@ final class WholePostViewModel: WholePostViewModelProtocol {
                 switch result {
                 case .success(let likes):
                     DispatchQueue.main.async {
+                        self.updateLikeField(isLike: self.post.likePost)
                         self.post.likes = likes
                         self.state = .updateView
                         self.notificationCenterPost()
@@ -92,6 +93,10 @@ final class WholePostViewModel: WholePostViewModelProtocol {
     }
     
     private func notificationCenterPost() {
-        notificationCenter.post(name: NotificationKey.updateViewKey, object: nil)
+        notificationCenter.post(name: NotificationKey.wholePostKey, object: nil)
+    }
+    
+    private func updateLikeField(isLike: Bool) {
+        self.post.likePost = !isLike
     }
 }
