@@ -86,7 +86,7 @@ final class LogInViewController: UIViewController, Coordinatable {
             guard let self = self else { return }
             switch state {
             case .initial:
-                break
+                self.loadingViewController.hide()
             case .showOpenRegistration:
                 guard let coordinator else { return }
                 coordinator.navigateTo(.registration(coordinator: coordinator))

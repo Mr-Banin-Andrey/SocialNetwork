@@ -85,6 +85,10 @@ final class MainViewController: UIViewController, Coordinatable {
         updateView()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     //MARK: Methods
     
     func bindViewModel() {
@@ -121,6 +125,16 @@ final class MainViewController: UIViewController, Coordinatable {
         } 
         
         NotificationCenter.default.addObserver(forName: NotificationKey.settingsSheetKey, object: nil, queue: .main) { [weak self] notification in
+            guard let self else { return }
+            viewModel.updateState(with: .startLoadPosts)
+        }
+        
+        NotificationCenter.default.addObserver(forName: NotificationKey.newAvatarKey, object: nil, queue: .main) { [weak self] notification in
+            guard let self else { return }
+            viewModel.updateState(with: .startLoadPosts)
+        }
+        
+        NotificationCenter.default.addObserver(forName: NotificationKey.newPostKey, object: nil, queue: .main) { [weak self] notification in
             guard let self else { return }
             viewModel.updateState(with: .startLoadPosts)
         }

@@ -26,7 +26,7 @@ final class ProfileHeaderView: UIView {
     
     //MARK: Properties
     
-    private lazy var avatarImage = AvatarAssembly(size: .sizeEighty, isBorder: false).view()
+    private lazy var avatarImage = AvatarAssembly(size: .sizeEighty, isBorder: false, isEdit: false).view()
     
     private lazy var nameAndProfessionStack: UIStackView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -207,10 +207,12 @@ final class ProfileHeaderView: UIView {
             switch state {
             case .initial:
                 break
-            case .showScreenGallery(let albums):
-                self.delegate?.openScreenGallery(albums: albums)
             case .updateSubscribe(let isSubscriber):
                 editButtonState(isSubscriber)
+            case .showScreenGallery(let albums):
+                self.delegate?.openScreenGallery(albums: albums)
+            
+                
             }
         }
     }

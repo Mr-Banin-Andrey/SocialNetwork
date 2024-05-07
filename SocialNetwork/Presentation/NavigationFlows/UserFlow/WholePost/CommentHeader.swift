@@ -19,7 +19,7 @@ final class CommentHeader: UIView {
     
     //MARK: Properties
     
-    private lazy var avatarImage = AvatarAssembly(size: .sizeThirty, isBorder: false).view()
+    private lazy var avatarImage = AvatarAssembly(size: .sizeThirty, isBorder: false, isEdit: false).view()
     
     private lazy var nicknameLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +37,7 @@ final class CommentHeader: UIView {
         return $0
     }(UILabel())
     
-    private lazy var photoImage = PhotoAssembly().view()
+    private lazy var photoImage = PhotoAssembly(isEdit: false).view()
     
     private lazy var commentTextLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false

@@ -49,6 +49,10 @@ final class SavedViewController: UIViewController, Coordinatable {
         updateView()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     //MARK: Methods
     
     func bindViewModel() {

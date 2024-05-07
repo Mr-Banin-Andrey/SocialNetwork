@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol AvatarViewDelegate: AnyObject {
+    func didTapAvatar()
+}
+
 final class AvatarView: UIView {
     
     enum AvatarSize {
@@ -18,12 +22,16 @@ final class AvatarView: UIView {
     
     private let viewModel: AvatarViewModel
     
+    weak var delegate: AvatarViewDelegate?
+    
     //MARK: Properties
     
     private lazy var pictureImage: UIImageView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(avatarTapped))
+        $0.addGestureRecognizer(tapGesture)
         return $0
     }(UIImageView())
     
@@ -54,7 +62,7 @@ final class AvatarView: UIView {
     
     //MARK: Initial
     
-    init(viewModel: AvatarViewModel, size: AvatarSize, isBorder: Bool) {
+    init(viewModel: AvatarViewModel, size: AvatarSize, isBorder: Bool, isEdit: Bool) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         
@@ -62,6 +70,7 @@ final class AvatarView: UIView {
         self.setupUI()
         setupType(type: size)
         setupBorder(isBorder)
+        pictureImage.isUserInteractionEnabled = isEdit
         bindViewModel()
     }
     
@@ -73,6 +82,10 @@ final class AvatarView: UIView {
     
     func setupAvatar(_ userID: String) {
         viewModel.updateState(with: .startLoadAvatar(userID, UIImage.logInLogoImage.jpegData(compressionQuality: 1.0) ?? Data()))
+    }
+    
+    func updateAvatar(_ imageData: Data) {
+        pictureImage.image = UIImage(data: imageData)
     }
     
     private func bindViewModel() {
@@ -138,5 +151,9 @@ final class AvatarView: UIView {
             self.pictureImage.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             self.pictureImage.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
+    }
+    
+    @objc private func avatarTapped() {
+        delegate?.didTapAvatar()
     }
 }

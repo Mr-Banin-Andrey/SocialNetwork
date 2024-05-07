@@ -56,6 +56,10 @@ final class ProfileViewController: UIViewController, Coordinatable {
         viewModel.updateState(with: .willStartUpdate)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     //MARK: Methods
     
     func bindViewModel() {
@@ -77,6 +81,17 @@ final class ProfileViewController: UIViewController, Coordinatable {
             case .openScreenGallery(let albums):
                 let gallery = PhotoGalleryAssembly(photoGalleryType: .forUser, albums: albums).viewController()
                 navigationController?.pushViewController(gallery, animated: true)
+            case .showAlertExit:
+                self.presentAlert(
+                    message: "Выйти из аккаунта?",
+                    actionTitle: "Отмена",
+                    addSecondAction: true, 
+                    secondActionTitle: "Выйти") { [weak self] in
+                        guard let self else { return }
+                        self.viewModel.updateState(with: .logOutButton)
+                    }
+            case .logOut:
+                self.coordinator?.signOut()
             }
         }
     }
@@ -91,13 +106,28 @@ final class ProfileViewController: UIViewController, Coordinatable {
             guard let self else { return }
             viewModel.updateState(with: .willStartUpdate)
         }
+        
+        NotificationCenter.default.addObserver(forName: NotificationKey.editPersonalDataKey, object: nil, queue: .main) { [weak self] notification in
+            guard let self else { return }
+            self.viewModel.updateState(with: .willStartUpdate)
+        }
+        
+        NotificationCenter.default.addObserver(forName: NotificationKey.newAvatarKey, object: nil, queue: .main) { [weak self] notification in
+            guard let self else { return }
+            viewModel.updateState(with: .willStartUpdate)
+        }
+        
+        NotificationCenter.default.addObserver(forName: NotificationKey.newPostKey, object: nil, queue: .main) { [weak self] notification in
+            guard let self else { return }
+            viewModel.updateState(with: .willStartUpdate)
+        }
     }
     
     private func setupNavBar() {
         let titleLabel = UIBarButtonItem(customView: titleLabel)
         self.navigationItem.leftBarButtonItems = [titleLabel]
                 
-        let rightButton = UIBarButtonItem(image: .burgerImage, style: .plain, target: self, action: #selector(didTapSettings))
+        let rightButton = UIBarButtonItem(image: .exitImage, style: .plain, target: self, action: #selector(didTapSettings))
         rightButton.tintColor = .textTertiaryColor
         self.navigationItem.rightBarButtonItems = [rightButton]
     }
@@ -115,7 +145,7 @@ final class ProfileViewController: UIViewController, Coordinatable {
     }
     
     @objc private func didTapSettings() {
-        
+        viewModel.updateState(with: .didTapExitButton)
     }
 }
 
@@ -193,7 +223,9 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
     }
     
     func openScreenCreatePost() {
-        return
+        guard let user = viewModel.user else { return }
+        let createPost = CreatePostAssembly(user: user).viewController()
+        navigationController?.pushViewController(createPost, animated: true)
     }
     
     func subscribeToProfile() {
@@ -201,7 +233,9 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
     }
     
     func editProfile() {
-        return
+        guard let user = viewModel.user else { return }
+        let editPersonalData = EditPersonalDataAssembly(user: user).viewController()
+        navigationController?.pushViewController(editPersonalData, animated: true)
     }
 }
 

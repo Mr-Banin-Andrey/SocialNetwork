@@ -38,6 +38,8 @@ final class FirestoreService {
         case failedToCreateLike
         case failedToUpdateSavedPosts
         case failedToSubscribe
+        case failedToUpdatePersonalData
+        case failedToCreatePost
     }
     
     // MARK: Private properties
@@ -84,5 +86,14 @@ final class FirestoreService {
     func updateObject(id: String, collection: Collections, field: FieldsForUpdate, objectsArray: [String]) async throws {
         let reference = dataBase.collection(collection.rawValue).document(id)
         try await reference.updateData([field.rawValue: objectsArray])
+    }
+    
+    func updatePersonalData(user: User) async throws  {
+        let reference = dataBase.collection(Collections.users.rawValue).document(user.id)
+        try await reference.updateData(["lastName": user.lastName,
+                                        "firstName": user.firstName,
+                                        "nickname": user.nickname,
+                                        "profession": user.profession
+                                       ])
     }
 }

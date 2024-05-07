@@ -23,7 +23,6 @@ struct PostCodable: Codable {
     let text: String
     let likes: [String]
     let comments: [String]
-    let savedPost: Bool
 
     
     enum CodingKeys: CodingKey {
@@ -37,6 +36,5 @@ struct PostCodable: Codable {
         case text
         case likes
         case comments
-        case savedPost
     }
 }

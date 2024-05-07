@@ -13,7 +13,7 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     
     //MARK: Properties
     
-    private lazy var pictureImage = PhotoAssembly().view()
+    private lazy var pictureImage = PhotoAssembly(isEdit: false).view()
     private var photoID: String?
     
     //MARK: Initial

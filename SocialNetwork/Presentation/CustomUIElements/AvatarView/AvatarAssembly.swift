@@ -11,15 +11,17 @@ final class AvatarAssembly {
     
     private let size: AvatarView.AvatarSize
     private let isBorder: Bool
+    private let isEdit: Bool
     
-    init(size: AvatarView.AvatarSize, isBorder: Bool) {
+    init(size: AvatarView.AvatarSize, isBorder: Bool, isEdit: Bool) {
         self.size = size
         self.isBorder = isBorder
+        self.isEdit = isEdit
     }
     
     func view() -> AvatarView {
         let viewModel = AvatarViewModel()
-        let view = AvatarView(viewModel: viewModel, size: size, isBorder: isBorder)
+        let view = AvatarView(viewModel: viewModel, size: size, isBorder: isBorder, isEdit: isEdit)
         return view
     }
 }

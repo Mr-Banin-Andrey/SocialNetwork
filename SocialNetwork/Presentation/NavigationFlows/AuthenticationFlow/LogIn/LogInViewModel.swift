@@ -63,6 +63,7 @@ final class LogInViewModel: LogInViewModelProtocol {
                 case .failure(let failure):
                     DispatchQueue.main.async {
                         print("Error signIn: ... \(failure)")
+                        self.state = .initial
                     }
                 }
             }

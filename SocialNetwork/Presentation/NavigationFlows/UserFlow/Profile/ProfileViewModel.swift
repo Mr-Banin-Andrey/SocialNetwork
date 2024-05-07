@@ -19,6 +19,8 @@ enum ProfileState {
     case openScreenMenu(Post)
     case openScreenPost(Post)
     case openScreenGallery([AlbumCodable])
+    case showAlertExit
+    case logOut
 }
 
 enum ProfileViewInput {
@@ -27,6 +29,8 @@ enum ProfileViewInput {
     case didTapOpenMenu(Post)
     case didTapOpenPost(Post)
     case didTapOpenGallery([AlbumCodable])
+    case didTapExitButton
+    case logOutButton
 }
 
 // MARK: - ProfileViewModel
@@ -66,6 +70,12 @@ final class ProfileViewModel: ProfileViewModelProtocol {
             state = .openScreenPost(post)
         case .didTapOpenGallery(let albums):
             state = .openScreenGallery(albums)
+        case .didTapExitButton:
+            state = .showAlertExit
+        case .logOutButton:
+            useCase.signOut()
+            state = .logOut
+            
         }
     }
     

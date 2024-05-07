@@ -21,7 +21,7 @@ final class PostCell: UITableViewCell {
     
     //MARK: Properties
 
-    private lazy var avatarView = AvatarAssembly(size: .sizeSixty, isBorder: false).view()
+    private lazy var avatarView = AvatarAssembly(size: .sizeSixty, isBorder: false, isEdit: false).view()
     
     private lazy var nameButton = CustomButton(
         title: "Ivanka Pushkin",
@@ -79,7 +79,7 @@ final class PostCell: UITableViewCell {
         self?.delegate?.openScreenWholePost(post: post)
     }
     
-    private lazy var pictureImage = PhotoAssembly().view()
+    private lazy var pictureImage = PhotoAssembly(isEdit: false).view()
     
     private lazy var horizontalLineView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false

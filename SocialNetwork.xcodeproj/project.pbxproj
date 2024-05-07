@@ -122,6 +122,17 @@
 		9DCF41292BE78D6A0058214B /* DimmingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41282BE78D6A0058214B /* DimmingViewController.swift */; };
 		9DCF412B2BE78D8F0058214B /* LoadingDimmingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF412A2BE78D8F0058214B /* LoadingDimmingViewController.swift */; };
 		9DCF412D2BE811D40058214B /* NotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF412C2BE811D40058214B /* NotificationKey.swift */; };
+		9DCF41302BE943360058214B /* EditPersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF412F2BE943360058214B /* EditPersonalDataViewController.swift */; };
+		9DCF41322BE943470058214B /* EditPersonalDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41312BE943470058214B /* EditPersonalDataViewModel.swift */; };
+		9DCF41342BE943520058214B /* EditPersonalDataAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41332BE943520058214B /* EditPersonalDataAssembly.swift */; };
+		9DCF41382BE972F90058214B /* ImageSheetAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41372BE972F90058214B /* ImageSheetAssembly.swift */; };
+		9DCF413B2BE973190058214B /* ImageSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF413A2BE973190058214B /* ImageSheetViewController.swift */; };
+		9DCF413D2BE9732F0058214B /* ImageSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF413C2BE9732F0058214B /* ImageSheetViewModel.swift */; };
+		9DCF41402BE973BB0058214B /* ChooseFromGalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF413F2BE973BB0058214B /* ChooseFromGalleryTableViewCell.swift */; };
+		9DCF41422BE973C90058214B /* MakePhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41412BE973C90058214B /* MakePhotoTableViewCell.swift */; };
+		9DCF41452BE98C1B0058214B /* CreatePostAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41442BE98C1B0058214B /* CreatePostAssembly.swift */; };
+		9DCF41472BE98C280058214B /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41462BE98C280058214B /* CreatePostViewController.swift */; };
+		9DCF41492BE98C3A0058214B /* CreatePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41482BE98C3A0058214B /* CreatePostViewModel.swift */; };
 		9DDBF07C2BD62D5700000863 /* CommentCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF07B2BD62D5700000863 /* CommentCodable.swift */; };
 		9DDBF07E2BD982D200000863 /* AlbumCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF07D2BD982D200000863 /* AlbumCodable.swift */; };
 		9DDBF0812BDAC7F100000863 /* FIRIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF0802BDAC7F100000863 /* FIRIdentifiable.swift */; };
@@ -256,6 +267,17 @@
 		9DCF41282BE78D6A0058214B /* DimmingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimmingViewController.swift; sourceTree = "<group>"; };
 		9DCF412A2BE78D8F0058214B /* LoadingDimmingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingDimmingViewController.swift; sourceTree = "<group>"; };
 		9DCF412C2BE811D40058214B /* NotificationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationKey.swift; sourceTree = "<group>"; };
+		9DCF412F2BE943360058214B /* EditPersonalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPersonalDataViewController.swift; sourceTree = "<group>"; };
+		9DCF41312BE943470058214B /* EditPersonalDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPersonalDataViewModel.swift; sourceTree = "<group>"; };
+		9DCF41332BE943520058214B /* EditPersonalDataAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPersonalDataAssembly.swift; sourceTree = "<group>"; };
+		9DCF41372BE972F90058214B /* ImageSheetAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSheetAssembly.swift; sourceTree = "<group>"; };
+		9DCF413A2BE973190058214B /* ImageSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSheetViewController.swift; sourceTree = "<group>"; };
+		9DCF413C2BE9732F0058214B /* ImageSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSheetViewModel.swift; sourceTree = "<group>"; };
+		9DCF413F2BE973BB0058214B /* ChooseFromGalleryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFromGalleryTableViewCell.swift; sourceTree = "<group>"; };
+		9DCF41412BE973C90058214B /* MakePhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePhotoTableViewCell.swift; sourceTree = "<group>"; };
+		9DCF41442BE98C1B0058214B /* CreatePostAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostAssembly.swift; sourceTree = "<group>"; };
+		9DCF41462BE98C280058214B /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
+		9DCF41482BE98C3A0058214B /* CreatePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewModel.swift; sourceTree = "<group>"; };
 		9DDBF07B2BD62D5700000863 /* CommentCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCodable.swift; sourceTree = "<group>"; };
 		9DDBF07D2BD982D200000863 /* AlbumCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCodable.swift; sourceTree = "<group>"; };
 		9DDBF0802BDAC7F100000863 /* FIRIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRIdentifiable.swift; sourceTree = "<group>"; };
@@ -439,6 +461,8 @@
 				9D6BE4362BA6C70500462B12 /* ProfileCoordinator.swift */,
 				9D6BE4382BA6C77A00462B12 /* ProfileViewController.swift */,
 				9D6BE43A2BA6C78800462B12 /* ProfileViewModel.swift */,
+				9DCF412E2BE942EB0058214B /* EditPersonalData */,
+				9DCF41432BE98BF50058214B /* CreatePost */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -675,6 +699,7 @@
 			children = (
 				9D7FCBDB2BB5F218001546FC /* AvatarView */,
 				9DCF41272BE78D4E0058214B /* DimmingViews */,
+				9DCF41362BE972DB0058214B /* ImageSheet */,
 				9D7FCC0D2BB9B254001546FC /* PhotoView */,
 				9D7FCC002BB82388001546FC /* ProfileHeader */,
 				9DC279C62B4BED7800FD401F /* CustomTextField.swift */,
@@ -732,6 +757,46 @@
 				9DCF412A2BE78D8F0058214B /* LoadingDimmingViewController.swift */,
 			);
 			path = DimmingViews;
+			sourceTree = "<group>";
+		};
+		9DCF412E2BE942EB0058214B /* EditPersonalData */ = {
+			isa = PBXGroup;
+			children = (
+				9DCF41332BE943520058214B /* EditPersonalDataAssembly.swift */,
+				9DCF412F2BE943360058214B /* EditPersonalDataViewController.swift */,
+				9DCF41312BE943470058214B /* EditPersonalDataViewModel.swift */,
+			);
+			path = EditPersonalData;
+			sourceTree = "<group>";
+		};
+		9DCF41362BE972DB0058214B /* ImageSheet */ = {
+			isa = PBXGroup;
+			children = (
+				9DCF41372BE972F90058214B /* ImageSheetAssembly.swift */,
+				9DCF413A2BE973190058214B /* ImageSheetViewController.swift */,
+				9DCF413C2BE9732F0058214B /* ImageSheetViewModel.swift */,
+				9DCF413E2BE973A40058214B /* View */,
+			);
+			path = ImageSheet;
+			sourceTree = "<group>";
+		};
+		9DCF413E2BE973A40058214B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9DCF413F2BE973BB0058214B /* ChooseFromGalleryTableViewCell.swift */,
+				9DCF41412BE973C90058214B /* MakePhotoTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9DCF41432BE98BF50058214B /* CreatePost */ = {
+			isa = PBXGroup;
+			children = (
+				9DCF41442BE98C1B0058214B /* CreatePostAssembly.swift */,
+				9DCF41462BE98C280058214B /* CreatePostViewController.swift */,
+				9DCF41482BE98C3A0058214B /* CreatePostViewModel.swift */,
+			);
+			path = CreatePost;
 			sourceTree = "<group>";
 		};
 		9DDBF07F2BDAC7D200000863 /* Interfaces */ = {
@@ -893,6 +958,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D59C4D02BCC27F100EB835C /* UserCodables.swift in Sources */,
+				9DCF41322BE943470058214B /* EditPersonalDataViewModel.swift in Sources */,
 				9D9E9CB42BBF2BC600593B73 /* CommentCell.swift in Sources */,
 				9DCF412D2BE811D40058214B /* NotificationKey.swift in Sources */,
 				9DCF411F2BE6A74A0058214B /* ValidationCheck.swift in Sources */,
@@ -903,6 +969,7 @@
 				9DCF412B2BE78D8F0058214B /* LoadingDimmingViewController.swift in Sources */,
 				9D6BE4432BA6C8B700462B12 /* SavedViewModel.swift in Sources */,
 				9D9E9CB72BC09A3700593B73 /* PhotoGalleryAssembly.swift in Sources */,
+				9DCF413B2BE973190058214B /* ImageSheetViewController.swift in Sources */,
 				9DCAC4F12B4D96280040C327 /* HaveAccountViewModel.swift in Sources */,
 				9D9E9CC82BC2BC0000593B73 /* PhotoCollectionViewCell.swift in Sources */,
 				9D609D612BA336F1001765C0 /* MainViewModel.swift in Sources */,
@@ -928,6 +995,7 @@
 				9D7FCBE12BB60202001546FC /* AvatarView.swift in Sources */,
 				9D7FCBEA2BB6CB55001546FC /* AppDIContainer.swift in Sources */,
 				9D7FCBFC2BB70159001546FC /* PostCell.swift in Sources */,
+				9DCF41382BE972F90058214B /* ImageSheetAssembly.swift in Sources */,
 				9D7FCBF82BB6FA03001546FC /* SubscriberViewController.swift in Sources */,
 				9D59C4DA2BCCF19300EB835C /* AuthenticationUseCase.swift in Sources */,
 				9D646AA62B48596E00C0B2D3 /* UIFont.swift in Sources */,
@@ -940,16 +1008,21 @@
 				9D7FCBE52BB60C4B001546FC /* UIActivityIndicatorViewExt.swift in Sources */,
 				9D7FCBD62BB5DAF9001546FC /* StoriesViewModel.swift in Sources */,
 				9D7FCC0C2BB887BE001546FC /* ProfileHeaderCollectionCell.swift in Sources */,
+				9DCF41402BE973BB0058214B /* ChooseFromGalleryTableViewCell.swift in Sources */,
 				9D7FCBDA2BB5F146001546FC /* StorieCell.swift in Sources */,
 				9DC279C72B4BED7800FD401F /* CustomTextField.swift in Sources */,
 				9D831D662BBDF9E800E4E8A9 /* UIViewExt.swift in Sources */,
 				9D9E9CB02BBDFF7600593B73 /* LikeCommentBookmarkView.swift in Sources */,
 				9DDBF07C2BD62D5700000863 /* CommentCodable.swift in Sources */,
+				9DCF41422BE973C90058214B /* MakePhotoTableViewCell.swift in Sources */,
 				9DC279C32B4BE71E00FD401F /* RegistrationViewController.swift in Sources */,
 				9D59C4D62BCC4CCC00EB835C /* AuthenticationService.swift in Sources */,
+				9DCF413D2BE9732F0058214B /* ImageSheetViewModel.swift in Sources */,
 				9D7FCBD42BB5D985001546FC /* StoriesView.swift in Sources */,
+				9DCF41492BE98C3A0058214B /* CreatePostViewModel.swift in Sources */,
 				9D9E9CC22BC2B71800593B73 /* GalleryHeaderViewModel.swift in Sources */,
 				9D59C4D42BCC4C6800EB835C /* UserUseCase.swift in Sources */,
+				9DCF41302BE943360058214B /* EditPersonalDataViewController.swift in Sources */,
 				9D609D572BA1CFC3001765C0 /* UserFactory.swift in Sources */,
 				9D646ABA2B493FD400C0B2D3 /* LogInViewController.swift in Sources */,
 				9D3B11CB2BC9B8FD00733DB2 /* SettingsSheetViewController.swift in Sources */,
@@ -958,7 +1031,9 @@
 				9D3B11CD2BC9B90800733DB2 /* SettingsSheetViewModel.swift in Sources */,
 				9D7FCBEC2BB6CE96001546FC /* DependencyWrapper.swift in Sources */,
 				9DC279B62B49D04100FD401F /* CustomButton.swift in Sources */,
+				9DCF41452BE98C1B0058214B /* CreatePostAssembly.swift in Sources */,
 				9D609D632BA33700001765C0 /* MainCoordinator.swift in Sources */,
+				9DCF41472BE98C280058214B /* CreatePostViewController.swift in Sources */,
 				9D7FCBE72BB624AF001546FC /* DateHeader.swift in Sources */,
 				9D7FCC132BB9B301001546FC /* PhotoViewModel.swift in Sources */,
 				9D7FCC0A2BB82448001546FC /* ProfileHeaderView.swift in Sources */,
@@ -983,6 +1058,7 @@
 				9D6BE4412BA6C8A700462B12 /* SavedViewController.swift in Sources */,
 				9D646AA02B48582100C0B2D3 /* UIColor.swift in Sources */,
 				9D831D642BBDB55200E4E8A9 /* WholePostViewModel.swift in Sources */,
+				9DCF41342BE943520058214B /* EditPersonalDataAssembly.swift in Sources */,
 				9D6BE43B2BA6C78800462B12 /* ProfileViewModel.swift in Sources */,
 				9D9E9CCA2BC2C54600593B73 /* StringConverter.swift in Sources */,
 				9DCAC4ED2B4D96130040C327 /* HaveAccountViewController.swift in Sources */,
@@ -1168,6 +1244,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SocialNetwork/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Вы сможете сделать фото для аватара";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Вы сможете выбрать фото из галереи для аватара";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -1201,6 +1279,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SocialNetwork/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Вы сможете сделать фото для аватара";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Вы сможете выбрать фото из галереи для аватара";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";

@@ -36,5 +36,6 @@ final class UserCoordinator: Coordinator {
     func stopUserFlow() {
         stop()
         (parentCoordinator as? RootCoordinator)?.startLogInFlow()
+        childCoordinators.removeAll()
     }
 }

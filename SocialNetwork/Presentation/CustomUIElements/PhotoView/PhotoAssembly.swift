@@ -8,10 +8,16 @@
 import Foundation
 
 final class PhotoAssembly {
-        
+    
+    private let isEdit: Bool
+    
+    init(isEdit: Bool) {
+        self.isEdit = isEdit
+    }
+    
     func view() -> PhotoView {
         let viewModel = PhotoViewModel()
-        let view = PhotoView(viewModel: viewModel)
+        let view = PhotoView(viewModel: viewModel, isEdit: isEdit)
         return view
     }
 

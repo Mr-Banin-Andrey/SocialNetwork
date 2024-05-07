@@ -12,8 +12,8 @@ final class ProfileHeaderCollectionCell: UICollectionViewCell {
     static let reuseID = "ProfileHeaderCollectionCellID"
     
     //MARK: Properties
-            
-    private lazy var photoImage = PhotoAssembly().view()
+
+    private lazy var photoImage = PhotoAssembly(isEdit: false).view()
 
     //MARK: Initial
     
