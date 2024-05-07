@@ -9,7 +9,7 @@ import UIKit
 
 protocol PostCellDelegate: AnyObject {
     func openScreenSubscriber(userID: String)
-    func openScreenMenuSheet()
+    func openScreenMenuSheet(post: Post)
     func openScreenWholePost(post: Post)
 }
 
@@ -21,7 +21,7 @@ final class PostCell: UITableViewCell {
     
     //MARK: Properties
 
-    private lazy var avatarView = AvatarAssembly(size: .sizeSixty, isBorder: false).view()
+    private lazy var avatarView = AvatarAssembly(size: .sizeSixty, isBorder: false, isEdit: false).view()
     
     private lazy var nameButton = CustomButton(
         title: "Ivanka Pushkin",
@@ -43,7 +43,8 @@ final class PostCell: UITableViewCell {
         image: .verticalEllipseImage,
         tintColor: .textTertiaryColor
     ) { [weak self] in
-        self?.delegate?.openScreenMenuSheet()
+        guard let post = self?.postInCell else {return }
+        self?.delegate?.openScreenMenuSheet(post: post)
     }
         
     private lazy var backgroundTextView: UIView = {
@@ -78,7 +79,7 @@ final class PostCell: UITableViewCell {
         self?.delegate?.openScreenWholePost(post: post)
     }
     
-    private lazy var pictureImage = PhotoAssembly().view()
+    private lazy var pictureImage = PhotoAssembly(isEdit: false).view()
     
     private lazy var horizontalLineView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false

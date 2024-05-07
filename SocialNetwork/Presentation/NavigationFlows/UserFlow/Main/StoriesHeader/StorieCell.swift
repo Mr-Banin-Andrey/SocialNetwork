@@ -13,7 +13,7 @@ final class StorieCell: UICollectionViewCell {
     
     //MARK: Properties
     
-    private lazy var pictureImage = AvatarAssembly(size: .sizeSixty, isBorder: true).view()
+    private lazy var pictureImage = AvatarAssembly(size: .sizeSixty, isBorder: true, isEdit: false).view()
     private var userID: String?
     
     //MARK: Initial

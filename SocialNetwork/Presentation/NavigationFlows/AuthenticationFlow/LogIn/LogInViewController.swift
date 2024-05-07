@@ -45,9 +45,12 @@ final class LogInViewController: UIViewController, Coordinatable {
         title: "Уже есть аккаунт",
         font: .interRegular400Font,
         titleColor: .textAndButtonColor,
-        backgroundColor: nil) { [weak self] in
-            self?.viewModel.updateState(with: .openScreenHaveAccount)
-        }
+        backgroundColor: nil
+    ) { [weak self] in
+        self?.viewModel.updateState(with: .openScreenHaveAccount)
+    }
+    
+    private lazy var loadingViewController = LoadingDimmingViewController()
     
     //MARK: Initial
     
@@ -68,14 +71,12 @@ final class LogInViewController: UIViewController, Coordinatable {
         self.bindViewModel()
         self.view.backgroundColor = .mainBackgroundColor
         self.setupUI()
+        
+        viewModel.updateState(with: .willCheckUser)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = false
     }
     
     //MARK: Private methods
@@ -85,13 +86,20 @@ final class LogInViewController: UIViewController, Coordinatable {
             guard let self = self else { return }
             switch state {
             case .initial:
-                print("initial")
+                self.loadingViewController.hide()
             case .showOpenRegistration:
                 guard let coordinator else { return }
                 coordinator.navigateTo(.registration(coordinator: coordinator))
             case .showOpenHaveAccount:
                 guard let coordinator else { return }
                 coordinator.navigateTo(.haveAccount(coordinator: coordinator))
+            case .tryingToSignIn:
+                self.loadingViewController.show(on: self)
+            case .showUser(let user):
+                self.loadingViewController.hide {
+                    self.navigationController?.navigationBar.isHidden = true
+                    self.coordinator?.proceedToUserFlow(user)
+                }
             }
         }
     }
@@ -100,7 +108,7 @@ final class LogInViewController: UIViewController, Coordinatable {
         self.view.addSubview(self.uiStack)
         self.uiStack.addArrangedSubview(self.logoImage)
         self.uiStack.addArrangedSubview(self.registrationButton)
-//        self.uiStack.addArrangedSubview(self.haveAccountButton)
+        self.uiStack.addArrangedSubview(self.haveAccountButton)
         
         NSLayoutConstraint.activate([
             self.uiStack.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
@@ -112,7 +120,7 @@ final class LogInViewController: UIViewController, Coordinatable {
             self.registrationButton.heightAnchor.constraint(equalToConstant: 47),
             self.registrationButton.widthAnchor.constraint(equalToConstant: 300),
 
-//            self.haveAccountButton.heightAnchor.constraint(equalToConstant: 30),
+            self.haveAccountButton.heightAnchor.constraint(equalToConstant: 30),
         ])
     }
 }

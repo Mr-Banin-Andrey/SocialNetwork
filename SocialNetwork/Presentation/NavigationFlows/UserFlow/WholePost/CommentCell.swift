@@ -13,7 +13,7 @@ final class CommentCell: UITableViewCell {
     
     //MARK: Properties
     
-    private lazy var avatarView = AvatarAssembly(size: .sizeFifteen, isBorder: false).view()
+    private lazy var avatarView = AvatarAssembly(size: .sizeFifteen, isBorder: false, isEdit: false).view()
     
     private lazy var nicknameLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false

@@ -26,7 +26,7 @@ final class ProfileHeaderView: UIView {
     
     //MARK: Properties
     
-    private lazy var avatarImage = AvatarAssembly(size: .sizeEighty, isBorder: false).view()
+    private lazy var avatarImage = AvatarAssembly(size: .sizeEighty, isBorder: false, isEdit: false).view()
     
     private lazy var nameAndProfessionStack: UIStackView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -173,7 +173,7 @@ final class ProfileHeaderView: UIView {
             case .subscriberView:
                 editButton.changeColorAndTitle(title: "Подписаться", color: .textAndButtonColor)
                 createPostButton.isHidden = true
-                myNotesLabel.text = "Посты кого-то..."
+                myNotesLabel.text = "Посты \(viewModel.user.firstName)"
             }
         }
     }
@@ -188,6 +188,7 @@ final class ProfileHeaderView: UIView {
         setupImage(type: type)
         bindViewModel()
         avatarImage.setupAvatar(viewModel.user.id)
+        viewModel.updateState(with: .willLoadData)
     }
     
     required init?(coder: NSCoder) {
@@ -206,8 +207,12 @@ final class ProfileHeaderView: UIView {
             switch state {
             case .initial:
                 break
+            case .updateSubscribe(let isSubscriber):
+                editButtonState(isSubscriber)
             case .showScreenGallery(let albums):
                 self.delegate?.openScreenGallery(albums: albums)
+            
+                
             }
         }
     }
@@ -218,6 +223,14 @@ final class ProfileHeaderView: UIView {
             self.type = .profileView
         case .subscriberView:
             self.type = .subscriberView
+        }
+    }
+    
+    private func editButtonState(_ isSubscriber: Bool) {
+        if isSubscriber {
+            editButton.changeColorAndTitle(title: "Отписаться", color: .textSecondaryColor)
+        } else {
+            editButton.changeColorAndTitle(title: "Подписаться", color: .textAndButtonColor)
         }
     }
     

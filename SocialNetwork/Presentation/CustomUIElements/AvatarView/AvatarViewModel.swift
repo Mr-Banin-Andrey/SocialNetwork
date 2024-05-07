@@ -46,7 +46,8 @@ final class AvatarViewModel: AvatarViewModelProtocol {
         switch viewInput {
         case .startLoadAvatar(let userID, let mockData):
             self.state = .loadPicture
-            useCase.fetchImageData(imageID: userID, basePath: .userAvatars) { (result: Result<Data,Error>) in
+            useCase.fetchImageData(imageID: userID, basePath: .userAvatars) { [weak self] result in
+                guard let self else { return }
                 switch result {
                 case .success(let dataImage):
                     self.state = .didLoadPicture(dataImage)

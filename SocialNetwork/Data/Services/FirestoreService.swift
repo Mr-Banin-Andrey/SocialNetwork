@@ -18,13 +18,28 @@ final class FirestoreService {
         case album
     }
     
-    enum Fields: String {
+    enum UserFields: String {
         case id
         case userCreatedID
     }
     
+    enum FieldsForUpdate: String {
+        case posts
+        case likes
+        case savedPosts
+        case followers
+        case following
+    }
+    
     enum FirestoreServiceError: Error {
         case notFoundUser
+        case errorСreatingProfile
+        case failedToCreateComment
+        case failedToCreateLike
+        case failedToUpdateSavedPosts
+        case failedToSubscribe
+        case failedToUpdatePersonalData
+        case failedToCreatePost
     }
     
     // MARK: Private properties
@@ -45,8 +60,8 @@ final class FirestoreService {
     }
     
     //MARK: Posts related methods
-        
-    func fetchObjects<T:Codable>(givenBy id: String = "", model: T.Type, collection: Collections, field: Fields? = .none) async throws -> [T] {
+    
+    func fetchObjects<T:Codable>(givenBy id: String = "", model: T.Type, collection: Collections, field: UserFields? = .none) async throws -> [T] {
         rootCollectionReference = dataBase.collection(collection.rawValue)
         var querySnapshot: QuerySnapshot
         
@@ -64,7 +79,21 @@ final class FirestoreService {
         return objects
     }
     
-    func createObjectDocument(userID: String, _ model: UserCodable, collection: Collections) async throws  {
-        try dataBase.collection(collection.rawValue).document(userID).setData(from: model)
+    func createObjectDocument<T:Codable>(id: String, _ model: T, collection: Collections) async throws  {
+        try dataBase.collection(collection.rawValue).document(id).setData(from: model)
+    }
+    
+    func updateObject(id: String, collection: Collections, field: FieldsForUpdate, objectsArray: [String]) async throws {
+        let reference = dataBase.collection(collection.rawValue).document(id)
+        try await reference.updateData([field.rawValue: objectsArray])
+    }
+    
+    func updatePersonalData(user: User) async throws  {
+        let reference = dataBase.collection(Collections.users.rawValue).document(user.id)
+        try await reference.updateData(["lastName": user.lastName,
+                                        "firstName": user.firstName,
+                                        "nickname": user.nickname,
+                                        "profession": user.profession
+                                       ])
     }
 }

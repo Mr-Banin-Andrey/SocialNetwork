@@ -30,6 +30,10 @@ final class ProfileCoordinator: Coordinator {
         navigationController.setViewControllers([profileViewController], animated: true)
     }
     
+    func signOut() {
+        (parentCoordinator as? UserCoordinator)?.stopUserFlow()
+        stop()
+    }
     
     // MARK: Types
     

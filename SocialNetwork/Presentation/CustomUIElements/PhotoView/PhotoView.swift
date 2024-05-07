@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol PhotoViewDelegate: AnyObject {
+    func didTapPhoto()
+}
+
 final class PhotoView: UIView {
     
     private let viewModel: PhotoViewModel
+    
+    weak var delegate: PhotoViewDelegate?
     
     //MARK: Properties
     
@@ -19,6 +25,8 @@ final class PhotoView: UIView {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 10
         $0.image = .forPostMockObjectImage
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(photoTapped))
+        $0.addGestureRecognizer(tapGesture)
         return $0
     }(UIImageView())
     
@@ -26,12 +34,13 @@ final class PhotoView: UIView {
     
     //MARK: Initial
     
-    init(viewModel: PhotoViewModel) {
+    init(viewModel: PhotoViewModel, isEdit: Bool) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         
         self.translatesAutoresizingMaskIntoConstraints = false
         self.setupUI()
+        pictureImage.isUserInteractionEnabled = isEdit
         bindViewModel()
         
     }
@@ -44,6 +53,10 @@ final class PhotoView: UIView {
     
     func setupPhoto(_ photoID: String) {
         viewModel.updateState(with: .startLoadPhoto(photoID, UIImage.forGallery.jpegData(compressionQuality: 1.0) ?? Data()))
+    }
+    
+    func updatePhoto(_ imageData: Data) {
+        pictureImage.image = UIImage(data: imageData)
     }
     
     private func bindViewModel() {
@@ -89,5 +102,9 @@ final class PhotoView: UIView {
             self.pictureImage.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             self.pictureImage.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
+    }
+    
+    @objc private func photoTapped() {
+        delegate?.didTapPhoto()
     }
 }

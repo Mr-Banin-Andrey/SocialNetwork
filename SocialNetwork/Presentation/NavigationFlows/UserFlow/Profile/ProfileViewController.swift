@@ -30,7 +30,6 @@ final class ProfileViewController: UIViewController, Coordinatable {
     private lazy var titleLabel: UILabel = {
         $0.font = .interSemiBold600Font
         $0.textColor = .textAndButtonColor
-        $0.text = viewModel.user.nickname
         return $0
     }(UILabel())
     
@@ -53,6 +52,12 @@ final class ProfileViewController: UIViewController, Coordinatable {
         setupNavBar()
         setupUI()
         bindViewModel()
+        updateView()
+        viewModel.updateState(with: .willStartUpdate)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     //MARK: Methods
@@ -64,8 +69,11 @@ final class ProfileViewController: UIViewController, Coordinatable {
             switch state {
             case .initial:
                 break
-            case .openScreenMenu:
-                let settings = SettingsSheetAssembly().viewController()
+            case .updateView:
+                titleLabel.text = viewModel.user?.nickname ?? ""
+                profileTable.reloadData()
+            case .openScreenMenu(let post):
+                let settings = SettingsSheetAssembly(post: post).viewController()
                 present(settings, animated: true)
             case .openScreenPost(let post):
                 let wholePost = WholePostAssembly(post: post).viewController()
@@ -73,7 +81,45 @@ final class ProfileViewController: UIViewController, Coordinatable {
             case .openScreenGallery(let albums):
                 let gallery = PhotoGalleryAssembly(photoGalleryType: .forUser, albums: albums).viewController()
                 navigationController?.pushViewController(gallery, animated: true)
+            case .showAlertExit:
+                self.presentAlert(
+                    message: "Выйти из аккаунта?",
+                    actionTitle: "Отмена",
+                    addSecondAction: true, 
+                    secondActionTitle: "Выйти") { [weak self] in
+                        guard let self else { return }
+                        self.viewModel.updateState(with: .logOutButton)
+                    }
+            case .logOut:
+                self.coordinator?.signOut()
             }
+        }
+    }
+    
+    private func updateView() {
+        NotificationCenter.default.addObserver(forName: NotificationKey.wholePostKey, object: nil, queue: .main) { [weak self] notification in
+            guard let self else { return }
+            viewModel.updateState(with: .willStartUpdate)
+        }
+        
+        NotificationCenter.default.addObserver(forName: NotificationKey.settingsSheetKey, object: nil, queue: .main) { [weak self] notification in
+            guard let self else { return }
+            viewModel.updateState(with: .willStartUpdate)
+        }
+        
+        NotificationCenter.default.addObserver(forName: NotificationKey.editPersonalDataKey, object: nil, queue: .main) { [weak self] notification in
+            guard let self else { return }
+            self.viewModel.updateState(with: .willStartUpdate)
+        }
+        
+        NotificationCenter.default.addObserver(forName: NotificationKey.newAvatarKey, object: nil, queue: .main) { [weak self] notification in
+            guard let self else { return }
+            viewModel.updateState(with: .willStartUpdate)
+        }
+        
+        NotificationCenter.default.addObserver(forName: NotificationKey.newPostKey, object: nil, queue: .main) { [weak self] notification in
+            guard let self else { return }
+            viewModel.updateState(with: .willStartUpdate)
         }
     }
     
@@ -81,7 +127,7 @@ final class ProfileViewController: UIViewController, Coordinatable {
         let titleLabel = UIBarButtonItem(customView: titleLabel)
         self.navigationItem.leftBarButtonItems = [titleLabel]
                 
-        let rightButton = UIBarButtonItem(image: .burgerImage, style: .plain, target: self, action: #selector(didTapSettings))
+        let rightButton = UIBarButtonItem(image: .exitImage, style: .plain, target: self, action: #selector(didTapSettings))
         rightButton.tintColor = .textTertiaryColor
         self.navigationItem.rightBarButtonItems = [rightButton]
     }
@@ -99,7 +145,7 @@ final class ProfileViewController: UIViewController, Coordinatable {
     }
     
     @objc private func didTapSettings() {
-        
+        viewModel.updateState(with: .didTapExitButton)
     }
 }
 
@@ -139,9 +185,10 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
-            let view = ProfileHeaderAssembly(type: .profileView, user: viewModel.user).view()
-            if !viewModel.user.photos.isEmpty {
-                view.setupHeader(numberOfPhoto: viewModel.user.photos[0].photos.count)
+            guard let user = viewModel.user else { return nil }
+            let view = ProfileHeaderAssembly(type: .profileView, user: user).view()
+            if !user.photos.isEmpty {
+                view.setupHeader(numberOfPhoto: user.photos[0].photos.count)
             } else {
                 view.setupHeader(numberOfPhoto: 0)
             }
@@ -176,7 +223,9 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
     }
     
     func openScreenCreatePost() {
-        return
+        guard let user = viewModel.user else { return }
+        let createPost = CreatePostAssembly(user: user).viewController()
+        navigationController?.pushViewController(createPost, animated: true)
     }
     
     func subscribeToProfile() {
@@ -184,7 +233,9 @@ extension ProfileViewController: ProfileHeaderViewDelegate {
     }
     
     func editProfile() {
-        return
+        guard let user = viewModel.user else { return }
+        let editPersonalData = EditPersonalDataAssembly(user: user).viewController()
+        navigationController?.pushViewController(editPersonalData, animated: true)
     }
 }
 
@@ -196,8 +247,8 @@ extension ProfileViewController: PostCellDelegate {
         return
     }
     
-    func openScreenMenuSheet() {
-        viewModel.updateState(with: .didTapOpenMenu)
+    func openScreenMenuSheet(post: Post) {
+        viewModel.updateState(with: .didTapOpenMenu(post))
     }
     
     func openScreenWholePost(post: Post) {

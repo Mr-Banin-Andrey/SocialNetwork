@@ -24,12 +24,18 @@ final class UserCoordinator: Coordinator {
     init(_ user: User, navigationController: UINavigationController) {
         self.navigationController = navigationController
                 
-        let userUseCase = UserUseCase()
-        self.userFactory = UserFactory(user: user, useCase: userUseCase)
+        let userUseCase = UserUseCase(user: user)
+        self.userFactory = UserFactory(useCase: userUseCase)
     }
     
     func start() {
         let mainTabBar = userFactory.makeRootTabBar(parentCoordinator: self)
         navigationController.setViewControllers([mainTabBar], animated: true)
+    }
+    
+    func stopUserFlow() {
+        stop()
+        (parentCoordinator as? RootCoordinator)?.startLogInFlow()
+        childCoordinators.removeAll()
     }
 }

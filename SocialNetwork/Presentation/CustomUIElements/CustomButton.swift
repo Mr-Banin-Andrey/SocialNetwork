@@ -97,6 +97,20 @@ final class CustomButton: UIButton {
         self.backgroundColor = color
     }
     
+    func updateState(isLike: Bool) {
+        if isLike {
+            self.setImage(.likeFillImage, for: .normal)
+            self.tintColor = .textTertiaryColor
+        } else {
+            self.setImage(.likeImage, for: .normal)
+            self.tintColor = .textAndButtonColor
+        }
+    }
+    
+    func updateTitle(title: String) {
+        setTitle(title, for: .normal)
+    }
+    
     //MARK: Private methods
     
     private func setupUnderline(text: String) -> NSAttributedString {

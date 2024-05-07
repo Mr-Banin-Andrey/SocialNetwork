@@ -56,8 +56,8 @@ final class AuthenticationCoordinator: Coordinator {
     
     enum Destination: DestinationProtocol {
         case registration(coordinator: AuthenticationCoordinator)
-        case confirmation(coordinator: AuthenticationCoordinator, phone: String)
         case haveAccount(coordinator: AuthenticationCoordinator)
+        case forgotPassword(coordinator: AuthenticationCoordinator)
         
         var module: any UIViewController & Coordinatable {
             switch self {
@@ -65,14 +65,14 @@ final class AuthenticationCoordinator: Coordinator {
                 let registrationVC = coordinator.authenticationFactory.makeRegistrationView()
                 (registrationVC as? RegistrationViewController)?.coordinator = coordinator
                 return registrationVC
-            case .confirmation(let coordinator, let phone):
-                let confirmationVC = coordinator.authenticationFactory.makeConfirmationView(phone: phone)
-                (confirmationVC as? ConfirmationViewController)?.coordinator = coordinator
-                return confirmationVC
             case .haveAccount(let coordinator):
                 let haveAccountVC = coordinator.authenticationFactory.makeHaveAccountView()
                 (haveAccountVC as? HaveAccountViewController)?.coordinator = coordinator
                 return haveAccountVC
+            case .forgotPassword(let coordinator):
+                let forgotPasswordVC = coordinator.authenticationFactory.makeForgotPasswordView()
+                (forgotPasswordVC as? ForgotPasswordViewController)?.coordinator = coordinator
+                return forgotPasswordVC
             }
         }
     }

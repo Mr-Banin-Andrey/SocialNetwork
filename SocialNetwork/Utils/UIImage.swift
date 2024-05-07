@@ -23,10 +23,26 @@ extension UIImage {
         UIImage(systemName: "arrow.left") ?? UIImage()
     }
     
+    // MARK: - ImageSheet
+    
+    class var cameraImage: UIImage {
+        UIImage(systemName: "camera") ?? UIImage()
+    }
+    
+    class var galleryImage: UIImage {
+        UIImage(systemName: "photo.on.rectangle") ?? UIImage()
+    }
+    
     // MARK: - Comment
     
     class var paperclipImage: UIImage {
         UIImage(systemName: "paperclip") ?? UIImage()
+    }
+    
+    // MARK: - EditPersonalData
+    
+    class var checkmarkImage: UIImage {
+        UIImage(systemName: "checkmark") ?? UIImage()
     }
     
     // MARK: - PhotoGallery
@@ -45,6 +61,10 @@ extension UIImage {
         UIImage(systemName: "heart") ?? UIImage()
     }
     
+    class var likeFillImage: UIImage {
+        UIImage(systemName: "heart.fill") ?? UIImage()
+    }
+    
     class var commentImage: UIImage {
         UIImage(systemName: "message") ?? UIImage()
     }
@@ -59,8 +79,8 @@ extension UIImage {
     
     // MARK: - ProfileView
     
-    class var burgerImage: UIImage {
-        UIImage(systemName: "line.3.horizontal") ?? UIImage()
+    class var exitImage: UIImage {
+        UIImage(systemName: "door.left.hand.open") ?? UIImage()
     }
     
     //MARK: - ProfileHeader

@@ -17,11 +17,14 @@ enum LogInState {
     case initial
     case showOpenRegistration
     case showOpenHaveAccount
+    case tryingToSignIn
+    case showUser(User)
 }
 
 enum LogInViewInput {
     case openScreenRegistration
     case openScreenHaveAccount
+    case willCheckUser
 }
 
 // MARK: - LogInViewModel
@@ -38,6 +41,8 @@ final class LogInViewModel: LogInViewModelProtocol {
         }
     }
     
+    @Dependency private var authenticationUseCase: AuthenticationUseCase
+    
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {
@@ -46,6 +51,22 @@ final class LogInViewModel: LogInViewModelProtocol {
             state = .showOpenRegistration
         case .openScreenHaveAccount:
             state = .showOpenHaveAccount
+        case .willCheckUser:
+            state = .tryingToSignIn
+            authenticationUseCase.authUser { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case .success(let user):
+                    DispatchQueue.main.async {
+                        self.state = .showUser(user)
+                    }
+                case .failure(let failure):
+                    DispatchQueue.main.async {
+                        print("Error signIn: ... \(failure)")
+                        self.state = .initial
+                    }
+                }
+            }
         }
     }
 }

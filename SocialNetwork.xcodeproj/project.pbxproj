@@ -112,11 +112,27 @@
 		9DC279CF2B4C64BC00FD401F /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9DC279CB2B4C64BC00FD401F /* Inter-Regular.ttf */; };
 		9DC279D02B4C64BC00FD401F /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9DC279CC2B4C64BC00FD401F /* Inter-SemiBold.ttf */; };
 		9DCAC4DE2B4D72BF0040C327 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4DD2B4D72BF0040C327 /* RegistrationViewModel.swift */; };
-		9DCAC4E32B4D78FE0040C327 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4E22B4D78FE0040C327 /* ConfirmationViewController.swift */; };
-		9DCAC4E72B4D79150040C327 /* ConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4E62B4D79150040C327 /* ConfirmationViewModel.swift */; };
 		9DCAC4EA2B4D82CC0040C327 /* UILabelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4E92B4D82CC0040C327 /* UILabelExt.swift */; };
 		9DCAC4ED2B4D96130040C327 /* HaveAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4EC2B4D96130040C327 /* HaveAccountViewController.swift */; };
 		9DCAC4F12B4D96280040C327 /* HaveAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCAC4F02B4D96280040C327 /* HaveAccountViewModel.swift */; };
+		9DCF411F2BE6A74A0058214B /* ValidationCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF411E2BE6A74A0058214B /* ValidationCheck.swift */; };
+		9DCF41212BE6B0EA0058214B /* UIViewController+PresentAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41202BE6B0EA0058214B /* UIViewController+PresentAlert.swift */; };
+		9DCF41242BE760AB0058214B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41232BE760AB0058214B /* ForgotPasswordViewController.swift */; };
+		9DCF41262BE7615C0058214B /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41252BE7615B0058214B /* ForgotPasswordViewModel.swift */; };
+		9DCF41292BE78D6A0058214B /* DimmingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41282BE78D6A0058214B /* DimmingViewController.swift */; };
+		9DCF412B2BE78D8F0058214B /* LoadingDimmingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF412A2BE78D8F0058214B /* LoadingDimmingViewController.swift */; };
+		9DCF412D2BE811D40058214B /* NotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF412C2BE811D40058214B /* NotificationKey.swift */; };
+		9DCF41302BE943360058214B /* EditPersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF412F2BE943360058214B /* EditPersonalDataViewController.swift */; };
+		9DCF41322BE943470058214B /* EditPersonalDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41312BE943470058214B /* EditPersonalDataViewModel.swift */; };
+		9DCF41342BE943520058214B /* EditPersonalDataAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41332BE943520058214B /* EditPersonalDataAssembly.swift */; };
+		9DCF41382BE972F90058214B /* ImageSheetAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41372BE972F90058214B /* ImageSheetAssembly.swift */; };
+		9DCF413B2BE973190058214B /* ImageSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF413A2BE973190058214B /* ImageSheetViewController.swift */; };
+		9DCF413D2BE9732F0058214B /* ImageSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF413C2BE9732F0058214B /* ImageSheetViewModel.swift */; };
+		9DCF41402BE973BB0058214B /* ChooseFromGalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF413F2BE973BB0058214B /* ChooseFromGalleryTableViewCell.swift */; };
+		9DCF41422BE973C90058214B /* MakePhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41412BE973C90058214B /* MakePhotoTableViewCell.swift */; };
+		9DCF41452BE98C1B0058214B /* CreatePostAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41442BE98C1B0058214B /* CreatePostAssembly.swift */; };
+		9DCF41472BE98C280058214B /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41462BE98C280058214B /* CreatePostViewController.swift */; };
+		9DCF41492BE98C3A0058214B /* CreatePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCF41482BE98C3A0058214B /* CreatePostViewModel.swift */; };
 		9DDBF07C2BD62D5700000863 /* CommentCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF07B2BD62D5700000863 /* CommentCodable.swift */; };
 		9DDBF07E2BD982D200000863 /* AlbumCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF07D2BD982D200000863 /* AlbumCodable.swift */; };
 		9DDBF0812BDAC7F100000863 /* FIRIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDBF0802BDAC7F100000863 /* FIRIdentifiable.swift */; };
@@ -241,11 +257,27 @@
 		9DC279CB2B4C64BC00FD401F /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		9DC279CC2B4C64BC00FD401F /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		9DCAC4DD2B4D72BF0040C327 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
-		9DCAC4E22B4D78FE0040C327 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
-		9DCAC4E62B4D79150040C327 /* ConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationViewModel.swift; sourceTree = "<group>"; };
 		9DCAC4E92B4D82CC0040C327 /* UILabelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExt.swift; sourceTree = "<group>"; };
 		9DCAC4EC2B4D96130040C327 /* HaveAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaveAccountViewController.swift; sourceTree = "<group>"; };
 		9DCAC4F02B4D96280040C327 /* HaveAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaveAccountViewModel.swift; sourceTree = "<group>"; };
+		9DCF411E2BE6A74A0058214B /* ValidationCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationCheck.swift; sourceTree = "<group>"; };
+		9DCF41202BE6B0EA0058214B /* UIViewController+PresentAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PresentAlert.swift"; sourceTree = "<group>"; };
+		9DCF41232BE760AB0058214B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		9DCF41252BE7615B0058214B /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
+		9DCF41282BE78D6A0058214B /* DimmingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimmingViewController.swift; sourceTree = "<group>"; };
+		9DCF412A2BE78D8F0058214B /* LoadingDimmingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingDimmingViewController.swift; sourceTree = "<group>"; };
+		9DCF412C2BE811D40058214B /* NotificationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationKey.swift; sourceTree = "<group>"; };
+		9DCF412F2BE943360058214B /* EditPersonalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPersonalDataViewController.swift; sourceTree = "<group>"; };
+		9DCF41312BE943470058214B /* EditPersonalDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPersonalDataViewModel.swift; sourceTree = "<group>"; };
+		9DCF41332BE943520058214B /* EditPersonalDataAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPersonalDataAssembly.swift; sourceTree = "<group>"; };
+		9DCF41372BE972F90058214B /* ImageSheetAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSheetAssembly.swift; sourceTree = "<group>"; };
+		9DCF413A2BE973190058214B /* ImageSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSheetViewController.swift; sourceTree = "<group>"; };
+		9DCF413C2BE9732F0058214B /* ImageSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSheetViewModel.swift; sourceTree = "<group>"; };
+		9DCF413F2BE973BB0058214B /* ChooseFromGalleryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFromGalleryTableViewCell.swift; sourceTree = "<group>"; };
+		9DCF41412BE973C90058214B /* MakePhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakePhotoTableViewCell.swift; sourceTree = "<group>"; };
+		9DCF41442BE98C1B0058214B /* CreatePostAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostAssembly.swift; sourceTree = "<group>"; };
+		9DCF41462BE98C280058214B /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
+		9DCF41482BE98C3A0058214B /* CreatePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewModel.swift; sourceTree = "<group>"; };
 		9DDBF07B2BD62D5700000863 /* CommentCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCodable.swift; sourceTree = "<group>"; };
 		9DDBF07D2BD982D200000863 /* AlbumCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCodable.swift; sourceTree = "<group>"; };
 		9DDBF0802BDAC7F100000863 /* FIRIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRIdentifiable.swift; sourceTree = "<group>"; };
@@ -298,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				9D41B90E2BD5097D002CBAA8 /* Entities */,
+				9DCF412C2BE811D40058214B /* NotificationKey.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -377,6 +410,7 @@
 				9D41B9152BD5623C002CBAA8 /* DateConverter.swift */,
 				9D41B9132BD557D8002CBAA8 /* GroupingForPosts.swift */,
 				9D9E9CC92BC2C54600593B73 /* StringConverter.swift */,
+				9DCF411E2BE6A74A0058214B /* ValidationCheck.swift */,
 				9D646A9F2B48582100C0B2D3 /* UIColor.swift */,
 				9D646AA52B48596E00C0B2D3 /* UIFont.swift */,
 				9D646AA32B48594B00C0B2D3 /* UIImage.swift */,
@@ -392,6 +426,7 @@
 				9D7FCBE42BB60C4B001546FC /* UIActivityIndicatorViewExt.swift */,
 				9D831D652BBDF9E800E4E8A9 /* UIViewExt.swift */,
 				9D41B9172BD57327002CBAA8 /* UIImage+JPEGData.swift */,
+				9DCF41202BE6B0EA0058214B /* UIViewController+PresentAlert.swift */,
 			);
 			path = UIExtensions;
 			sourceTree = "<group>";
@@ -401,7 +436,7 @@
 			children = (
 				9D3994D82BA0752F009F894A /* AuthenticationCoordinator.swift */,
 				9D3994E42BA0B53D009F894A /* AuthenticationFactory.swift */,
-				9D646AB52B493F1C00C0B2D3 /* Сonfirmation */,
+				9DCF41222BE760830058214B /* ForgotPassword */,
 				9D646AB22B49326000C0B2D3 /* HaveAccount */,
 				9D646AB42B493EE000C0B2D3 /* LogIn */,
 				9D646AB32B493B5400C0B2D3 /* Registration */,
@@ -426,6 +461,8 @@
 				9D6BE4362BA6C70500462B12 /* ProfileCoordinator.swift */,
 				9D6BE4382BA6C77A00462B12 /* ProfileViewController.swift */,
 				9D6BE43A2BA6C78800462B12 /* ProfileViewModel.swift */,
+				9DCF412E2BE942EB0058214B /* EditPersonalData */,
+				9DCF41432BE98BF50058214B /* CreatePost */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -476,15 +513,6 @@
 				9D646ABD2B493FF300C0B2D3 /* LogInViewModel.swift */,
 			);
 			path = LogIn;
-			sourceTree = "<group>";
-		};
-		9D646AB52B493F1C00C0B2D3 /* Сonfirmation */ = {
-			isa = PBXGroup;
-			children = (
-				9DCAC4E22B4D78FE0040C327 /* ConfirmationViewController.swift */,
-				9DCAC4E62B4D79150040C327 /* ConfirmationViewModel.swift */,
-			);
-			path = "Сonfirmation";
 			sourceTree = "<group>";
 		};
 		9D653A562B0F9D6E009B98A5 = {
@@ -670,6 +698,8 @@
 			isa = PBXGroup;
 			children = (
 				9D7FCBDB2BB5F218001546FC /* AvatarView */,
+				9DCF41272BE78D4E0058214B /* DimmingViews */,
+				9DCF41362BE972DB0058214B /* ImageSheet */,
 				9D7FCC0D2BB9B254001546FC /* PhotoView */,
 				9D7FCC002BB82388001546FC /* ProfileHeader */,
 				9DC279C62B4BED7800FD401F /* CustomTextField.swift */,
@@ -709,6 +739,64 @@
 				9D609D522BA1CF47001765C0 /* UserFlow */,
 			);
 			path = NavigationFlows;
+			sourceTree = "<group>";
+		};
+		9DCF41222BE760830058214B /* ForgotPassword */ = {
+			isa = PBXGroup;
+			children = (
+				9DCF41232BE760AB0058214B /* ForgotPasswordViewController.swift */,
+				9DCF41252BE7615B0058214B /* ForgotPasswordViewModel.swift */,
+			);
+			path = ForgotPassword;
+			sourceTree = "<group>";
+		};
+		9DCF41272BE78D4E0058214B /* DimmingViews */ = {
+			isa = PBXGroup;
+			children = (
+				9DCF41282BE78D6A0058214B /* DimmingViewController.swift */,
+				9DCF412A2BE78D8F0058214B /* LoadingDimmingViewController.swift */,
+			);
+			path = DimmingViews;
+			sourceTree = "<group>";
+		};
+		9DCF412E2BE942EB0058214B /* EditPersonalData */ = {
+			isa = PBXGroup;
+			children = (
+				9DCF41332BE943520058214B /* EditPersonalDataAssembly.swift */,
+				9DCF412F2BE943360058214B /* EditPersonalDataViewController.swift */,
+				9DCF41312BE943470058214B /* EditPersonalDataViewModel.swift */,
+			);
+			path = EditPersonalData;
+			sourceTree = "<group>";
+		};
+		9DCF41362BE972DB0058214B /* ImageSheet */ = {
+			isa = PBXGroup;
+			children = (
+				9DCF41372BE972F90058214B /* ImageSheetAssembly.swift */,
+				9DCF413A2BE973190058214B /* ImageSheetViewController.swift */,
+				9DCF413C2BE9732F0058214B /* ImageSheetViewModel.swift */,
+				9DCF413E2BE973A40058214B /* View */,
+			);
+			path = ImageSheet;
+			sourceTree = "<group>";
+		};
+		9DCF413E2BE973A40058214B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9DCF413F2BE973BB0058214B /* ChooseFromGalleryTableViewCell.swift */,
+				9DCF41412BE973C90058214B /* MakePhotoTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9DCF41432BE98BF50058214B /* CreatePost */ = {
+			isa = PBXGroup;
+			children = (
+				9DCF41442BE98C1B0058214B /* CreatePostAssembly.swift */,
+				9DCF41462BE98C280058214B /* CreatePostViewController.swift */,
+				9DCF41482BE98C3A0058214B /* CreatePostViewModel.swift */,
+			);
+			path = CreatePost;
 			sourceTree = "<group>";
 		};
 		9DDBF07F2BDAC7D200000863 /* Interfaces */ = {
@@ -870,13 +958,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D59C4D02BCC27F100EB835C /* UserCodables.swift in Sources */,
+				9DCF41322BE943470058214B /* EditPersonalDataViewModel.swift in Sources */,
 				9D9E9CB42BBF2BC600593B73 /* CommentCell.swift in Sources */,
+				9DCF412D2BE811D40058214B /* NotificationKey.swift in Sources */,
+				9DCF411F2BE6A74A0058214B /* ValidationCheck.swift in Sources */,
 				9DCAC4DE2B4D72BF0040C327 /* RegistrationViewModel.swift in Sources */,
 				9D3994DD2BA09A52009F894A /* Coordinatable.swift in Sources */,
 				9D41B9162BD5623C002CBAA8 /* DateConverter.swift in Sources */,
 				9D7FCBE32BB60229001546FC /* AvatarAssembly.swift in Sources */,
+				9DCF412B2BE78D8F0058214B /* LoadingDimmingViewController.swift in Sources */,
 				9D6BE4432BA6C8B700462B12 /* SavedViewModel.swift in Sources */,
 				9D9E9CB72BC09A3700593B73 /* PhotoGalleryAssembly.swift in Sources */,
+				9DCF413B2BE973190058214B /* ImageSheetViewController.swift in Sources */,
 				9DCAC4F12B4D96280040C327 /* HaveAccountViewModel.swift in Sources */,
 				9D9E9CC82BC2BC0000593B73 /* PhotoCollectionViewCell.swift in Sources */,
 				9D609D612BA336F1001765C0 /* MainViewModel.swift in Sources */,
@@ -891,6 +984,8 @@
 				9D6BE4372BA6C70500462B12 /* ProfileCoordinator.swift in Sources */,
 				9D6BE4352BA6BF1F00462B12 /* UserTabBar.swift in Sources */,
 				9D3994E32BA0ACB6009F894A /* NavigationFlowType.swift in Sources */,
+				9DCF41212BE6B0EA0058214B /* UIViewController+PresentAlert.swift in Sources */,
+				9DCF41262BE7615C0058214B /* ForgotPasswordViewModel.swift in Sources */,
 				9D41B91C2BD58665002CBAA8 /* ImageCacheService.swift in Sources */,
 				9D41B91A2BD57A59002CBAA8 /* Data+Image.swift in Sources */,
 				9D6BE43F2BA6C89300462B12 /* SavedCoordinator.swift in Sources */,
@@ -900,6 +995,7 @@
 				9D7FCBE12BB60202001546FC /* AvatarView.swift in Sources */,
 				9D7FCBEA2BB6CB55001546FC /* AppDIContainer.swift in Sources */,
 				9D7FCBFC2BB70159001546FC /* PostCell.swift in Sources */,
+				9DCF41382BE972F90058214B /* ImageSheetAssembly.swift in Sources */,
 				9D7FCBF82BB6FA03001546FC /* SubscriberViewController.swift in Sources */,
 				9D59C4DA2BCCF19300EB835C /* AuthenticationUseCase.swift in Sources */,
 				9D646AA62B48596E00C0B2D3 /* UIFont.swift in Sources */,
@@ -908,20 +1004,25 @@
 				9D59C4DC2BD3E7FD00EB835C /* CloudStorageService.swift in Sources */,
 				9DDBF0812BDAC7F100000863 /* FIRIdentifiable.swift in Sources */,
 				9D9E9CBB2BC09A6F00593B73 /* PhotoGalleryViewModel.swift in Sources */,
+				9DCF41242BE760AB0058214B /* ForgotPasswordViewController.swift in Sources */,
 				9D7FCBE52BB60C4B001546FC /* UIActivityIndicatorViewExt.swift in Sources */,
 				9D7FCBD62BB5DAF9001546FC /* StoriesViewModel.swift in Sources */,
 				9D7FCC0C2BB887BE001546FC /* ProfileHeaderCollectionCell.swift in Sources */,
+				9DCF41402BE973BB0058214B /* ChooseFromGalleryTableViewCell.swift in Sources */,
 				9D7FCBDA2BB5F146001546FC /* StorieCell.swift in Sources */,
 				9DC279C72B4BED7800FD401F /* CustomTextField.swift in Sources */,
 				9D831D662BBDF9E800E4E8A9 /* UIViewExt.swift in Sources */,
 				9D9E9CB02BBDFF7600593B73 /* LikeCommentBookmarkView.swift in Sources */,
 				9DDBF07C2BD62D5700000863 /* CommentCodable.swift in Sources */,
+				9DCF41422BE973C90058214B /* MakePhotoTableViewCell.swift in Sources */,
 				9DC279C32B4BE71E00FD401F /* RegistrationViewController.swift in Sources */,
 				9D59C4D62BCC4CCC00EB835C /* AuthenticationService.swift in Sources */,
+				9DCF413D2BE9732F0058214B /* ImageSheetViewModel.swift in Sources */,
 				9D7FCBD42BB5D985001546FC /* StoriesView.swift in Sources */,
+				9DCF41492BE98C3A0058214B /* CreatePostViewModel.swift in Sources */,
 				9D9E9CC22BC2B71800593B73 /* GalleryHeaderViewModel.swift in Sources */,
-				9DCAC4E32B4D78FE0040C327 /* ConfirmationViewController.swift in Sources */,
 				9D59C4D42BCC4C6800EB835C /* UserUseCase.swift in Sources */,
+				9DCF41302BE943360058214B /* EditPersonalDataViewController.swift in Sources */,
 				9D609D572BA1CFC3001765C0 /* UserFactory.swift in Sources */,
 				9D646ABA2B493FD400C0B2D3 /* LogInViewController.swift in Sources */,
 				9D3B11CB2BC9B8FD00733DB2 /* SettingsSheetViewController.swift in Sources */,
@@ -930,7 +1031,9 @@
 				9D3B11CD2BC9B90800733DB2 /* SettingsSheetViewModel.swift in Sources */,
 				9D7FCBEC2BB6CE96001546FC /* DependencyWrapper.swift in Sources */,
 				9DC279B62B49D04100FD401F /* CustomButton.swift in Sources */,
+				9DCF41452BE98C1B0058214B /* CreatePostAssembly.swift in Sources */,
 				9D609D632BA33700001765C0 /* MainCoordinator.swift in Sources */,
+				9DCF41472BE98C280058214B /* CreatePostViewController.swift in Sources */,
 				9D7FCBE72BB624AF001546FC /* DateHeader.swift in Sources */,
 				9D7FCC132BB9B301001546FC /* PhotoViewModel.swift in Sources */,
 				9D7FCC0A2BB82448001546FC /* ProfileHeaderView.swift in Sources */,
@@ -939,7 +1042,6 @@
 				9D59C4D22BCC2FD500EB835C /* PostCodable.swift in Sources */,
 				9DC279B32B49CB4B00FD401F /* ViewModelProtocol.swift in Sources */,
 				9D831D622BBDB54000E4E8A9 /* WholePostViewController.swift in Sources */,
-				9DCAC4E72B4D79150040C327 /* ConfirmationViewModel.swift in Sources */,
 				9D3994D92BA0752F009F894A /* AuthenticationCoordinator.swift in Sources */,
 				9D59C4D82BCC4CDC00EB835C /* FirestoreService.swift in Sources */,
 				9D41B90C2BD50910002CBAA8 /* DataConverter.swift in Sources */,
@@ -952,9 +1054,11 @@
 				9D9E9CC42BC2B72A00593B73 /* GalleryHeaderAssembly.swift in Sources */,
 				9D41B9182BD57327002CBAA8 /* UIImage+JPEGData.swift in Sources */,
 				9D7FCBDF2BB601EF001546FC /* AvatarViewModel.swift in Sources */,
+				9DCF41292BE78D6A0058214B /* DimmingViewController.swift in Sources */,
 				9D6BE4412BA6C8A700462B12 /* SavedViewController.swift in Sources */,
 				9D646AA02B48582100C0B2D3 /* UIColor.swift in Sources */,
 				9D831D642BBDB55200E4E8A9 /* WholePostViewModel.swift in Sources */,
+				9DCF41342BE943520058214B /* EditPersonalDataAssembly.swift in Sources */,
 				9D6BE43B2BA6C78800462B12 /* ProfileViewModel.swift in Sources */,
 				9D9E9CCA2BC2C54600593B73 /* StringConverter.swift in Sources */,
 				9DCAC4ED2B4D96130040C327 /* HaveAccountViewController.swift in Sources */,
@@ -1140,6 +1244,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SocialNetwork/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Вы сможете сделать фото для аватара";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Вы сможете выбрать фото из галереи для аватара";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -1173,6 +1279,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SocialNetwork/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Вы сможете сделать фото для аватара";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Вы сможете выбрать фото из галереи для аватара";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";

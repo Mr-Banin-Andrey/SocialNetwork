@@ -45,14 +45,45 @@ final class SavedViewController: UIViewController, Coordinatable {
         
         setupUI()
         bindViewModel()
+        viewModel.updateState(with: .willStartUpdate)
+        updateView()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     //MARK: Methods
     
     func bindViewModel() {
-
+        viewModel.onStateDidChange = { [weak self] state in
+            guard let self else { return }
+            switch state {
+            case .initial:
+                break
+            case .updateView:
+                savedTable.reloadData()
+            case .openScreenMenu(let post):
+                let settings = SettingsSheetAssembly(post: post).viewController()
+                present(settings, animated: true)
+            case .openScreenPost(let post):
+                let wholePost = WholePostAssembly(post: post).viewController()
+                navigationController?.pushViewController(wholePost, animated: true)
+            }
+        }
     }
     
+    private func updateView() {
+        NotificationCenter.default.addObserver(forName: NotificationKey.wholePostKey, object: nil, queue: .main) { [weak self] notification in
+            guard let self else { return }
+            viewModel.updateState(with: .willStartUpdate)
+        }
+        
+        NotificationCenter.default.addObserver(forName: NotificationKey.settingsSheetKey, object: nil, queue: .main) { [weak self] notification in
+            guard let self else { return }
+            viewModel.updateState(with: .willStartUpdate)
+        }
+    }
     
     private func setupUI() {
         navigationItem.title = "Сохраненные"
@@ -117,12 +148,11 @@ extension SavedViewController: PostCellDelegate {
         return
     }
     
-    func openScreenMenuSheet() {
-        return
+    func openScreenMenuSheet(post: Post) {
+        viewModel.updateState(with: .didTapOpenMenu(post))
     }
     
     func openScreenWholePost(post: Post) {
-        let wholePost = WholePostAssembly(post: post).viewController()
-        navigationController?.pushViewController(wholePost, animated: true)
+        viewModel.updateState(with: .didTapOpenPost(post))
     }
 }

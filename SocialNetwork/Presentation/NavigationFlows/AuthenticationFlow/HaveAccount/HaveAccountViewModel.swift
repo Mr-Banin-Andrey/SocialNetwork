@@ -15,11 +15,15 @@ protocol HaveAccountViewModelProtocol: ViewModelProtocol where State == HaveAcco
 
 enum HaveAccountState {
     case initial
-    case showUser
+    case tryingToSignIn
+    case showUser(User)
+    case showAlertError
+    case openScreenForgotPassword
 }
 
 enum HaveAccountViewInput {
-    case goToScreenMain // получает юзера
+    case didTapSignIn(email: String, password: String)
+    case didTapForgotPassword
 }
 
 // MARK: - HaveAccountViewModel
@@ -36,12 +40,32 @@ final class HaveAccountViewModel: HaveAccountViewModelProtocol {
         }
     }
     
+    @Dependency private var authenticationUseCase: AuthenticationUseCase
+    
     //MARK: Methods
     
     func updateState(with viewInput: ViewInput) {
         switch viewInput {
-        case .goToScreenMain:
-            state = .showUser
+
+        case .didTapSignIn(email: let email, password: let password):
+            
+            state = .tryingToSignIn
+            authenticationUseCase.signIn(email: email, password: password) { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case .success(let user):
+                    DispatchQueue.main.async {
+                        self.state = .showUser(user)
+                    }
+                case .failure(let failure):
+                    DispatchQueue.main.async {
+                        self.state = .showAlertError
+                        print("Error signIn: ... \(failure)")
+                    }
+                }
+            }
+        case .didTapForgotPassword:
+            state = .openScreenForgotPassword
         }
     }
     

@@ -7,9 +7,17 @@
 
 import UIKit
 
+protocol LikeCommentBookmarkViewDelegate: AnyObject {
+    func didTapLike()
+}
+
 final class LikeCommentBookmarkView: UIView {
     
+    weak var delegate: LikeCommentBookmarkViewDelegate?
+    
     //MARK: Properties
+    
+    private var post: Post?
     
     private lazy var likeAndCommentStack: UIStackView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -27,12 +35,12 @@ final class LikeCommentBookmarkView: UIView {
         return $0
     }(UIStackView())
     
-    private lazy var likeImage: UIImageView = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.image = .likeImage
-        $0.tintColor = .textAndButtonColor
-        return $0
-    }(UIImageView())
+    private lazy var likeImageButton = CustomButton(
+        image: .likeImage,
+        tintColor: .textAndButtonColor
+    ) { [weak self] in
+        self?.delegate?.didTapLike()
+    }
     
     private lazy var likeLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -88,9 +96,11 @@ final class LikeCommentBookmarkView: UIView {
     //MARK: Methods
     
     func setupView(post: Post) {
+        self.post = post
         likeLabel.text = "\(post.likes.count)"
         commentLabel.text = "\(post.comments.count)"
         changeBookmark(isSaved: post.savedPost)
+        likeImageButton.updateState(isLike: post.likePost)
     }
     
     private func changeBookmark(isSaved: Bool) {
@@ -107,7 +117,7 @@ final class LikeCommentBookmarkView: UIView {
         addSubview(likeAndCommentStack)
         likeAndCommentStack.addArrangedSubview(likeStack)
         likeAndCommentStack.addArrangedSubview(commentStack)
-        likeStack.addArrangedSubview(likeImage)
+        likeStack.addArrangedSubview(likeImageButton)
         likeStack.addArrangedSubview(likeLabel)
         commentStack.addArrangedSubview(commentImage)
         commentStack.addArrangedSubview(commentLabel)
